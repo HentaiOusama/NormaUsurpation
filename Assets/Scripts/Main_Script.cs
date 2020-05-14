@@ -118,7 +118,7 @@ public class Main_Script : MonoBehaviour
 
         // This if else Block has to be ......DELETED......
         if(k == 50) {
-            increaseSliderValue();
+            increaseLifeOfFriendlyShip();
             k = 0;
         } else {
             k++;
@@ -126,22 +126,13 @@ public class Main_Script : MonoBehaviour
     }
 
 
-
-
-    IEnumerator waiter(float time)
-    {
-        //Wait for 4 seconds
-        yield return new WaitForSecondsRealtime(time);
-    }
-
-
     // Slider Value Increaser
-    public void increaseSliderValue() {
+    public void increaseLifeOfFriendlyShip() {
         slider.value += 0.1f;
         if(slider.value >= 1) {
-            if(lifeLevel <= lifeLvlLimit) {
-                slider.value = 0;
+            if(lifeLevel < lifeLvlLimit) {
                 lifeLevel++;
+                slider.value = 0;
                 if(lifeLevel < 10) {
                     lifeLevelText.text = "0" + lifeLevel.ToString();
                 } else {
@@ -152,5 +143,33 @@ public class Main_Script : MonoBehaviour
                 slider.value = 1;
             }
         }
+    }
+
+    public void decreaseLifeOfFriendlyShip() {
+        slider.value -= 0.1f;
+        if(slider.value <= 0) {
+            if(lifeLevel == 1) {
+                gameOver();
+                return;
+            }
+            if(lifeLevel > 1) {
+                lifeLevel--;
+                slider.value = 1;
+                if(lifeLevel < 10) {
+                    lifeLevelText.text = "0" + lifeLevel.ToString();
+                } else {
+                    lifeLevelText.text = lifeLevel.ToString();
+                }
+                BulletBuilder.buildBullet(lifeLevel, currentBullet.getSpwanPoints());
+            } else {
+                slider.value = 1;
+            }
+        }
+    }
+
+
+    // Ends the Game  <-- Not Yet Complete
+    public void gameOver() {
+
     }
 }

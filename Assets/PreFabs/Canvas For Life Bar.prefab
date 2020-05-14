@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2155724151023809384}
   m_Layer: 5
   m_Name: Canvas For Life Bar
-  m_TagString: Untagged
+  m_TagString: ProgressBarCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

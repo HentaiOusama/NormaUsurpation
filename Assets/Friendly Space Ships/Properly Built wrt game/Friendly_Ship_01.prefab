@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 1596515668900207609}
   m_Layer: 0
   m_Name: Friendly_Ship_01
-  m_TagString: Untagged
+  m_TagString: FriendlyShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletObject: {fileID: 6970105522484412680, guid: 7e7d288d5d55dac4ebe13fb09af53161,
     type: 3}
-  bulletWaitIntVal: 30
+  fireRate: 0.5
 --- !u!1 &4171679262508672518
 GameObject:
   m_ObjectHideFlags: 0

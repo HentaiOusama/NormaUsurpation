@@ -1,28 +1,25 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BulletBuilder : MonoBehaviour
 {
     public Object bulletObject;
-    public int bulletWaitIntVal = 0;
+    public float fireRate;
     static int lifeLevel = 0;
     static Transform[] spawnPoints = null;
     static bool shouldBuildBullets = false;
+    static float nextFireTime;
 
 
 
     // Non-Serialized Variables
     Quaternion tempQuat;
-    int val = 0;
-
 
 
     // Update is called once per frame
     void Update()
     {
-        if(shouldBuildBullets && (lifeLevel > 0) && (val == 0)) {
-
-            val = bulletWaitIntVal;
+        if(shouldBuildBullets && (lifeLevel > 0) && (Time.time > nextFireTime)) {
+            nextFireTime = Time.time + fireRate;
 
             switch(lifeLevel) {
                 case 1:
@@ -52,12 +49,6 @@ public class BulletBuilder : MonoBehaviour
                     Instantiate(bulletObject, spawnPoints[4].position, spawnPoints[4].rotation);
                     break;
             }
-        } else {
-            val--;
-        }
-
-        if(val < 0) {
-            val = 0;
         }
     }
 
@@ -79,13 +70,6 @@ public class BulletBuilder : MonoBehaviour
     }
     public static void startBuildingBullets() {
         shouldBuildBullets = true;
-    }
-
-
-    // Wait for seconds
-    IEnumerator waiter(float time)
-    {
-        //Wait for 4 seconds
-        yield return new WaitForSecondsRealtime(time);
+        nextFireTime = Time.time;
     }
 }
