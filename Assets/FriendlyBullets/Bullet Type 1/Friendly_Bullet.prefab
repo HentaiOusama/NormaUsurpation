@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2419976297132559077}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 3, z: 2}
+  m_LocalScale: {x: 0.7, y: 1.4, z: 2}
   m_Children: []
   m_Father: {fileID: 1378228832154747390}
   m_RootOrder: 0
@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 1378228832154747390}
   - component: {fileID: 5349188697384626997}
   - component: {fileID: 8125110629180304159}
+  - component: {fileID: 6494893924608248860}
   - component: {fileID: 2481610361372359725}
   m_Layer: 0
   m_Name: Friendly_Bullet
@@ -165,10 +166,24 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.27
-  m_Height: 1.8
+  m_Radius: 0.1
+  m_Height: 0.6
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.3}
+  m_Center: {x: 0, y: 0, z: 0.22}
+--- !u!114 &6494893924608248860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6970105522484412680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2873fd08a12844789b7e8cb2f1ca71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageValue: 100
+  speedValue: 15
 --- !u!114 &2481610361372359725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,5 +196,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9560ad10434f6e04180108eb21361f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 6970105522484412680}
-  Speed: 15

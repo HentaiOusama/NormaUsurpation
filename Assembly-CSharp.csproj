@@ -36,12 +36,16 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BulletBuilder.cs" />
-     <Compile Include="Assets\Scripts\BulletMover.cs" />
      <Compile Include="Assets\Scripts\Bullet_Animating_Script.cs" />
+     <Compile Include="Assets\Scripts\EnemyBulletBuilder.cs" />
+     <Compile Include="Assets\Scripts\EnemyWaveBuilder.cs" />
+     <Compile Include="Assets\Scripts\FriendlyBulletBuilder.cs" />
+     <Compile Include="Assets\Scripts\FriendlyBulletData.cs" />
+     <Compile Include="Assets\Scripts\FriendlyBulletMover.cs" />
      <Compile Include="Assets\Scripts\ItemDestroyer.cs" />
      <Compile Include="Assets\Scripts\Main_Script.cs" />
      <Compile Include="Assets\Scripts\Ship Scripts\ShipMovementScript.cs" />
+     <Compile Include="Assets\Scripts\fBulletEnemyCollisionHandler.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

@@ -1,12 +1,16 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - BulletBuilder
-    - BulletMover
     - Bullet_Animating_Script
+    - EnemyBulletBuilder
+    - EnemyWaveBuilder
+    - FriendlyBulletBuilder
+    - FriendlyBulletData
+    - FriendlyBulletMover
     - ItemDestroyer
     - Main_Script
     - ShipMovementScript
+    - fBulletEnemyCollisionHandler
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -73,25 +77,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11374}
     - Class: 114
-      Script: {instanceID: 11782}
+      Script: {instanceID: 11736}
     - Class: 114
-      Script: {instanceID: 12288}
+      Script: {instanceID: 11764}
     - Class: 114
-      Script: {instanceID: 12356}
+      Script: {instanceID: 11786}
     - Class: 114
-      Script: {instanceID: 12370}
+      Script: {instanceID: 12292}
     - Class: 114
-      Script: {instanceID: 12404}
+      Script: {instanceID: 12360}
     - Class: 114
-      Script: {instanceID: 12438}
+      Script: {instanceID: 12374}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12408}
     - Class: 114
-      Script: {instanceID: 12764}
+      Script: {instanceID: 12442}
     - Class: 114
-      Script: {instanceID: 12896}
+      Script: {instanceID: 12622}
     - Class: 114
-      Script: {instanceID: 12998}
+      Script: {instanceID: 12768}
+    - Class: 114
+      Script: {instanceID: 12900}
+    - Class: 114
+      Script: {instanceID: 13002}
+    - Class: 114
+      Script: {instanceID: 18576}
+    - Class: 114
+      Script: {instanceID: 18608}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -123,10 +135,10 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
-      Hash: 2f9a290561336941f73996e84947804d
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: BulletMover
+    className: FriendlyBulletMover
   - hash:
       serializedVersion: 2
       Hash: c42672c997f8be6b1aa86a927ebea785
@@ -285,6 +297,12 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
+      Hash: d152280a9dbcd81e53a5ca9fbcabb005
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyBulletBuilder
+  - hash:
+      serializedVersion: 2
       Hash: cc4274b586df3c02688bac01b88bd16c
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -295,6 +313,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: ControlPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 329938102fae4fe55ebdc53956e2d8d2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyWaveBuilder
   - hash:
       serializedVersion: 2
       Hash: b8a5e8091ab0b8861d2add371082c5e0
@@ -492,7 +516,7 @@ ScriptsOnlyBuild:
       Hash: d152280a9dbcd81e53a5ca9fbcabb005
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: BulletBuilder
+    className: FriendlyBulletBuilder
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -571,6 +595,18 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: d0e6536fa056d4649132d7cd43d0ad5a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FriendlyBulletData
+  - hash:
+      serializedVersion: 2
+      Hash: babf713b4aa07efb18c50ea6aa2f50cd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: fBulletEnemyCollisionHandler
   platform: 13
   scenePathNames:
   - Assets/Scenes/Play Scene.unity

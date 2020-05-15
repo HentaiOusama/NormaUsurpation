@@ -163,7 +163,7 @@ MonoBehaviour:
   percentageWidthForTouch: 90
   percentageHeightForTouch: 30
   AllowedHorizontalTouchWidth: 2.5
-  AllowedVerticalTouchWidth: 4
+  AllowedVerticalTouchWidth: 4.75
   heightOffset: 2
   touchHeightOffset: 3.3
 --- !u!114 &1596515668900207609
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletObject: {fileID: 6970105522484412680, guid: 7e7d288d5d55dac4ebe13fb09af53161,
     type: 3}
-  fireRate: 0.5
+  fireRate: 0.35
 --- !u!1 &4171679262508672518
 GameObject:
   m_ObjectHideFlags: 0
