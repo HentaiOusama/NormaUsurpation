@@ -181,7 +181,7 @@ MonoBehaviour:
   tagsOfObjectsNotToDestroy:
   - EnemyShip
   - FriendlyShip
-  - ProgressBarCanvas
+  - DisplayCanvas
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -5126,7 +5126,7 @@ GameObject:
   - component: {fileID: 1698560785}
   m_Layer: 0
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: BackgroundQuad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5171,13 +5171,17 @@ MonoBehaviour:
   FPSTarget: 60
   mainCamera: {fileID: 963194227}
   defaultCameraOrthogonalSize: 35.55556
+  refrenceWidth: 1080
+  refrenceHeight: 1920
   startBgIndex: 0
   baseBackgroundWidth: 40
+  lifeBarVerticalOffset: 2
+  gameLevelVerticalOffset: 2
+  lifeLvlLimit: 5
   fromIntroCoOrdinates: {x: 0, y: 0, z: -6.5}
   currIntroPosition: {x: 0, y: 0, z: 0}
   toIntroCoOrdinates: {x: 0, y: 0, z: 0}
   friendlyShipIntroSpeed: 0.1
-  lifeLvlLimit: 5
 --- !u!23 &1698560782
 MeshRenderer:
   m_ObjectHideFlags: 0

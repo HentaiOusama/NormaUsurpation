@@ -4,11 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - ProgressBarCanvas
   - FriendlyBullet
   - EnemyBullet
   - FriendlyShip
   - EnemyShip
+  - DisplayCanvas
+  - BackgroundQuad
+  - ProgressBarCanvas
   layers:
   - Default
   - TransparentFX

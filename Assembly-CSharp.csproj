@@ -45,6 +45,7 @@
      <Compile Include="Assets\Scripts\ItemDestroyer.cs" />
      <Compile Include="Assets\Scripts\Main_Script.cs" />
      <Compile Include="Assets\Scripts\Ship Scripts\ShipMovementScript.cs" />
+     <Compile Include="Assets\Scripts\SizeData.cs" />
      <Compile Include="Assets\Scripts\fBulletEnemyCollisionHandler.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />

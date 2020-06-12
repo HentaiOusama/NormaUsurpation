@@ -3,6 +3,17 @@ using UnityEngine.UI;
 using UnityEditor;
 
 [System.Serializable]
+public class LBRTValues{
+    public float left, bottom, right, top;
+    public LBRTValues(float left, float bottom, float right, float top) {
+        this.left = left;
+        this.bottom = bottom;
+        this.right = right;
+        this.top = top;
+    }
+}
+
+[System.Serializable]
 public class Backgrounds {
     public Material material;
     public float width;
@@ -51,20 +62,23 @@ public class Main_Script : MonoBehaviour
     public int FPSTarget;
     public Camera mainCamera;
     public float defaultCameraOrthogonalSize;
+    public float refrenceWidth;
+    public float refrenceHeight;
     public int startBgIndex;
     public float baseBackgroundWidth;
+    public float lifeBarVerticalOffset, gameLevelVerticalOffset;
+    public int lifeLvlLimit;
     public Vector3 fromIntroCoOrdinates, currIntroPosition, toIntroCoOrdinates;
     public float friendlyShipIntroSpeed;
-    public int lifeLvlLimit;
-
-
 
 
     // Non-Serialized Variables
     GameObject currentFriendlySpaceShip;
+    LBRTValues viewableScaleConstrains;
     Slider lifeLevelSlider;
     Text lifeLevelText;
     Text gameLevelText;
+    float resizeRatio; // Only for canvases. No need to resize other stuff
     int k = 0;
     int lifeLevel = 1;
     float lifeLevelSliderValue = 0.1f;
@@ -77,8 +91,6 @@ public class Main_Script : MonoBehaviour
     {
         // Setting Background and Adjusting Camera size
         setBackground(startBgIndex);
-        float refrenceHeight = Screen.height;
-        float refrenceWidth = Screen.width;
         float refrenceAspect = refrenceWidth/refrenceHeight;
         float screenHeight = Screen.currentResolution.height;
         float screenWidth = Screen.currentResolution.width;
@@ -87,28 +99,38 @@ public class Main_Script : MonoBehaviour
         Debug.Log("screenWidth = " + screenWidth + " screenHeight = " + screenHeight + " screenAspect = " + screenAspect);
         Debug.Log("cameraAspect = " + Camera.main.aspect);
         if(screenAspect >= 1) {
-            Camera.main.orthographicSize = defaultCameraOrthogonalSize/screenAspect/refrenceAspect;
+            Camera.main.orthographicSize = defaultCameraOrthogonalSize*refrenceAspect*screenAspect;
+            resizeRatio = (float) System.Math.Round(((refrenceAspect*screenAspect)/4) + 0.75f, 3);
         } else {
-            Camera.main.orthographicSize = defaultCameraOrthogonalSize*screenAspect/refrenceAspect;
+            Camera.main.orthographicSize = defaultCameraOrthogonalSize*refrenceAspect/screenAspect;
+            resizeRatio = (float) System.Math.Round(((refrenceAspect/screenAspect)/4) + 0.75f, 3);
         }
+        Debug.Log("Resize Ratio = " + resizeRatio);
+        // Sets the scale wise constrains of workspace on the background
+        viewableScaleConstrains = new LBRTValues(-baseBackgroundWidth/2, -Camera.main.orthographicSize, baseBackgroundWidth/2, Camera.main.orthographicSize);
 
 
-        QualitySettings.vSyncCount = 0; // Disables VSync for custom Frame Rate
-        Application.targetFrameRate = FPSTarget; // Sets custom FPS
+        // Disables VSync for custom Frame Rate and sets custom FPS
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = FPSTarget;
 
 
-        // Regarding Friendly Ship
-        currentFriendlySpaceShip = Instantiate(CSTData.currentShipObject, CSTData.currentShipCoOrdinates, CSTData.currentShipQuaternion) as GameObject;
-        currentFriendlySpaceShip.transform.localScale = CSTData.currentShipScale;
-        currIntroPosition = fromIntroCoOrdinates;
-        currentFriendlySpaceShip.transform.SetPositionAndRotation(fromIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
-
-
-        // Regarding Life Bar
+        // Regarding Life Bar and game Level
         GameObject lifeBarCanvasObject = Instantiate(lifeBarCanvasData.CanvasObject , lifeBarCanvasData.Position, 
                                                     Quaternion.Euler(lifeBarCanvasData.Rotation)) as GameObject;
         GameObject gameLevelCanvasObject = Instantiate(gameLevelCanvasData.CanvasObject , gameLevelCanvasData.Position, 
                                                     Quaternion.Euler(gameLevelCanvasData.Rotation)) as GameObject;
+        Vector3 tempPosition = lifeBarCanvasObject.transform.position;
+        lifeBarCanvasObject.transform.localScale = new Vector3(lifeBarCanvasData.Scale.x*resizeRatio, lifeBarCanvasData.Scale.y*resizeRatio, lifeBarCanvasData.Scale.z);
+        lifeBarCanvasObject.transform.SetPositionAndRotation(new Vector3(tempPosition.x, tempPosition.y, viewableScaleConstrains.bottom + 
+                                                            (lifeBarCanvasObject.GetComponent<SizeData>().occupiedDistance.z*resizeRatio/2) + 
+                                                            lifeBarVerticalOffset), lifeBarCanvasObject.transform.rotation);
+        tempPosition = gameLevelCanvasObject.transform.position;
+        gameLevelCanvasObject.transform.localScale = new Vector3(gameLevelCanvasData.Scale.x*resizeRatio, gameLevelCanvasData.Scale.y*resizeRatio, gameLevelCanvasData.Scale.z);
+        gameLevelCanvasObject.transform.SetPositionAndRotation(new Vector3(tempPosition.x, tempPosition.y, viewableScaleConstrains.top - 
+                                                            (gameLevelCanvasObject.GetComponent<SizeData>().occupiedDistance.z*resizeRatio/2) - 
+                                                            gameLevelVerticalOffset), gameLevelCanvasObject.transform.rotation);
+        gameLevelCanvasObject.transform.localScale = gameLevelCanvasData.Scale;
         Canvas lifeBarCanvas = lifeBarCanvasObject.GetComponent<Canvas>();
         Canvas gameLevelCanvas = gameLevelCanvasObject.GetComponent<Canvas>();
         lifeBarCanvas.worldCamera = mainCamera;
@@ -122,7 +144,14 @@ public class Main_Script : MonoBehaviour
         gameLevelText.text = "01";
 
 
-        // Regarding building Bullets
+        // Regarding Friendly Ship
+        currentFriendlySpaceShip = Instantiate(CSTData.currentShipObject, CSTData.currentShipCoOrdinates, CSTData.currentShipQuaternion) as GameObject;
+        currentFriendlySpaceShip.transform.localScale = CSTData.currentShipScale;
+        currIntroPosition = fromIntroCoOrdinates;
+        currentFriendlySpaceShip.transform.SetPositionAndRotation(fromIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
+
+
+        // Regarding Building Friendly Bullets
         currentBullet = new CurrentBulletData(new Transform[]{currentFriendlySpaceShip.transform.GetChild(1).GetChild(0), 
                                                             currentFriendlySpaceShip.transform.GetChild(1).GetChild(1), 
                                                             currentFriendlySpaceShip.transform.GetChild(1).GetChild(2), 
