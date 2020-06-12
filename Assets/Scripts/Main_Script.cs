@@ -1,12 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 
 [System.Serializable]
-public class LifeBarCanvasTransformData {
-    public Object lifeBarCanvasObject;
-    public Vector3 lifeBarCanvasCoOrdinates;
-    public Vector3 lifeBarCanvasScale;
-    public Quaternion lifeBarCanvasQuaternion;
+public class Backgrounds {
+    public Material material;
+    public float width;
+    public float height;
+}
+
+[System.Serializable]
+public class CanvasData {
+    public Object CanvasObject;
+    public Vector3 Position;
+    public Vector3 Scale;
+    public Vector3 Rotation;
 }
 
 [System.Serializable]
@@ -31,29 +39,35 @@ public class CurrentBulletData {
     }
 }
 
+
+
 public class Main_Script : MonoBehaviour
 {
+    // Serialized Variables
+    public Backgrounds[] backgrounds;
+    public CanvasData lifeBarCanvasData, gameLevelCanvasData;
+    public CurrentShipTransformData CSTData;
+    public CurrentBulletData currentBullet;
     public int FPSTarget;
     public Camera mainCamera;
-    public LifeBarCanvasTransformData LBCTData;
-    public CurrentShipTransformData CSTData;
+    public float defaultCameraOrthogonalSize;
+    public int startBgIndex;
+    public float baseBackgroundWidth;
     public Vector3 fromIntroCoOrdinates, currIntroPosition, toIntroCoOrdinates;
     public float friendlyShipIntroSpeed;
     public int lifeLvlLimit;
-    public CurrentBulletData currentBullet;
 
 
 
 
     // Non-Serialized Variables
-    GameObject lifeBarCanvasObject;
     GameObject currentFriendlySpaceShip;
-    Canvas canvas;
-    Slider slider;
+    Slider lifeLevelSlider;
     Text lifeLevelText;
+    Text gameLevelText;
     int k = 0;
     int lifeLevel = 1;
-    float sliderValue = 0.1f;
+    float lifeLevelSliderValue = 0.1f;
     bool shouldIntroduce = true;
 
 
@@ -61,6 +75,24 @@ public class Main_Script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Setting Background and Adjusting Camera size
+        setBackground(startBgIndex);
+        float refrenceHeight = Screen.height;
+        float refrenceWidth = Screen.width;
+        float refrenceAspect = refrenceWidth/refrenceHeight;
+        float screenHeight = Screen.currentResolution.height;
+        float screenWidth = Screen.currentResolution.width;
+        float screenAspect = screenWidth/screenHeight;
+        Debug.Log("refrenceWidth = " + refrenceWidth + " refrenceHeight = " + refrenceHeight + " refrenceAspect = " + refrenceAspect);
+        Debug.Log("screenWidth = " + screenWidth + " screenHeight = " + screenHeight + " screenAspect = " + screenAspect);
+        Debug.Log("cameraAspect = " + Camera.main.aspect);
+        if(screenAspect >= 1) {
+            Camera.main.orthographicSize = defaultCameraOrthogonalSize/screenAspect/refrenceAspect;
+        } else {
+            Camera.main.orthographicSize = defaultCameraOrthogonalSize*screenAspect/refrenceAspect;
+        }
+
+
         QualitySettings.vSyncCount = 0; // Disables VSync for custom Frame Rate
         Application.targetFrameRate = FPSTarget; // Sets custom FPS
 
@@ -73,14 +105,21 @@ public class Main_Script : MonoBehaviour
 
 
         // Regarding Life Bar
-        lifeBarCanvasObject = Instantiate(LBCTData.lifeBarCanvasObject, LBCTData.lifeBarCanvasCoOrdinates, LBCTData.lifeBarCanvasQuaternion) as GameObject;
-        canvas = lifeBarCanvasObject.GetComponent<Canvas>();
-        canvas.worldCamera = mainCamera;
-        slider = canvas.GetComponentInChildren<Slider>();
-        slider.value = 0.1f;
-        sliderValue = 0.1f;
-        lifeLevelText = canvas.GetComponentInChildren<Text>();
+        GameObject lifeBarCanvasObject = Instantiate(lifeBarCanvasData.CanvasObject , lifeBarCanvasData.Position, 
+                                                    Quaternion.Euler(lifeBarCanvasData.Rotation)) as GameObject;
+        GameObject gameLevelCanvasObject = Instantiate(gameLevelCanvasData.CanvasObject , gameLevelCanvasData.Position, 
+                                                    Quaternion.Euler(gameLevelCanvasData.Rotation)) as GameObject;
+        Canvas lifeBarCanvas = lifeBarCanvasObject.GetComponent<Canvas>();
+        Canvas gameLevelCanvas = gameLevelCanvasObject.GetComponent<Canvas>();
+        lifeBarCanvas.worldCamera = mainCamera;
+        gameLevelCanvas.worldCamera = mainCamera;
+        lifeLevelSlider = lifeBarCanvas.GetComponentInChildren<Slider>();
+        lifeLevelText = lifeBarCanvas.GetComponentInChildren<Text>();
+        gameLevelText = gameLevelCanvas.GetComponentInChildren<Text>();
+        lifeLevelSlider.value = 0.1f;
+        lifeLevelSliderValue = 0.1f;
         lifeLevelText.text = "01";
+        gameLevelText.text = "01";
 
 
         // Regarding building Bullets
@@ -128,11 +167,11 @@ public class Main_Script : MonoBehaviour
 
     // Slider Value Increaser
     public void increaseLifeOfFriendlyShip() {
-        sliderValue += 0.1f;
-        if(sliderValue > 1.09f) {
+        lifeLevelSliderValue += 0.1f;
+        if(lifeLevelSliderValue > 1.09f) {
             if(lifeLevel < lifeLvlLimit) {
                 lifeLevel++;
-                sliderValue = 0.1f;
+                lifeLevelSliderValue = 0.1f;
                 if(lifeLevel < 10) {
                     lifeLevelText.text = "0" + lifeLevel.ToString();
                 } else {
@@ -140,22 +179,22 @@ public class Main_Script : MonoBehaviour
                 }
                 currentFriendlySpaceShip.GetComponent<FriendlyBulletBuilder>().buildFriendlyBullets(lifeLevel, currentBullet.getSpwanPoints());
             } else {
-                sliderValue = 1;
+                lifeLevelSliderValue = 1;
             }
         }
-        slider.value = sliderValue;
+        lifeLevelSlider.value = lifeLevelSliderValue;
     }
 
     public void decreaseLifeOfFriendlyShip() {
-        sliderValue -= 0.1f;
-        if(sliderValue < 0.1) {
+        lifeLevelSliderValue -= 0.1f;
+        if(lifeLevelSliderValue < 0.1) {
             if(lifeLevel == 1) {
                 gameOver();
                 return;
             }
             if(lifeLevel > 1) {
                 lifeLevel--;
-                sliderValue = 1;
+                lifeLevelSliderValue = 1;
                 if(lifeLevel < 10) {
                     lifeLevelText.text = "0" + lifeLevel.ToString();
                 } else {
@@ -163,10 +202,10 @@ public class Main_Script : MonoBehaviour
                 }
                 currentFriendlySpaceShip.GetComponent<FriendlyBulletBuilder>().buildFriendlyBullets(lifeLevel, currentBullet.getSpwanPoints());
             } else {
-                sliderValue = 1;
+                lifeLevelSliderValue = 1;
             }
         }
-        slider.value = sliderValue;
+        lifeLevelSlider.value = lifeLevelSliderValue;
     }
 
 
@@ -175,4 +214,15 @@ public class Main_Script : MonoBehaviour
         FriendlyBulletBuilder.stopBuildingBullets();
         Destroy(currentFriendlySpaceShip);
     }
+
+
+    // This function fixes the size of backgroud quad and sets it 
+    public void setBackground(int index) {
+        if(backgrounds[index].width != baseBackgroundWidth) {
+            backgrounds[index].height = baseBackgroundWidth*backgrounds[index].height/backgrounds[index].width;
+            backgrounds[index].width = baseBackgroundWidth;
+        }
+        gameObject.transform.localScale = new Vector3(backgrounds[index].width, backgrounds[index].height, 5);
+    }
+
 }
