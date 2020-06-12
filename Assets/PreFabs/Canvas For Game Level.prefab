@@ -170,6 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   referenceScale: {x: 2, y: 2, z: 1}
   occupiedDistance: {x: 2, y: 1, z: 2}
+  defaultScaleForUse: {x: 2, y: 2, z: 1}
 --- !u!1 &8893431072805920951
 GameObject:
   m_ObjectHideFlags: 0

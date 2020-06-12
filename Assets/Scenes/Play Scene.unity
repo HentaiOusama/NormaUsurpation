@@ -5144,9 +5144,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgrounds:
-  - material: {fileID: 2100000, guid: 79534d1bccff008489ba3652d3e0f7c5, type: 2}
-    width: 40
-    height: 93.623
+    BGMaterialList:
+    - material: {fileID: 2100000, guid: 79534d1bccff008489ba3652d3e0f7c5, type: 2}
+      width: 40
+      height: 93.623
+    startBgIndex: 0
+    baseBackgroundWidth: 40
   lifeBarCanvasData:
     CanvasObject: {fileID: 6729826543933219466, guid: a146ca00d41318d48863f94368c5098a,
       type: 3}
@@ -5159,12 +5162,15 @@ MonoBehaviour:
     Position: {x: 17.5, y: -4, z: 33.5}
     Scale: {x: 2, y: 2, z: 1}
     Rotation: {x: 90, y: 0, z: 0}
-  CSTData:
-    currentShipObject: {fileID: 4171679261465287792, guid: e424fc01e751e334ba16d62ff09acced,
-      type: 3}
-    currentShipCoOrdinates: {x: 0, y: 0, z: -6.5}
-    currentShipScale: {x: 6.6, y: 6.6, z: 6.6}
-    currentShipQuaternion: {x: 0, y: 0, z: 0, w: 0}
+  friendlyShips:
+    FSList:
+    - FriendlyShipObject: {fileID: 4171679261465287792, guid: e424fc01e751e334ba16d62ff09acced,
+        type: 3}
+      Position: {x: 0, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0}
+    startShipIndex: 0
+    currentShipIndex: 0
+    FSIntroSpeed: 0.1
   currentBullet:
     currentBulletObject: {fileID: 6970105522484412680, guid: 7e7d288d5d55dac4ebe13fb09af53161,
       type: 3}
@@ -5173,14 +5179,9 @@ MonoBehaviour:
   defaultCameraOrthogonalSize: 35.55556
   refrenceWidth: 1080
   refrenceHeight: 1920
-  startBgIndex: 0
-  baseBackgroundWidth: 40
   lifeBarVerticalOffset: 2
   gameLevelVerticalOffset: 2
   lifeLvlLimit: 5
-  fromIntroCoOrdinates: {x: 0, y: 0, z: -6.5}
-  currIntroPosition: {x: 0, y: 0, z: 0}
-  toIntroCoOrdinates: {x: 0, y: 0, z: 0}
   friendlyShipIntroSpeed: 0.1
 --- !u!23 &1698560782
 MeshRenderer:

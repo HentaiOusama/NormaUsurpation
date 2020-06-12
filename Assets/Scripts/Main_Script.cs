@@ -3,6 +3,20 @@ using UnityEngine.UI;
 using UnityEditor;
 
 [System.Serializable]
+public class BackgroundElement {
+    public Material material;
+    public float width;
+    public float height;
+}
+
+[System.Serializable]
+public class BackgroundData {
+    public BackgroundElement[] BGMaterialList;
+    public int startBgIndex;
+    public float baseBackgroundWidth;
+}
+
+[System.Serializable]
 public class LBRTValues{
     public float left, bottom, right, top;
     public LBRTValues(float left, float bottom, float right, float top) {
@@ -14,13 +28,6 @@ public class LBRTValues{
 }
 
 [System.Serializable]
-public class Backgrounds {
-    public Material material;
-    public float width;
-    public float height;
-}
-
-[System.Serializable]
 public class CanvasData {
     public Object CanvasObject;
     public Vector3 Position;
@@ -29,11 +36,27 @@ public class CanvasData {
 }
 
 [System.Serializable]
-public class CurrentShipTransformData {
-    public Object currentShipObject;
-    public Vector3 currentShipCoOrdinates;
-    public Vector3 currentShipScale;
-    public Quaternion currentShipQuaternion;
+public class FriendlyShipElement {
+    ///// To get the scale, use GetComponent<SizeData>().defaultScaleForUse /////
+    public Object FriendlyShipObject;
+    public Vector3 Rotation;
+    Vector3 Scale;
+    Quaternion retRotation;
+    public FriendlyShipElement(){
+        retRotation = Quaternion.Euler(Rotation);
+    }
+    public Quaternion getRotation() {
+        return retRotation;
+    }
+}
+
+[System.Serializable]
+public class FriendlyShipData {
+    public FriendlyShipElement[] FSList;
+    public int startShipIndex;
+    public int currentShipIndex = 0;
+    public float FSIntroSpeed;   
+
 }
 
 [System.Serializable]
@@ -55,20 +78,17 @@ public class CurrentBulletData {
 public class Main_Script : MonoBehaviour
 {
     // Serialized Variables
-    public Backgrounds[] backgrounds;
+    public BackgroundData backgrounds;
     public CanvasData lifeBarCanvasData, gameLevelCanvasData;
-    public CurrentShipTransformData CSTData;
+    public FriendlyShipData friendlyShips;
     public CurrentBulletData currentBullet;
     public int FPSTarget;
     public Camera mainCamera;
     public float defaultCameraOrthogonalSize;
     public float refrenceWidth;
     public float refrenceHeight;
-    public int startBgIndex;
-    public float baseBackgroundWidth;
     public float lifeBarVerticalOffset, gameLevelVerticalOffset;
     public int lifeLvlLimit;
-    public Vector3 fromIntroCoOrdinates, currIntroPosition, toIntroCoOrdinates;
     public float friendlyShipIntroSpeed;
 
 
@@ -82,6 +102,7 @@ public class Main_Script : MonoBehaviour
     int k = 0;
     int lifeLevel = 1;
     float lifeLevelSliderValue = 0.1f;
+    Vector3 fromIntroCoOrdinates, currIntroPosition, toIntroCoOrdinates;
     bool shouldIntroduce = true;
 
 
@@ -90,7 +111,7 @@ public class Main_Script : MonoBehaviour
     void Start()
     {
         // Setting Background and Adjusting Camera size
-        setBackground(startBgIndex);
+        setBackground(backgrounds.startBgIndex);
         float refrenceAspect = refrenceWidth/refrenceHeight;
         float screenHeight = Screen.currentResolution.height;
         float screenWidth = Screen.currentResolution.width;
@@ -107,12 +128,15 @@ public class Main_Script : MonoBehaviour
         }
         Debug.Log("Resize Ratio = " + resizeRatio);
         // Sets the scale wise constrains of workspace on the background
-        viewableScaleConstrains = new LBRTValues(-baseBackgroundWidth/2, -Camera.main.orthographicSize, baseBackgroundWidth/2, Camera.main.orthographicSize);
+        viewableScaleConstrains = new LBRTValues(-backgrounds.baseBackgroundWidth/2, -Camera.main.orthographicSize, 
+                                                backgrounds.baseBackgroundWidth/2, Camera.main.orthographicSize);
+
 
 
         // Disables VSync for custom Frame Rate and sets custom FPS
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = FPSTarget;
+
 
 
         // Regarding Life Bar and game Level
@@ -144,11 +168,20 @@ public class Main_Script : MonoBehaviour
         gameLevelText.text = "01";
 
 
+
         // Regarding Friendly Ship
-        currentFriendlySpaceShip = Instantiate(CSTData.currentShipObject, CSTData.currentShipCoOrdinates, CSTData.currentShipQuaternion) as GameObject;
-        currentFriendlySpaceShip.transform.localScale = CSTData.currentShipScale;
+        fromIntroCoOrdinates = new Vector3(0, 0, viewableScaleConstrains.bottom - 5);
+        currentFriendlySpaceShip = Instantiate(friendlyShips.FSList[friendlyShips.currentShipIndex].FriendlyShipObject, 
+                                            fromIntroCoOrdinates, friendlyShips.FSList[friendlyShips.currentShipIndex].getRotation()) as GameObject;
+        SizeData tempSizeData = currentFriendlySpaceShip.GetComponent<SizeData>();
+        currentFriendlySpaceShip.transform.localScale = tempSizeData.defaultScaleForUse;
+        fromIntroCoOrdinates = new Vector3(0, 0, viewableScaleConstrains.bottom - 
+                                        (tempSizeData.occupiedDistance.z*tempSizeData.defaultScaleForUse.z/tempSizeData.referenceScale.z)/2);
+        toIntroCoOrdinates = new Vector3(0, 0, viewableScaleConstrains.bottom + 
+                                        (tempSizeData.occupiedDistance.z*tempSizeData.defaultScaleForUse.z/tempSizeData.referenceScale.z)/2);
         currIntroPosition = fromIntroCoOrdinates;
         currentFriendlySpaceShip.transform.SetPositionAndRotation(fromIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
+
 
 
         // Regarding Building Friendly Bullets
@@ -247,11 +280,11 @@ public class Main_Script : MonoBehaviour
 
     // This function fixes the size of backgroud quad and sets it 
     public void setBackground(int index) {
-        if(backgrounds[index].width != baseBackgroundWidth) {
-            backgrounds[index].height = baseBackgroundWidth*backgrounds[index].height/backgrounds[index].width;
-            backgrounds[index].width = baseBackgroundWidth;
+        if( backgrounds.BGMaterialList[index].width != backgrounds.baseBackgroundWidth) {
+            backgrounds.BGMaterialList[index].height = backgrounds.baseBackgroundWidth*backgrounds.BGMaterialList[index].height/backgrounds.BGMaterialList[index].width;
+            backgrounds.BGMaterialList[index].width = backgrounds.baseBackgroundWidth;
         }
-        gameObject.transform.localScale = new Vector3(backgrounds[index].width, backgrounds[index].height, 5);
+        gameObject.transform.localScale = new Vector3(backgrounds.BGMaterialList[index].width, backgrounds.BGMaterialList[index].height, 5);
     }
 
 }

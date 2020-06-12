@@ -553,3 +553,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   referenceScale: {x: 20, y: 20, z: 1}
   occupiedDistance: {x: 2, y: 0, z: 17.8}
+  defaultScaleForUse: {x: 20, y: 20, z: 1}
