@@ -924,7 +924,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 2000
+    maxNumParticles: 1000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -1189,7 +1189,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 60
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5166,11 +5166,15 @@ MonoBehaviour:
     FSList:
     - FriendlyShipObject: {fileID: 4171679261465287792, guid: e424fc01e751e334ba16d62ff09acced,
         type: 3}
-      Position: {x: 0, y: 0, z: 0}
       Rotation: {x: 0, y: 0, z: 0}
     startShipIndex: 0
     currentShipIndex: 0
     FSIntroSpeed: 0.1
+    extraHorizontalPosition: 2
+    extraVerticalPositionBottom: 2
+    extraVerticalPositionTop: 2
+    heightOffset: 3
+    percentHeightAllowedForMovement: 27.5
   currentBullet:
     currentBulletObject: {fileID: 6970105522484412680, guid: 7e7d288d5d55dac4ebe13fb09af53161,
       type: 3}

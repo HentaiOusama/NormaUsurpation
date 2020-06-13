@@ -17,17 +17,6 @@ public class BackgroundData {
 }
 
 [System.Serializable]
-public class LBRTValues{
-    public float left, bottom, right, top;
-    public LBRTValues(float left, float bottom, float right, float top) {
-        this.left = left;
-        this.bottom = bottom;
-        this.right = right;
-        this.top = top;
-    }
-}
-
-[System.Serializable]
 public class CanvasData {
     public Object CanvasObject;
     public Vector3 Position;
@@ -55,7 +44,11 @@ public class FriendlyShipData {
     public FriendlyShipElement[] FSList;
     public int startShipIndex;
     public int currentShipIndex = 0;
-    public float FSIntroSpeed;   
+    public float FSIntroSpeed;
+    public float extraHorizontalPosition;
+    public float extraVerticalPositionBottom, extraVerticalPositionTop;
+    public float heightOffset;
+    public float percentHeightAllowedForMovement;
 
 }
 
@@ -103,6 +96,7 @@ public class Main_Script : MonoBehaviour
     int lifeLevel = 1;
     float lifeLevelSliderValue = 0.1f;
     Vector3 fromIntroCoOrdinates, currIntroPosition, toIntroCoOrdinates;
+    SizeData tempSizeData;
     bool shouldIntroduce = true;
 
 
@@ -112,9 +106,9 @@ public class Main_Script : MonoBehaviour
     {
         // Setting Background and Adjusting Camera size
         setBackground(backgrounds.startBgIndex);
-        float refrenceAspect = refrenceWidth/refrenceHeight;
         float screenHeight = Screen.currentResolution.height;
         float screenWidth = Screen.currentResolution.width;
+        float refrenceAspect = refrenceWidth/refrenceHeight;
         float screenAspect = screenWidth/screenHeight;
         Debug.Log("refrenceWidth = " + refrenceWidth + " refrenceHeight = " + refrenceHeight + " refrenceAspect = " + refrenceAspect);
         Debug.Log("screenWidth = " + screenWidth + " screenHeight = " + screenHeight + " screenAspect = " + screenAspect);
@@ -173,7 +167,7 @@ public class Main_Script : MonoBehaviour
         fromIntroCoOrdinates = new Vector3(0, 0, viewableScaleConstrains.bottom - 5);
         currentFriendlySpaceShip = Instantiate(friendlyShips.FSList[friendlyShips.currentShipIndex].FriendlyShipObject, 
                                             fromIntroCoOrdinates, friendlyShips.FSList[friendlyShips.currentShipIndex].getRotation()) as GameObject;
-        SizeData tempSizeData = currentFriendlySpaceShip.GetComponent<SizeData>();
+        tempSizeData = currentFriendlySpaceShip.GetComponent<SizeData>();
         currentFriendlySpaceShip.transform.localScale = tempSizeData.defaultScaleForUse;
         fromIntroCoOrdinates = new Vector3(0, 0, viewableScaleConstrains.bottom - 
                                         (tempSizeData.occupiedDistance.z*tempSizeData.defaultScaleForUse.z/tempSizeData.referenceScale.z)/2);
@@ -181,6 +175,7 @@ public class Main_Script : MonoBehaviour
                                         (tempSizeData.occupiedDistance.z*tempSizeData.defaultScaleForUse.z/tempSizeData.referenceScale.z)/2);
         currIntroPosition = fromIntroCoOrdinates;
         currentFriendlySpaceShip.transform.SetPositionAndRotation(fromIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
+        
 
 
 
@@ -213,6 +208,10 @@ public class Main_Script : MonoBehaviour
                 shouldIntroduce = false;
                 currentFriendlySpaceShip.GetComponent<FriendlyBulletBuilder>().buildFriendlyBullets(lifeLevel, currentBullet.getSpwanPoints());
                 FriendlyBulletBuilder.startBuildingBullets();
+                currentFriendlySpaceShip.GetComponent<ShipMovementScript>().TakeData(currentFriendlySpaceShip.transform, viewableScaleConstrains, 
+                                        currentFriendlySpaceShip.transform.localScale, tempSizeData, friendlyShips.extraHorizontalPosition, 
+                                        friendlyShips.extraVerticalPositionBottom, friendlyShips.extraVerticalPositionTop, 
+                                        friendlyShips.heightOffset, friendlyShips.percentHeightAllowedForMovement);
             }
         }
 

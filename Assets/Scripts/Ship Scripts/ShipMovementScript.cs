@@ -2,104 +2,99 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TouchConstrains {
-    public float bottom, left, top, right;
-
-    public TouchConstrains (float bottom, float left, float top, float right) {
-        this.bottom = bottom;
-        this.left = left;
-        this.top = top;
-        this.right = right;
-    }
-
-}
-
-[System.Serializable]
-public class ValueConstrains {
-    public float bottom, left, top, right;
-
-    public ValueConstrains (float bottom, float left, float top, float right) {
-        this.bottom = bottom;
-        this.left = left;
-        this.top = top;
-        this.right = right;
-    }
-
-}
-
 public class ShipMovementScript : MonoBehaviour {
 
-    
-    public Transform currentFriendlyShipTransform;
-    public ValueConstrains BLTRValueConstrains;
-    public float percentageWidthForTouch, percentageHeightForTouch; // For Screen
-    public float AllowedHorizontalTouchWidth, AllowedVerticalTouchWidth; // W.R.T. Ship
-    public float heightOffset, touchHeightOffset;
-
     // Non-Serialized Variables
-    float ScreenWidth, ScreenHeight;
-    TouchConstrains BLTRTouchConstrains;
+    bool dataGiven = false;
+    Transform currentFriendlyShipTransform;
+    LBRTValues LBRTPositionConstrains; // It's  Position extremities allowed for ship's transform (details in TakeData Method)
+    LBRTValues LBRTShipTouchConstrains; // Distances around Ship for touch
+    float heightOffset;
+    int count;
+    Vector2 touchLocationOnScreen;
+    Vector3 touchLocationInWorld;
+
+
+
+    // For Getting and Setting relevent data from Main Script
+    public void TakeData(Transform transform, LBRTValues PositionConstrains, Vector3 currentScale, SizeData shipSizeData, float extraHorizontalPosition, 
+                        float extraVerticalPositionBottom, float extraVerticalPositionTop, float heightOffset, float percentHeightAllowedForMovement) {
+
+        currentFriendlyShipTransform = transform;
+        LBRTPositionConstrains = PositionConstrains; // Initially it's visible screen LBRT constrains
+        float leftRight = (shipSizeData.occupiedDistance.x/shipSizeData.referenceScale.x)*currentScale.x/2 + extraHorizontalPosition;
+        float bottom = (shipSizeData.occupiedDistance.z/shipSizeData.referenceScale.z)*currentScale.z/2 + extraVerticalPositionBottom;
+        float top = (shipSizeData.occupiedDistance.z/shipSizeData.referenceScale.z)*currentScale.z/2 + extraVerticalPositionTop;
+        LBRTShipTouchConstrains = new LBRTValues(leftRight, bottom, leftRight, top);
+        this.heightOffset = heightOffset;
+        float maximumTopPositionAllowed = LBRTPositionConstrains.bottom + ((2*LBRTPositionConstrains.top*percentHeightAllowedForMovement)/100);
+        float minimumBottomPositionAllowed = LBRTPositionConstrains.bottom + ((shipSizeData.referenceScale.z/shipSizeData.occupiedDistance.z)*currentScale.z/2);
+        float minimumLeftPositionAllowed = LBRTPositionConstrains.left;
+        float maximumRightPositionAllowed = LBRTPositionConstrains.right;
+        // Now LBRTPositionConstrains holds values of extremities of transform of ship which are allowed
+        LBRTPositionConstrains = new LBRTValues(minimumLeftPositionAllowed, minimumBottomPositionAllowed, maximumRightPositionAllowed, maximumTopPositionAllowed);
+        dataGiven = true;
+    }
+
+
 
     // Start is called before the first frame update
     void Start() {
-        ScreenWidth =  Screen.width/2;
-        ScreenHeight = Screen.height;
-        float left = BLTRValueConstrains.left - (((100 - percentageWidthForTouch)/100) * BLTRValueConstrains.left);
-        float right = -left;
-        float top = percentageHeightForTouch * (BLTRValueConstrains.top) / 100;
-        BLTRTouchConstrains = new TouchConstrains(0, left, top, right);
     }
 
     // Update is called once per frame
     void FixedUpdate() {
-        int count = Input.touchCount;
-        if(count > 0) {
-            Vector2 touchLocation = Input.GetTouch(0).position;
-            touchLocation.x = (touchLocation.x - ScreenWidth) * (BLTRValueConstrains.right/ScreenWidth);
-            touchLocation.y = (touchLocation.y * BLTRValueConstrains.top / ScreenHeight);
 
-            if(touchWithinConstrains(touchLocation, BLTRTouchConstrains)) {
+        if(dataGiven) {
+            count = Input.touchCount;
+            if(count > 0) {
+                touchLocationOnScreen = Input.GetTouch(0).position;
+                touchLocationInWorld = Camera.main.ScreenToWorldPoint(touchLocationOnScreen);
+                if(isTouchWithinConstrains()) {
 
-                if(validTouch(touchLocation, BLTRTouchConstrains, BLTRValueConstrains)) {
-
-                    if(touchLocation.y > BLTRTouchConstrains.top) {
-                        touchLocation.y = BLTRTouchConstrains.top;
+                    if(touchLocationInWorld.z > LBRTPositionConstrains.top) {
+                        touchLocationInWorld.z = LBRTPositionConstrains.top;
+                    }
+                    if(touchLocationInWorld.z < LBRTPositionConstrains.bottom) {
+                        touchLocationInWorld.z = LBRTPositionConstrains.bottom;
+                    }
+                    if(touchLocationInWorld.x > LBRTPositionConstrains.right) {
+                        touchLocationInWorld.x = LBRTPositionConstrains.right;
+                    }
+                    if(touchLocationInWorld.x < LBRTPositionConstrains.left) {
+                        touchLocationInWorld.x = LBRTPositionConstrains.left;
                     }
 
-                    currentFriendlyShipTransform.SetPositionAndRotation(new Vector3(touchLocation.x, 0, (touchLocation.y - heightOffset)),
-                    currentFriendlyShipTransform.rotation);
+
+                    touchLocationInWorld = new Vector3(touchLocationInWorld.x, 0, touchLocationInWorld.z + heightOffset);
+                    currentFriendlyShipTransform.SetPositionAndRotation(touchLocationInWorld, currentFriendlyShipTransform.rotation);
                 }
             }
         }
     }
 
-    public bool touchWithinConstrains (Vector2 touch, TouchConstrains BLTR) {
+    public bool isTouchWithinConstrains () {
         bool isWithinLimits = false;
 
-        if (touch.y <= (BLTR.top + touchHeightOffset) && 
-            touch.y >= (BLTR.bottom) && 
-            touch.x <= (BLTR.right) && 
-            touch.x >= (BLTR.left)) {
+        if ((touchLocationInWorld.x <= (currentFriendlyShipTransform.position.x + LBRTShipTouchConstrains.right)) && 
+            (touchLocationInWorld.x >= (currentFriendlyShipTransform.position.x - LBRTShipTouchConstrains.left)) &&
+            (touchLocationInWorld.z <= (currentFriendlyShipTransform.position.z + LBRTShipTouchConstrains.top)) &&
+            (touchLocationInWorld.z >= (currentFriendlyShipTransform.position.z - LBRTShipTouchConstrains.bottom))) {
                 isWithinLimits = true;
             }
 
         return isWithinLimits;
     }
 
-    public bool validTouch (Vector2 touch, TouchConstrains TBLTR, ValueConstrains BLTR) {
-        bool isValid = false;
 
-        float currentHorizontal = currentFriendlyShipTransform.position.x; // Allowed is +- 0.75
-        float currentVertical = currentFriendlyShipTransform.position.z;
+    // Method for Debuging
+    public void logTouchPositions(Vector2 touchLocationOnScreen, Vector3 touchLocationInWorld) {
+        Debug.Log("Position Testing");
+        Debug.Log("touchLocationOnScreen (x, y) = " + touchLocationOnScreen.x + ", " + touchLocationOnScreen.y);
+        Debug.Log("WorldTouchPoint (x, y, z) = " + touchLocationInWorld.x + ", " + touchLocationInWorld.y + ", " + touchLocationInWorld.z);
+    }
 
-
-        if (touch.x <= (currentHorizontal + AllowedHorizontalTouchWidth) && 
-            touch.x >= (currentHorizontal - AllowedHorizontalTouchWidth) && 
-            touch.y <= (currentVertical + AllowedVerticalTouchWidth) && 
-            touch.y >= (currentVertical - 0.01f)) {
-                isValid = true;
-            }
-
-        return isValid;
+    public void logTouchPositions(Vector3 touchLocationInWorld) {
+        Debug.Log("WorldTouchPoint (x, y, z) = " + touchLocationInWorld.x + ", " + touchLocationInWorld.y + ", " + touchLocationInWorld.z);
     }
 }

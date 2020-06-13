@@ -155,18 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fbae7a0344262544bb750a04b4e864f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentFriendlyShipTransform: {fileID: 4171679261465287795}
-  BLTRValueConstrains:
-    bottom: 0
-    left: -9.6
-    top: 36.5
-    right: 9.6
-  percentageWidthForTouch: 90
-  percentageHeightForTouch: 30
-  AllowedHorizontalTouchWidth: 2.5
-  AllowedVerticalTouchWidth: 4.75
-  heightOffset: 2
-  touchHeightOffset: 3.3
 --- !u!114 &1596515668900207609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   referenceScale: {x: 19, y: 19, z: 19}
   occupiedDistance: {x: 22, y: 6, z: 25}
-  defaultScaleForUse: {x: 6, y: 6, z: 6}
+  defaultScaleForUse: {x: 6.5, y: 6.5, z: 6.5}
 --- !u!1 &4171679262508672518
 GameObject:
   m_ObjectHideFlags: 0
