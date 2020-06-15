@@ -83,6 +83,7 @@ public class Main_Script : MonoBehaviour
     public float lifeBarVerticalOffset, gameLevelVerticalOffset;
     public int lifeLvlLimit;
     public float friendlyShipIntroSpeed;
+    public Object enemyHolderObject;
 
 
     // Non-Serialized Variables
@@ -98,6 +99,7 @@ public class Main_Script : MonoBehaviour
     Vector3 fromIntroCoOrdinates, currIntroPosition, toIntroCoOrdinates;
     SizeData tempSizeData;
     bool shouldIntroduce = true;
+    EnemyWaveBuilder enemyWaveBuilder;
 
 
 
@@ -185,6 +187,11 @@ public class Main_Script : MonoBehaviour
                                                             currentFriendlySpaceShip.transform.GetChild(1).GetChild(2), 
                                                             currentFriendlySpaceShip.transform.GetChild(1).GetChild(3), 
                                                             currentFriendlySpaceShip.transform.GetChild(1).GetChild(4)});
+        
+
+
+        // Regarding EnemyWaveBuilder
+        enemyWaveBuilder = gameObject.GetComponent<EnemyWaveBuilder>();
     }
 
 
@@ -203,6 +210,8 @@ public class Main_Script : MonoBehaviour
         if(shouldIntroduce) {
             currIntroPosition.z += friendlyShipIntroSpeed;
             currentFriendlySpaceShip.transform.SetPositionAndRotation(currIntroPosition, currentFriendlySpaceShip.transform.rotation);
+
+            // On Intro Completion
             if(currentFriendlySpaceShip.transform.position.z >= toIntroCoOrdinates.z) {
                 currentFriendlySpaceShip.transform.SetPositionAndRotation(toIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
                 shouldIntroduce = false;
@@ -212,6 +221,7 @@ public class Main_Script : MonoBehaviour
                                         currentFriendlySpaceShip.transform.localScale, tempSizeData, friendlyShips.extraHorizontalPosition, 
                                         friendlyShips.extraVerticalPositionBottom, friendlyShips.extraVerticalPositionTop, 
                                         friendlyShips.heightOffset, friendlyShips.percentHeightAllowedForMovement);
+                enemyWaveBuilder.startBuildingWaves(1, viewableScaleConstrains, enemyHolderObject);
             }
         }
 

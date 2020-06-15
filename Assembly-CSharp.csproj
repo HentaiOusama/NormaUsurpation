@@ -38,6 +38,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Bullet_Animating_Script.cs" />
      <Compile Include="Assets\Scripts\EnemyBulletBuilder.cs" />
+     <Compile Include="Assets\Scripts\EnemyShipMovementScript.cs" />
      <Compile Include="Assets\Scripts\EnemyWaveBuilder.cs" />
      <Compile Include="Assets\Scripts\FriendlyBulletBuilder.cs" />
      <Compile Include="Assets\Scripts\FriendlyBulletData.cs" />
@@ -48,6 +49,7 @@
      <Compile Include="Assets\Scripts\Ship Scripts\ShipMovementScript.cs" />
      <Compile Include="Assets\Scripts\SizeData.cs" />
      <Compile Include="Assets\Scripts\fBulletEnemyCollisionHandler.cs" />
+     <Compile Include="Assets\Test_Script.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
@@ -617,6 +619,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="PathCreator.csproj">
+      <Project>{363050ad-69d5-135d-a688-78f9461fe252}</Project>
+      <Name>PathCreator</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="PathCreatorEditor.csproj">
+      <Project>{7bcf3ad9-ab2c-7def-cf0b-2158251a649a}</Project>
+      <Name>PathCreatorEditor</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

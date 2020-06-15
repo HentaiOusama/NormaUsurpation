@@ -1,49 +1,50 @@
 ﻿using UnityEngine;
+using PathCreation;
 
 [System.Serializable]
-public class WaveLevelData {
-    public Object[] enemyObject;
+public class WaveBuildingData {
+    public Object[] enemyObjects;
+    public Object[] movementPathObjects;
+    public Object multipleEnemyHolder;
+    public int waveLevel;
+    public int maxWaves;
 }
 
 
 public class EnemyWaveBuilder : MonoBehaviour
 {
     // Serialized variables
-    public WaveLevelData[] waveLevelData;
-    public int waveLevel = 1;
-    public int maxWaves;
-
-
+    public WaveBuildingData waveBuildingData;
 
     // Non-Serialized Variables
-    static bool shouldBuildEnemyWave;
-    static int tempWaveLevel = 1;
-    static int totalEnemyCount = 0;
+    LBRTValues viewableScreenConstrains;
+    Object enemyHolderObject;
+    bool shouldBuildEnemyWave = false;
+    int tempWaveLevel = 1;
+    int totalEnemyCount = 0;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        shouldBuildEnemyWave = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(waveLevel != tempWaveLevel) {
-            waveLevel = tempWaveLevel;
+        if(waveBuildingData.waveLevel != tempWaveLevel) {
+            waveBuildingData.waveLevel = tempWaveLevel;
             shouldBuildEnemyWave = true;
         }
 
-        if(shouldBuildEnemyWave && (waveLevel <= waveLevelData.Length)) {
-            switch(waveLevel) {
+        if(shouldBuildEnemyWave && (waveBuildingData.waveLevel <= waveBuildingData.maxWaves)) {
+            shouldBuildEnemyWave = false;
+            switch(waveBuildingData.waveLevel) {
                 case 1:
-                    Instantiate(waveLevelData[waveLevel-1].enemyObject[0], new Vector3(0, 0, 25), Quaternion.Euler(0, 0, 0));
-                    totalEnemyCount++;
+                    buildWave1(0, 1, 5);
                     break;
             }
-            shouldBuildEnemyWave = false;
         }
 
         if(totalEnemyCount == 0) {
@@ -52,13 +53,48 @@ public class EnemyWaveBuilder : MonoBehaviour
         
     }
 
-    public static void buildEnemyWave(int waveLevel_) {
-        shouldBuildEnemyWave = true;
-        tempWaveLevel = waveLevel_;
+
+
+    // Not fully complete
+    public void buildWave1(int index, int numberOfLayers, int enemiesPerLayer){
+        // index => which enemyShip to build
+
+        float screenWidth = 2*viewableScreenConstrains.right;
+        
+        GameObject tempObj = Instantiate(waveBuildingData.enemyObjects[index], new Vector3(0, 25, 0), Quaternion.Euler(0, 0, 0)) as GameObject; // Temporary Instantiation
+        SizeData enemyShipSizeData = tempObj.GetComponent<SizeData>();
+
+        float enemyShipWidth = (enemyShipSizeData.occupiedDistance.x/enemyShipSizeData.defaultScaleForUse.x)*tempObj.transform.localScale.x;
+        float gapSize = (screenWidth/enemiesPerLayer) - enemyShipWidth;
+
+        GameObject multipleEnemyHolder = Instantiate(waveBuildingData.multipleEnemyHolder, new Vector3(2*viewableScreenConstrains.right, 0, 0), 
+                                                    Quaternion.Euler(0, 0, 0)) as GameObject;
+        Destroy(tempObj);
+        float startPos = viewableScreenConstrains.right;
+        for(int i = 0; i < enemiesPerLayer; i++) {
+            startPos += gapSize/2;
+            startPos += enemyShipWidth/2;
+            tempObj = Instantiate(waveBuildingData.enemyObjects[index], new Vector3(startPos, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+            tempObj.transform.SetParent(multipleEnemyHolder.transform);
+            startPos += enemyShipWidth/2;
+            startPos += gapSize/2;
+            totalEnemyCount++;
+        }
+
+        tempObj = Instantiate(waveBuildingData.movementPathObjects[1], new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
     }
 
 
-    public static void decreaseEnemyCount() {
+
+    public void startBuildingWaves(int waveLevel_, LBRTValues viewableScreenConstrains, Object enemyHolderObject) {
+        this.viewableScreenConstrains = viewableScreenConstrains;
+        tempWaveLevel = waveLevel_;
+        this.enemyHolderObject = enemyHolderObject;
+        shouldBuildEnemyWave = true;
+    }
+
+
+    public void decreaseEnemyCount() {
         totalEnemyCount--;
     }
 

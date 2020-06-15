@@ -10,6 +10,7 @@ TagManager:
   - EnemyShip
   - DisplayCanvas
   - BackgroundQuad
+  - EnemyShipMovementPaths
   - ProgressBarCanvas
   layers:
   - Default
