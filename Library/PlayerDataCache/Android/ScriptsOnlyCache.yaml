@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - Bullet_Animating_Script
     - EnemyBulletBuilder
+    - EnemyShipMovementScript
     - EnemyWaveBuilder
     - FriendlyBulletBuilder
     - FriendlyBulletData
@@ -12,6 +13,8 @@ ScriptsOnlyBuild:
     - ShipMovementScript
     - SizeData
     - fBulletEnemyCollisionHandler
+    PathCreator.dll:
+    - PathCreation.PathCreator
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -68,45 +71,49 @@ ScriptsOnlyBuild:
     - Class: 111
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11178}
+      Script: {instanceID: 11176}
     - Class: 114
-      Script: {instanceID: 11182}
+      Script: {instanceID: 11180}
     - Class: 114
-      Script: {instanceID: 11248}
+      Script: {instanceID: 11250}
     - Class: 114
-      Script: {instanceID: 11338}
+      Script: {instanceID: 11276}
     - Class: 114
-      Script: {instanceID: 11378}
+      Script: {instanceID: 11344}
     - Class: 114
-      Script: {instanceID: 11740}
+      Script: {instanceID: 11384}
     - Class: 114
-      Script: {instanceID: 11768}
+      Script: {instanceID: 11750}
     - Class: 114
-      Script: {instanceID: 11790}
+      Script: {instanceID: 11778}
     - Class: 114
-      Script: {instanceID: 11994}
+      Script: {instanceID: 11800}
     - Class: 114
-      Script: {instanceID: 12298}
+      Script: {instanceID: 12006}
     - Class: 114
-      Script: {instanceID: 12366}
+      Script: {instanceID: 12318}
     - Class: 114
-      Script: {instanceID: 12380}
+      Script: {instanceID: 12390}
     - Class: 114
-      Script: {instanceID: 12414}
+      Script: {instanceID: 12404}
     - Class: 114
-      Script: {instanceID: 12448}
+      Script: {instanceID: 12438}
     - Class: 114
-      Script: {instanceID: 12628}
+      Script: {instanceID: 12472}
     - Class: 114
-      Script: {instanceID: 12726}
+      Script: {instanceID: 12504}
     - Class: 114
-      Script: {instanceID: 12776}
+      Script: {instanceID: 12656}
     - Class: 114
-      Script: {instanceID: 12812}
+      Script: {instanceID: 12756}
     - Class: 114
-      Script: {instanceID: 12910}
+      Script: {instanceID: 12806}
     - Class: 114
-      Script: {instanceID: 13014}
+      Script: {instanceID: 12842}
+    - Class: 114
+      Script: {instanceID: 12940}
+    - Class: 114
+      Script: {instanceID: 13046}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -166,6 +173,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ShipMovementScript
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyShipMovementScript
   - hash:
       serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
@@ -318,7 +331,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 329938102fae4fe55ebdc53956e2d8d2
+      Hash: d76a7121ce355a895e7567cef340e74d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyWaveBuilder
@@ -396,16 +409,28 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
+      Hash: 1532436743ef194dbf67c97ed7b8e9f1
+    assemblyName: PathCreator.dll
+    namespaceName: PathCreation
+    className: GlobalDisplaySettings
+  - hash:
+      serializedVersion: 2
       Hash: 5ad4aa237d47ac2bab17bacb672edf7a
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 8cb8ec2b9f1f83fd1da96cebd8e5735f
+      Hash: cd7e2cc4901e86fd8eda6fbd41f9a4ca
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Main_Script
+  - hash:
+      serializedVersion: 2
+      Hash: bfd10ec349a1a59ca1631589faec3d02
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Test_Script
   - hash:
       serializedVersion: 2
       Hash: 783f593b9380cf72d0f7ebfd4a0d4bcd
@@ -466,6 +491,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Bullet_Animating_Script
+  - hash:
+      serializedVersion: 2
+      Hash: 5455126194c7fb60e2136719105446c8
+    assemblyName: PathCreator.dll
+    namespaceName: PathCreation
+    className: PathCreator
   - hash:
       serializedVersion: 2
       Hash: 8001a5f7502aab37e42206da015e6914
