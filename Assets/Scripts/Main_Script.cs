@@ -74,7 +74,8 @@ public class Main_Script : MonoBehaviour
     public BackgroundData backgrounds;
     public CanvasData lifeBarCanvasData, gameLevelCanvasData;
     public FriendlyShipData friendlyShips;
-    public CurrentBulletData currentBullet;
+    public CurrentBulletData currentBulletData;
+    public Object[] dropItemObjects;
     public int FPSTarget;
     public Camera mainCamera;
     public float defaultCameraOrthogonalSize;
@@ -89,13 +90,8 @@ public class Main_Script : MonoBehaviour
     // Non-Serialized Variables
     GameObject currentFriendlySpaceShip;
     LBRTValues viewableScaleConstrains;
-    Slider lifeLevelSlider;
-    Text lifeLevelText;
     Text gameLevelText;
     float resizeRatio; // Only for canvases. No need to resize other stuff
-    int k = 0;
-    int lifeLevel = 1;
-    float lifeLevelSliderValue = 0.1f;
     Vector3 fromIntroCoOrdinates, currIntroPosition, toIntroCoOrdinates;
     SizeData tempSizeData;
     bool shouldIntroduce = true;
@@ -155,12 +151,7 @@ public class Main_Script : MonoBehaviour
         Canvas gameLevelCanvas = gameLevelCanvasObject.GetComponent<Canvas>();
         lifeBarCanvas.worldCamera = mainCamera;
         gameLevelCanvas.worldCamera = mainCamera;
-        lifeLevelSlider = lifeBarCanvas.GetComponentInChildren<Slider>();
-        lifeLevelText = lifeBarCanvas.GetComponentInChildren<Text>();
         gameLevelText = gameLevelCanvas.GetComponentInChildren<Text>();
-        lifeLevelSlider.value = 0.1f;
-        lifeLevelSliderValue = 0.1f;
-        lifeLevelText.text = "01";
         gameLevelText.text = "01";
 
 
@@ -177,21 +168,22 @@ public class Main_Script : MonoBehaviour
                                         (tempSizeData.occupiedDistance.z*tempSizeData.defaultScaleForUse.z/tempSizeData.referenceScale.z)/2);
         currIntroPosition = fromIntroCoOrdinates;
         currentFriendlySpaceShip.transform.SetPositionAndRotation(fromIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
-        
-
-
-
-        // Regarding Building Friendly Bullets
-        currentBullet = new CurrentBulletData(new Transform[]{currentFriendlySpaceShip.transform.GetChild(1).GetChild(0), 
+        currentBulletData = new CurrentBulletData(new Transform[]{currentFriendlySpaceShip.transform.GetChild(1).GetChild(0), 
                                                             currentFriendlySpaceShip.transform.GetChild(1).GetChild(1), 
                                                             currentFriendlySpaceShip.transform.GetChild(1).GetChild(2), 
                                                             currentFriendlySpaceShip.transform.GetChild(1).GetChild(3), 
                                                             currentFriendlySpaceShip.transform.GetChild(1).GetChild(4)});
         
+        currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().TakeData(lifeBarCanvas, 0.1f, 1, lifeLvlLimit, currentBulletData);
+        
 
 
         // Regarding EnemyWaveBuilder
         enemyWaveBuilder = gameObject.GetComponent<EnemyWaveBuilder>();
+
+
+
+        // Regarding
     }
 
 
@@ -206,7 +198,7 @@ public class Main_Script : MonoBehaviour
         }
         
 
-        // For Introducing Friendly SpcaeShip
+        // For Introducing Friendly SpcaeShip And Starting It's Functionalities
         if(shouldIntroduce) {
             currIntroPosition.z += friendlyShipIntroSpeed;
             currentFriendlySpaceShip.transform.SetPositionAndRotation(currIntroPosition, currentFriendlySpaceShip.transform.rotation);
@@ -215,9 +207,9 @@ public class Main_Script : MonoBehaviour
             if(currentFriendlySpaceShip.transform.position.z >= toIntroCoOrdinates.z) {
                 currentFriendlySpaceShip.transform.SetPositionAndRotation(toIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
                 shouldIntroduce = false;
-                currentFriendlySpaceShip.GetComponent<FriendlyBulletBuilder>().buildFriendlyBullets(lifeLevel, currentBullet.getSpwanPoints());
+                currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().buildProperBullets();
                 FriendlyBulletBuilder.startBuildingBullets();
-                currentFriendlySpaceShip.GetComponent<ShipMovementScript>().TakeData(currentFriendlySpaceShip.transform, viewableScaleConstrains, 
+                currentFriendlySpaceShip.GetComponent<FriendlyShipMovementScript>().TakeData(currentFriendlySpaceShip.transform, viewableScaleConstrains, 
                                         currentFriendlySpaceShip.transform.localScale, tempSizeData, friendlyShips.extraHorizontalPosition, 
                                         friendlyShips.extraVerticalPositionBottom, friendlyShips.extraVerticalPositionTop, 
                                         friendlyShips.heightOffset, friendlyShips.percentHeightAllowedForMovement);
@@ -225,65 +217,6 @@ public class Main_Script : MonoBehaviour
             }
         }
 
-
-        // This if else Block has to be ......DELETED......
-        if(k == 50) {
-            increaseLifeOfFriendlyShip();
-            k = 0;
-        } else {
-            k++;
-        }
-    }
-
-
-    // Slider Value Increaser
-    public void increaseLifeOfFriendlyShip() {
-        lifeLevelSliderValue += 0.1f;
-        if(lifeLevelSliderValue > 1.09f) {
-            if(lifeLevel < lifeLvlLimit) {
-                lifeLevel++;
-                lifeLevelSliderValue = 0.1f;
-                if(lifeLevel < 10) {
-                    lifeLevelText.text = "0" + lifeLevel.ToString();
-                } else {
-                    lifeLevelText.text = lifeLevel.ToString();
-                }
-                currentFriendlySpaceShip.GetComponent<FriendlyBulletBuilder>().buildFriendlyBullets(lifeLevel, currentBullet.getSpwanPoints());
-            } else {
-                lifeLevelSliderValue = 1;
-            }
-        }
-        lifeLevelSlider.value = lifeLevelSliderValue;
-    }
-
-    public void decreaseLifeOfFriendlyShip() {
-        lifeLevelSliderValue -= 0.1f;
-        if(lifeLevelSliderValue < 0.1) {
-            if(lifeLevel == 1) {
-                gameOver();
-                return;
-            }
-            if(lifeLevel > 1) {
-                lifeLevel--;
-                lifeLevelSliderValue = 1;
-                if(lifeLevel < 10) {
-                    lifeLevelText.text = "0" + lifeLevel.ToString();
-                } else {
-                    lifeLevelText.text = lifeLevel.ToString();
-                }
-                currentFriendlySpaceShip.GetComponent<FriendlyBulletBuilder>().buildFriendlyBullets(lifeLevel, currentBullet.getSpwanPoints());
-            } else {
-                lifeLevelSliderValue = 1;
-            }
-        }
-        lifeLevelSlider.value = lifeLevelSliderValue;
-    }
-
-
-    // Ends the Game  <-- Not Yet Complete
-    public void gameOver() {
-        FriendlyBulletBuilder.stopBuildingBullets();
-        Destroy(currentFriendlySpaceShip);
     }
 
 

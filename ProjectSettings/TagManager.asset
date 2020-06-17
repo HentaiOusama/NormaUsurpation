@@ -12,6 +12,8 @@ TagManager:
   - BackgroundQuad
   - EnemyShipMovementPaths
   - ProgressBarCanvas
+  - DropItemLife
+  - DropItemArmour
   layers:
   - Default
   - TransparentFX

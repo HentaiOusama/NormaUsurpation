@@ -89,9 +89,10 @@ GameObject:
   - component: {fileID: 4171679261465287795}
   - component: {fileID: 5042969568563291360}
   - component: {fileID: 5440878946752338284}
-  - component: {fileID: -5542033046315651203}
+  - component: {fileID: 4152742387474721497}
   - component: {fileID: 1596515668900207609}
   - component: {fileID: 204600217990397066}
+  - component: {fileID: 7846831521925905590}
   m_Layer: 0
   m_Name: Friendly_Ship_01
   m_TagString: FriendlyShip
@@ -123,7 +124,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4171679261465287792}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.4
   m_Height: 0.8
@@ -137,13 +138,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4171679261465287792}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.3
   m_Height: 1.3
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: -0.3}
---- !u!114 &-5542033046315651203
+--- !u!114 &4152742387474721497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,6 +186,18 @@ MonoBehaviour:
   referenceScale: {x: 19, y: 19, z: 19}
   occupiedDistance: {x: 22, y: 6, z: 25}
   defaultScaleForUse: {x: 6.5, y: 6.5, z: 6.5}
+--- !u!114 &7846831521925905590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4171679261465287792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd20868a21affb4d9b93b0903943a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4171679262508672518
 GameObject:
   m_ObjectHideFlags: 0

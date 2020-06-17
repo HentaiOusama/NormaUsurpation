@@ -104,7 +104,11 @@ public class EnemyWaveBuilder : MonoBehaviour
         tempSizeData = introPath.GetComponent<SizeData>();
         introPath.transform.localScale = tempSizeData.referenceScale * ((multipleEnemyHolder.transform.position.x - 
                                             tempGameObject.transform.position.x) / tempSizeData.occupiedDistance.x);
-        multipleEnemyHolder.AddComponent<EnemyShipMovementScript>().startMovingEnemies(1, introPath, new GameObject[]{tempGameObject}, 2, 4);
+        GameObject[] movementPaths = new GameObject[] {tempGameObject};
+        EnemyHolderDataHub holderDataHub =  multipleEnemyHolder.GetComponent<EnemyHolderDataHub>();
+        holderDataHub.TakePathsForDeletion(introPath, movementPaths);
+        holderDataHub.increaseChildrenShipsBy(numberOfLayersToBuild * enemiesPerLayer);
+        multipleEnemyHolder.AddComponent<EnemyShipMovementScript>().startMovingEnemies(1, introPath, movementPaths, 2, 4);
     }
 
 
