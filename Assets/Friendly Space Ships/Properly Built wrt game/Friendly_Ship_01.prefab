@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd20868a21affb4d9b93b0903943a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPerSubLifeLevel: 3500
 --- !u!1 &4171679262508672518
 GameObject:
   m_ObjectHideFlags: 0

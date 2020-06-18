@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FriendlyShipDataHub : MonoBehaviour
 {
+    // Serialized variables
+    public float healthPerSubLifeLevel;
 
     // Non-Serialized variables
     Slider lifeLevelSlider;
@@ -12,6 +14,7 @@ public class FriendlyShipDataHub : MonoBehaviour
     float lifeLevelSliderValue;
     int lifeLevel;
     int lifeLvlLimit;
+    float currentHealthForCurrentSubLifeLevel;
     Text lifeLevelText;
     CurrentBulletData currentBulletData;
 
@@ -27,8 +30,7 @@ public class FriendlyShipDataHub : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision other) 
-    {
+    void OnTriggerEnter(Collider other) {
         string colliderTag = other.gameObject.tag;
 
         if(colliderTag == "DropItemLife") 
@@ -39,10 +41,21 @@ public class FriendlyShipDataHub : MonoBehaviour
         {
             // To be built
         }
-        else if (colliderTag == "EnemyBullet") 
+        else if(colliderTag == "EnemyBullet") 
         {
-            // To be built
+            float damage = other.gameObject.GetComponent<EnemyBulletData>().getDamageValue();
+            for(int i = 0; i < (int) damage/healthPerSubLifeLevel; i++) {
+                decreaseLifeOfFriendlyShip();
+            }
+            damage = damage%healthPerSubLifeLevel;
+            currentHealthForCurrentSubLifeLevel -= damage;
+            if(currentHealthForCurrentSubLifeLevel <= 0) {
+                currentHealthForCurrentSubLifeLevel += healthPerSubLifeLevel;
+                decreaseLifeOfFriendlyShip();
+            }
         }
+
+        Destroy(other.gameObject);
     }
 
 
@@ -109,6 +122,7 @@ public class FriendlyShipDataHub : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // Calls the class that builds friendly bullets
     public void buildProperBullets() {
         gameObject.GetComponent<FriendlyBulletBuilder>().buildFriendlyBullets(lifeLevel, currentBulletData.getSpwanPoints());
     }

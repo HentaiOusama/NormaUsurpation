@@ -38,6 +38,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Bullet_Animating_Script.cs" />
      <Compile Include="Assets\Scripts\EnemyBulletBuilder.cs" />
+     <Compile Include="Assets\Scripts\EnemyBulletData.cs" />
      <Compile Include="Assets\Scripts\EnemyHolderDataHub.cs" />
      <Compile Include="Assets\Scripts\EnemyShipMovementScript.cs" />
      <Compile Include="Assets\Scripts\EnemyWaveBuilder.cs" />
