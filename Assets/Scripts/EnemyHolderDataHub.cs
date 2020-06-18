@@ -8,6 +8,7 @@ public class EnemyHolderDataHub : MonoBehaviour
     GameObject introPath;
     GameObject[] movementPaths;
     int numberOfChildrenShips = -1;
+    EnemyWaveBuilder enemyWaveBuilder;
 
     // Update is called once per frame
     void Update()
@@ -17,6 +18,7 @@ public class EnemyHolderDataHub : MonoBehaviour
             for(int i = 0; i < movementPaths.Length; i++) {
                 Destroy(movementPaths[i]);
             }
+            enemyWaveBuilder.allChilderEnemiesDefeated();
             Destroy(gameObject);
         }        
     }
@@ -36,8 +38,9 @@ public class EnemyHolderDataHub : MonoBehaviour
         }
     }
 
-    public void TakePathsForDeletion(GameObject introPath, GameObject[] movementPaths) {
+    public void TakePathsForDeletion(EnemyWaveBuilder enemyWaveBuilder, GameObject introPath, GameObject[] movementPaths) {
         this.introPath = introPath;
+        this.enemyWaveBuilder = enemyWaveBuilder;
         this.movementPaths = movementPaths;
     }
 }

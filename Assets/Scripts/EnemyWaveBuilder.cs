@@ -21,7 +21,7 @@ public class EnemyWaveBuilder : MonoBehaviour
     Object enemyHolderObject;
     bool shouldBuildEnemyWave = false;
     int tempWaveLevel = 1;
-    int totalEnemyCount = 0;
+    int totalNumberOfActiveEnemyHolders = 0;
 
 
 
@@ -38,27 +38,34 @@ public class EnemyWaveBuilder : MonoBehaviour
             shouldBuildEnemyWave = true;
         }
 
+        if(waveBuildingData.waveLevel > waveBuildingData.maxWaves) {
+            shouldBuildEnemyWave = false;
+        }
+
         if(shouldBuildEnemyWave && (waveBuildingData.waveLevel <= waveBuildingData.maxWaves)) {
             shouldBuildEnemyWave = false;
             switch(waveBuildingData.waveLevel) {
                 case 1:
-                    buildWave1(0, 0, 4, 6, viewableScreenConstrains.top - 4f, 1);
+                    buildWave1("right", 0, 0, 5, 6, viewableScreenConstrains.top - 4f, 1);
+                    break;
+
+                case 2:
+                    buildWave2(0, 0, 5, 7, viewableScreenConstrains.top - 4f, 1);
                     break;
             }
         }
-
-        if(totalEnemyCount == 0) {
-            tempWaveLevel++;
-        }
-        
     }
 
 
 
     // Not fully complete
-    public void buildWave1(int enemyShipIndex,int numberOfLayersToSkip, int numberOfLayersToBuild, int enemiesPerLayer, float startUpperHeight, float verticalGapSize){
+    void buildWave1(string startDirection, int enemyShipIndex,int numberOfLayersToSkip, int numberOfLayersToBuild, int enemiesPerLayer, float startUpperHeight, float verticalGapSize){
         // index => which enemyShip to build
-        float screenWidth, enemyShipWidth, enemyShipHeight, horizontalGapSize, startPosLeft, startPosTop = startUpperHeight;
+        // startDirection can only be left or right ATM.
+        int totalEnemyCount = 0;
+        startDirection = startDirection.ToLower();
+
+        float screenWidth, enemyShipWidth, enemyShipHeight, horizontalGapSize, startPosHorizontal, startPosTop = startUpperHeight;
         screenWidth = 2*viewableScreenConstrains.right;
         Vector3 centerPosition;
         GameObject tempGameObject, multipleEnemyHolder;
@@ -67,50 +74,93 @@ public class EnemyWaveBuilder : MonoBehaviour
         // Get data regarding the ship we are going to build by instantiating a temporary enemyShip to get SizeData and then delete it.
         tempGameObject = Instantiate(waveBuildingData.enemyObjects[enemyShipIndex], new Vector3(0, 25, 0), Quaternion.Euler(0, 0, 0)) as GameObject; // Temporary Instantiation
         tempSizeData = tempGameObject.GetComponent<SizeData>();
-        enemyShipWidth = (tempSizeData.occupiedDistance.x/tempSizeData.defaultScaleForUse.x)*tempGameObject.transform.localScale.x;
+        tempGameObject.transform.localScale = tempSizeData.defaultScaleForUse;
+        enemyShipWidth = (tempSizeData.occupiedDistance.x/tempSizeData.referenceScale.x)*tempGameObject.transform.localScale.x;
         enemyShipHeight = (tempSizeData.occupiedDistance.z/tempSizeData.referenceScale.z)*tempGameObject.transform.localScale.z;
         Destroy(tempGameObject);
         horizontalGapSize = (screenWidth/enemiesPerLayer) - enemyShipWidth;
         startPosTop -= numberOfLayersToSkip*(enemyShipHeight);
-        centerPosition = new Vector3(2*viewableScreenConstrains.right, 0, startPosTop - ((enemyShipHeight/2) * numberOfLayersToBuild));
+        if(startDirection == "right") {
+            centerPosition = new Vector3(2*viewableScreenConstrains.right, 0, startPosTop - ((enemyShipHeight/2) * numberOfLayersToBuild));
+        } else if(startDirection == "left") {
+            centerPosition = new Vector3(2*viewableScreenConstrains.left, 0, startPosTop - ((enemyShipHeight/2) * numberOfLayersToBuild));
+        } else {
+            Debug.Log("Error Building Wave 1");
+            return;
+        }
+        
         multipleEnemyHolder = Instantiate(waveBuildingData.multipleEnemyHolder, new Vector3(centerPosition.x, 0, centerPosition.z), 
                                         Quaternion.Euler(0, 0, 0)) as GameObject;
-
+        totalNumberOfActiveEnemyHolders++;
 
         for(int i = 0; i < numberOfLayersToBuild; i++) {
             startPosTop -= verticalGapSize/2;
             startPosTop -= enemyShipHeight/2;
-            startPosLeft = viewableScreenConstrains.right;
+            if(startDirection == "right") {
+                startPosHorizontal = viewableScreenConstrains.right;
+            } else if(startDirection == "left") {
+                startPosHorizontal = viewableScreenConstrains.left;
+            } else {
+                return;
+            }
             for(int j = 0; j < enemiesPerLayer; j++) {
-                startPosLeft += horizontalGapSize/2;
-                startPosLeft += enemyShipWidth/2;
-                tempGameObject = Instantiate(waveBuildingData.enemyObjects[enemyShipIndex], new Vector3(startPosLeft, 0, startPosTop),
+                if(startDirection == "right") {
+                    startPosHorizontal += horizontalGapSize/2;
+                    startPosHorizontal += enemyShipWidth/2;
+                } else if(startDirection == "left") {
+                    startPosHorizontal -= horizontalGapSize/2;
+                    startPosHorizontal -= enemyShipWidth/2;
+                }
+                tempGameObject = Instantiate(waveBuildingData.enemyObjects[enemyShipIndex], new Vector3(startPosHorizontal, 0, startPosTop),
                                             Quaternion.Euler(0, 0, 0)) as GameObject;
+                tempGameObject.transform.localScale = tempGameObject.GetComponent<SizeData>().defaultScaleForUse;
                 tempGameObject.transform.SetParent(multipleEnemyHolder.transform);
-                startPosLeft += enemyShipWidth/2;
-                startPosLeft += horizontalGapSize/2;
+                if(startDirection == "right") {
+                    startPosHorizontal += horizontalGapSize/2;
+                    startPosHorizontal += enemyShipWidth/2;
+                } else if(startDirection == "left") {
+                    startPosHorizontal -= horizontalGapSize/2;
+                    startPosHorizontal -= enemyShipWidth/2;
+                }
                 totalEnemyCount++;
             }
             startPosTop -= enemyShipHeight/2;
             startPosTop -= verticalGapSize/2;
         }
-
+        float rotation_Y = 0;
+        if(startDirection == "right") {
+            rotation_Y = 0;
+        } else if(startDirection == "left") {
+            rotation_Y = 180;
+        }
         tempGameObject = Instantiate(waveBuildingData.movementPathObjects[1], new Vector3(0, 0, centerPosition.z), 
-                                    Quaternion.Euler(0, 0, 0)) as GameObject;
+                                    Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
         tempSizeData = tempGameObject.GetComponent<SizeData>();
         tempGameObject.transform.localScale = tempSizeData.referenceScale * (horizontalGapSize/tempSizeData.occupiedDistance.x);
+        if(startDirection == "right") {
+            rotation_Y = 180;
+        } else if(startDirection == "left") {
+            rotation_Y = 0;
+        }
         GameObject introPath = Instantiate(waveBuildingData.movementPathObjects[0], new Vector3(centerPosition.x/2, 0, centerPosition.z), 
-                                            Quaternion.Euler(0, 180, 0)) as GameObject;
+                                            Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
         tempSizeData = introPath.GetComponent<SizeData>();
-        introPath.transform.localScale = tempSizeData.referenceScale * ((multipleEnemyHolder.transform.position.x - 
+        introPath.transform.localScale = tempSizeData.referenceScale * (Mathf.Abs(multipleEnemyHolder.transform.position.x - 
                                             tempGameObject.transform.position.x) / tempSizeData.occupiedDistance.x);
         GameObject[] movementPaths = new GameObject[] {tempGameObject};
         EnemyHolderDataHub holderDataHub =  multipleEnemyHolder.GetComponent<EnemyHolderDataHub>();
-        holderDataHub.TakePathsForDeletion(introPath, movementPaths);
-        holderDataHub.increaseChildrenShipsBy(numberOfLayersToBuild * enemiesPerLayer);
+        holderDataHub.TakePathsForDeletion(this, introPath, movementPaths);
+        holderDataHub.increaseChildrenShipsBy(totalEnemyCount);
         multipleEnemyHolder.AddComponent<EnemyShipMovementScript>().startMovingEnemies(1, introPath, movementPaths, 2, 4);
     }
 
+
+    void buildWave2(int enemyShipIndex,int numberOfLayersToSkip, int numberOfLayersToBuild, int enemiesPerLayer, float startUpperHeight, float verticalGapSize){
+        // index => which enemyShip to build
+        for(int i = 0; i < numberOfLayersToBuild; i++) {
+            buildWave1((i%2==0)?"left":"right", enemyShipIndex, i, 1, enemiesPerLayer, startUpperHeight, verticalGapSize);
+        }
+    }
 
 
     public void startBuildingWaves(int waveLevel_, LBRTValues viewableScreenConstrains, Object enemyHolderObject) {
@@ -121,9 +171,15 @@ public class EnemyWaveBuilder : MonoBehaviour
     }
 
 
-    public void decreaseEnemyCount() {
-        totalEnemyCount--;
+    public void buildNextWave() {
+        tempWaveLevel++;
     }
 
 
+    public void allChilderEnemiesDefeated() {
+        totalNumberOfActiveEnemyHolders--;
+        if(totalNumberOfActiveEnemyHolders == 0) {
+            buildNextWave();
+        }
+    }
 }

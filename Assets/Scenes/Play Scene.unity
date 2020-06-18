@@ -38,13 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.43846747, g: 0.48655277, b: 0.5668258, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -281,6 +281,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2094366170}
     m_Modifications:
+    - target: {fileID: 3532786271960218439, guid: 474f2f9fb2daa174b844687690dd919c,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532786272180439608, guid: 474f2f9fb2daa174b844687690dd919c,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532786272314590140, guid: 474f2f9fb2daa174b844687690dd919c,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3532786272886287400, guid: 474f2f9fb2daa174b844687690dd919c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -350,6 +365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyShip FusionCore Lighting
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532786272886287401, guid: 474f2f9fb2daa174b844687690dd919c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 474f2f9fb2daa174b844687690dd919c, type: 3}
@@ -5336,9 +5356,8 @@ MonoBehaviour:
     extraVerticalPositionTop: 2
     heightOffset: 3
     percentHeightAllowedForMovement: 27.5
-  currentBullet:
-    currentBulletObject: {fileID: 6970105522484412680, guid: 7e7d288d5d55dac4ebe13fb09af53161,
-      type: 3}
+  currentBulletData:
+    currentBulletObject: {fileID: 0}
   dropItemObjects: []
   FPSTarget: 60
   mainCamera: {fileID: 963194227}
@@ -5434,7 +5453,7 @@ MonoBehaviour:
     multipleEnemyHolder: {fileID: 258396911993631381, guid: 6264a983de7c15a49b62feed9a6d605c,
       type: 3}
     waveLevel: 1
-    maxWaves: 1
+    maxWaves: 2
 --- !u!114 &1698560786
 MonoBehaviour:
   m_ObjectHideFlags: 0

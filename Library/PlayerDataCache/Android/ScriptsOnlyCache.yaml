@@ -65,6 +65,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
@@ -108,21 +110,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12508}
     - Class: 114
-      Script: {instanceID: 12660}
+      Script: {instanceID: 12662}
     - Class: 114
-      Script: {instanceID: 12760}
+      Script: {instanceID: 12762}
     - Class: 114
-      Script: {instanceID: 12810}
+      Script: {instanceID: 12812}
     - Class: 114
-      Script: {instanceID: 12846}
+      Script: {instanceID: 12848}
     - Class: 114
-      Script: {instanceID: 12944}
+      Script: {instanceID: 12946}
     - Class: 114
-      Script: {instanceID: 12970}
+      Script: {instanceID: 12972}
     - Class: 114
-      Script: {instanceID: 13052}
+      Script: {instanceID: 13054}
     - Class: 114
-      Script: {instanceID: 13092}
+      Script: {instanceID: 13094}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -146,6 +148,8 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 258
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -516,6 +520,12 @@ ScriptsOnlyBuild:
     className: PathCreator
   - hash:
       serializedVersion: 2
+      Hash: d0e6536fa056d4649132d7cd43d0ad5a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyBulletData
+  - hash:
+      serializedVersion: 2
       Hash: 8001a5f7502aab37e42206da015e6914
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -676,12 +686,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyHolderDataHub
-  - hash:
-      serializedVersion: 2
-      Hash: d0e6536fa056d4649132d7cd43d0ad5a
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: EnemyBulletData
   platform: 13
   scenePathNames:
   - Assets/Scenes/Play Scene.unity
