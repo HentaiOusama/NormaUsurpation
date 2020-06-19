@@ -10,11 +10,6 @@ public class FriendlyBulletBuilder : MonoBehaviour
     static float nextFireTime;
 
 
-
-    // Non-Serialized Variables
-    Quaternion tempQuat;
-
-
     // Update is called once per frame
     void Update()
     {
