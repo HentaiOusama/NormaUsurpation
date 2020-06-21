@@ -5356,6 +5356,13 @@ MonoBehaviour:
     extraVerticalPositionTop: 2
     heightOffset: 3
     percentHeightAllowedForMovement: 27.5
+    friendlyShieldData:
+      friendlyShieldObject: {fileID: 2577343152426573743, guid: 295265dec98075646b06b3f19babfb62,
+        type: 3}
+      shieldDuration: 12
+      friendlyShipTransform: {fileID: 0}
+      friendlyShipHeight: 0
+      gap: 0.7
   currentBulletData:
     currentBulletObject: {fileID: 0}
   dropItemObjects: []
@@ -5468,10 +5475,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropItemObjects:
   - {fileID: 1881635661690382, guid: 7fe663c320605884fa98fc281dcd658c, type: 3}
-  - {fileID: 1979763831003660, guid: 607a402248a73e543a0225389adc73be, type: 3}
   - {fileID: 1921158414525276, guid: 96e67c203eaa84d4ca0401f29e2a1083, type: 3}
+  - {fileID: 1979763831003660, guid: 607a402248a73e543a0225389adc73be, type: 3}
   - {fileID: 1497605810254298, guid: e1278af432e1326409a9d65459699475, type: 3}
-  movementVelocity: 10
+  movementVelocity: 8
 --- !u!1 &2094366169
 GameObject:
   m_ObjectHideFlags: 0

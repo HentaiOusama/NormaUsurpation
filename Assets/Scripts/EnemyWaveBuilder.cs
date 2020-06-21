@@ -1,15 +1,6 @@
 ﻿using UnityEngine;
 using PathCreation;
 
-[System.Serializable]
-public class WaveBuildingData {
-    public Object[] enemyObjects;
-    public Object[] movementPathObjects;
-    public Object multipleEnemyHolder;
-    public int waveLevel;
-    public int maxWaves;
-}
-
 
 public class EnemyWaveBuilder : MonoBehaviour
 {
@@ -209,7 +200,7 @@ public class EnemyWaveBuilder : MonoBehaviour
         // Building Intro Path
         GameObject introPath = null;
         if(startDirection == "top") {
-            rotation_Y = -90;
+            rotation_Y = 90;
             float verticalIntroPathSize = centerPosition.z - tempVerticalPos;
             introPath = Instantiate(waveBuildingData.movementPathObjects[0], new Vector3(centerPosition.x/2, 0, verticalIntroPathSize/2), 
                                     Quaternion.Euler(0, rotation_Y, 0)) as GameObject;

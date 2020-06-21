@@ -2,71 +2,6 @@
 using UnityEngine.UI;
 using UnityEditor;
 
-[System.Serializable]
-public class BackgroundElement {
-    public Material material;
-    public float width;
-    public float height;
-}
-
-[System.Serializable]
-public class BackgroundData {
-    public BackgroundElement[] BGMaterialList;
-    public int startBgIndex;
-    public float baseBackgroundWidth;
-}
-
-[System.Serializable]
-public class CanvasData {
-    public Object CanvasObject;
-    public Vector3 Position;
-    public Vector3 Scale;
-    public Vector3 Rotation;
-}
-
-[System.Serializable]
-public class FriendlyShipElement {
-    ///// To get the scale, use GetComponent<SizeData>().defaultScaleForUse /////
-    public Object FriendlyShipObject;
-    public Vector3 Rotation;
-    Vector3 Scale;
-    Quaternion retRotation;
-    public FriendlyShipElement(){
-        retRotation = Quaternion.Euler(Rotation);
-    }
-    public Quaternion getRotation() {
-        return retRotation;
-    }
-}
-
-[System.Serializable]
-public class FriendlyShipData {
-    public FriendlyShipElement[] FSList;
-    public int startShipIndex;
-    public int currentShipIndex = 0;
-    public float FSIntroSpeed;
-    public float extraHorizontalPosition;
-    public float extraVerticalPositionBottom, extraVerticalPositionTop;
-    public float heightOffset;
-    public float percentHeightAllowedForMovement;
-
-}
-
-[System.Serializable]
-public class CurrentBulletData {
-    public GameObject currentBulletObject;
-    Transform[] spwanPoints;
-
-    public CurrentBulletData(Transform[] spwanPoints) {
-        this.spwanPoints = spwanPoints;
-    }
-
-    public Transform[] getSpwanPoints() {
-        return spwanPoints;
-    }
-}
-
-
 
 public class Main_Script : MonoBehaviour
 {
@@ -174,7 +109,12 @@ public class Main_Script : MonoBehaviour
                                                             currentFriendlySpaceShip.transform.GetChild(1).GetChild(3), 
                                                             currentFriendlySpaceShip.transform.GetChild(1).GetChild(4)});
         
-        currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().TakeData(lifeBarCanvas, 0.1f, 1, lifeLvlLimit, currentBulletData);
+        currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().TakeData(lifeBarCanvas, 0.1f, 1, lifeLvlLimit, currentBulletData, 
+                                                                            friendlyShips.friendlyShieldData);
+        
+        friendlyShips.friendlyShieldData.friendlyShipTransform = currentFriendlySpaceShip.transform;
+        friendlyShips.friendlyShieldData.friendlyShipHeight = (tempSizeData.occupiedDistance.z / tempSizeData.referenceScale.z) * 
+                                                            currentFriendlySpaceShip.transform.localScale.z;
         
 
 

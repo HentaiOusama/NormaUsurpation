@@ -36,6 +36,14 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\WebDemo\scripts\CameraShake.cs" />
+     <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\WebDemo\scripts\ExplodingProjectile.cs" />
+     <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\WebDemo\scripts\Projectile.cs" />
+     <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\WebDemo\scripts\projectileActor.cs" />
+     <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\destroyMe.cs" />
+     <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\instantiateEffectCaller.cs" />
+     <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\particleColorChanger.cs" />
+     <Compile Include="Assets\Scripts\AllCustomClasses.cs" />
      <Compile Include="Assets\Scripts\Bullet_Animating_Script.cs" />
      <Compile Include="Assets\Scripts\EnemyBulletBuilder.cs" />
      <Compile Include="Assets\Scripts\EnemyBulletData.cs" />
@@ -45,6 +53,7 @@
      <Compile Include="Assets\Scripts\FriendlyBulletBuilder.cs" />
      <Compile Include="Assets\Scripts\FriendlyBulletData.cs" />
      <Compile Include="Assets\Scripts\FriendlyBulletMover.cs" />
+     <Compile Include="Assets\Scripts\FriendlyShieldHandler.cs" />
      <Compile Include="Assets\Scripts\FriendlyShipDataHub.cs" />
      <Compile Include="Assets\Scripts\FriendlyShipMovementScript.cs" />
      <Compile Include="Assets\Scripts\ItemDestroyer.cs" />
@@ -56,7 +65,10 @@
      <Compile Include="Assets\Scripts\fBulletEnemyCollisionHandler.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+     <None Include="Assets\Bullets\Enemy\Projectile Pack 1\OtherReq Stuff\shader\Mobile-Particle-AlphaBlended-ZTestAlways.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+     <None Include="Assets\Bullets\Enemy\Projectile Pack 1\OtherReq Stuff\shader\Mobile-Particle-Add-ZTestAlways.shader" />
+     <None Include="Assets\Bullets\Enemy\Projectile Pack 1\Tips &amp; Documentations.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />

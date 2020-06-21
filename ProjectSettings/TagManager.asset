@@ -14,6 +14,8 @@ TagManager:
   - ProgressBarCanvas
   - DropItemLife
   - DropItemArmour
+  - FriendlyShield
+  - FX
   layers:
   - Default
   - TransparentFX

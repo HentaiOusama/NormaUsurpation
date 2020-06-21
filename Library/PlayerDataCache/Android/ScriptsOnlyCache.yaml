@@ -9,6 +9,7 @@ ScriptsOnlyBuild:
     - FriendlyBulletBuilder
     - FriendlyBulletData
     - FriendlyBulletMover
+    - FriendlyShieldHandler
     - FriendlyShipDataHub
     - FriendlyShipMovementScript
     - ItemDestroyer
@@ -76,55 +77,57 @@ ScriptsOnlyBuild:
     - Class: 111
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11178}
+      Script: {instanceID: 11186}
     - Class: 114
-      Script: {instanceID: 11182}
+      Script: {instanceID: 11190}
     - Class: 114
-      Script: {instanceID: 11252}
+      Script: {instanceID: 11260}
     - Class: 114
-      Script: {instanceID: 11278}
+      Script: {instanceID: 11286}
     - Class: 114
-      Script: {instanceID: 11346}
+      Script: {instanceID: 11356}
     - Class: 114
-      Script: {instanceID: 11386}
+      Script: {instanceID: 11398}
     - Class: 114
-      Script: {instanceID: 11752}
+      Script: {instanceID: 11764}
     - Class: 114
-      Script: {instanceID: 11780}
+      Script: {instanceID: 11792}
     - Class: 114
-      Script: {instanceID: 11802}
+      Script: {instanceID: 11814}
     - Class: 114
-      Script: {instanceID: 12008}
+      Script: {instanceID: 12020}
     - Class: 114
-      Script: {instanceID: 12124}
+      Script: {instanceID: 12138}
     - Class: 114
-      Script: {instanceID: 12322}
+      Script: {instanceID: 12336}
     - Class: 114
-      Script: {instanceID: 12394}
+      Script: {instanceID: 12410}
     - Class: 114
-      Script: {instanceID: 12408}
+      Script: {instanceID: 12424}
     - Class: 114
-      Script: {instanceID: 12442}
+      Script: {instanceID: 12458}
     - Class: 114
-      Script: {instanceID: 12476}
+      Script: {instanceID: 12492}
     - Class: 114
-      Script: {instanceID: 12508}
+      Script: {instanceID: 12524}
     - Class: 114
-      Script: {instanceID: 12662}
+      Script: {instanceID: 12680}
     - Class: 114
-      Script: {instanceID: 12762}
+      Script: {instanceID: 12782}
     - Class: 114
-      Script: {instanceID: 12812}
+      Script: {instanceID: 12834}
     - Class: 114
-      Script: {instanceID: 12848}
+      Script: {instanceID: 12870}
     - Class: 114
-      Script: {instanceID: 12946}
+      Script: {instanceID: 12914}
     - Class: 114
       Script: {instanceID: 12972}
     - Class: 114
-      Script: {instanceID: 13054}
+      Script: {instanceID: 12998}
     - Class: 114
-      Script: {instanceID: 13094}
+      Script: {instanceID: 13080}
+    - Class: 114
+      Script: {instanceID: 13120}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -202,6 +205,12 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
+      Hash: 71e41e59a9b9d3d35a3f2005e6919d13
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: destroyMe
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -224,6 +233,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Scrollbar
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Projectile
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -400,6 +415,12 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
+      Hash: e6c4518bc1078db26ead5f041a29caee
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ExplodingProjectile
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
@@ -442,10 +463,16 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: dbd9b34310963452e4bf33164bbf325b
+      Hash: 77d391c94eda79f4a422fada21fa3785
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Main_Script
+  - hash:
+      serializedVersion: 2
+      Hash: 17975bc7460cf535fa9f277b27bdb12c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: projectileActor
   - hash:
       serializedVersion: 2
       Hash: bfd10ec349a1a59ca1631589faec3d02
@@ -520,6 +547,12 @@ ScriptsOnlyBuild:
     className: PathCreator
   - hash:
       serializedVersion: 2
+      Hash: ea761a5aa1a511dc8dc06676ceba4d43
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: particleColorChanger
+  - hash:
+      serializedVersion: 2
       Hash: d0e6536fa056d4649132d7cd43d0ad5a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -550,6 +583,12 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
+      Hash: e2be45436b68a421e8ea0821e13bb2bc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CameraShake
+  - hash:
+      serializedVersion: 2
       Hash: babf713b4aa07efb18c50ea6aa2f50cd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -562,6 +601,12 @@ ScriptsOnlyBuild:
     className: MarkerTrack
   - hash:
       serializedVersion: 2
+      Hash: da5105de6a6cfbde50e7cdc590407abd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: instantiateEffectCaller
+  - hash:
+      serializedVersion: 2
       Hash: d791aa6007fa3640be1164ea75bb087d
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -572,6 +617,18 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FriendlyBulletData
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AllCustomClasses
+  - hash:
+      serializedVersion: 2
+      Hash: 67c5fa90e81bf2760de4df5b0f9e4b02
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FriendlyShieldHandler
   - hash:
       serializedVersion: 2
       Hash: 21d73eda81c18eacd2c91ad5dfaf2e32

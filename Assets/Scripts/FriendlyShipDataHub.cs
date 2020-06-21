@@ -17,6 +17,7 @@ public class FriendlyShipDataHub : MonoBehaviour
     float currentHealthForCurrentSubLifeLevel;
     Text lifeLevelText;
     CurrentBulletData currentBulletData;
+    FriendlyShieldData friendlyShieldData;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,8 @@ public class FriendlyShipDataHub : MonoBehaviour
         } 
         else if(colliderTag == "DropItemArmour") 
         {
-            // To be built
+            GameObject tempShield = Instantiate(friendlyShieldData.friendlyShieldObject , new Vector3(0, 50, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+            tempShield.GetComponent<FriendlyShieldHandler>().takeData(friendlyShieldData);
         }
         else if(colliderTag == "EnemyBullet") 
         {
@@ -61,7 +63,8 @@ public class FriendlyShipDataHub : MonoBehaviour
 
 
     // Fetches data from Main Script
-    public void TakeData(Canvas lifeBarCanvas, float lifeLevelSliderValue, int lifeLevel, int lifeLvlLimit, CurrentBulletData currentBulletData) {
+    public void TakeData(Canvas lifeBarCanvas, float lifeLevelSliderValue, int lifeLevel, int lifeLvlLimit, CurrentBulletData currentBulletData, 
+                        FriendlyShieldData friendlyShieldData) {
         lifeLevelSlider = lifeBarCanvas.GetComponentInChildren<Slider>();
         lifeLevelText = lifeBarCanvas.GetComponentInChildren<Text>();
         lifeLevelSlider.value = lifeLevelSliderValue;
@@ -70,6 +73,7 @@ public class FriendlyShipDataHub : MonoBehaviour
         this.lifeLevel = lifeLevel;
         this.lifeLvlLimit = lifeLvlLimit;
         this.currentBulletData = currentBulletData;
+        this.friendlyShieldData = friendlyShieldData;
     }
 
     // Slider Value Increaser
