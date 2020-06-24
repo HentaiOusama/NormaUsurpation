@@ -411,8 +411,8 @@ GameObject:
   - component: {fileID: 5321282302784638352}
   - component: {fileID: 7249105912054393768}
   - component: {fileID: -5815087075484140517}
-  - component: {fileID: 7334838036413479673}
   - component: {fileID: 5615516329770563692}
+  - component: {fileID: -7664591419080814317}
   m_Layer: 0
   m_Name: EnemyShip FusionCore
   m_TagString: EnemyShip
@@ -465,19 +465,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletObject: {fileID: 0}
   fireRate: 0
---- !u!114 &7334838036413479673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5321282302784638355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb6b064d0c8495a4db2214808ac10e48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLife: 750
 --- !u!114 &5615516329770563692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,6 +480,19 @@ MonoBehaviour:
   referenceScale: {x: 2, y: 2, z: 2}
   occupiedDistance: {x: 3, y: 3, z: 8}
   defaultScaleForUse: {x: 1.5, y: 1.5, z: 1.5}
+--- !u!114 &-7664591419080814317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5321282302784638355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed743888392729b4cbdbeb241780a658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 750
 --- !u!1 &5321282303358203877
 GameObject:
   m_ObjectHideFlags: 0

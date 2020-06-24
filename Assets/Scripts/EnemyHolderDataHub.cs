@@ -10,6 +10,7 @@ public class EnemyHolderDataHub : MonoBehaviour
     int numberOfChildrenShips = -1;
     EnemyWaveBuilder enemyWaveBuilder;
     int waveLevel = -1;
+    bool isIntroComplete = false;
 
     // Update is called once per frame
     void Update()
@@ -46,5 +47,13 @@ public class EnemyHolderDataHub : MonoBehaviour
         this.introPath = introPath;
         this.enemyWaveBuilder = enemyWaveBuilder;
         this.movementPaths = movementPaths;
+    }
+
+    public void introComplete() {
+        isIntroComplete = true;
+    }
+
+    public bool IsIntroComplete() {
+        return isIntroComplete;
     }
 }

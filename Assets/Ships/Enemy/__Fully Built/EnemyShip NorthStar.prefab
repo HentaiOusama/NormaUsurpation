@@ -1181,8 +1181,8 @@ GameObject:
   - component: {fileID: 4545169038122641521}
   - component: {fileID: 4370057365424098185}
   - component: {fileID: -2025672617643306907}
-  - component: {fileID: 8198452205029334047}
   - component: {fileID: 320900396115396897}
+  - component: {fileID: -6433735719078358456}
   m_Layer: 0
   m_Name: EnemyShip NorthStar
   m_TagString: EnemyShip
@@ -1247,19 +1247,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletObject: {fileID: 0}
   fireRate: 0
---- !u!114 &8198452205029334047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8979477520111658436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb6b064d0c8495a4db2214808ac10e48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLife: 5000
 --- !u!114 &320900396115396897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,6 +1262,19 @@ MonoBehaviour:
   referenceScale: {x: 2, y: 2, z: 2}
   occupiedDistance: {x: 7, y: 1.8, z: 11}
   defaultScaleForUse: {x: 2, y: 2, z: 2}
+--- !u!114 &-6433735719078358456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979477520111658436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed743888392729b4cbdbeb241780a658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 750
 --- !u!1 &8979477521220083634
 GameObject:
   m_ObjectHideFlags: 0

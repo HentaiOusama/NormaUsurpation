@@ -10,7 +10,6 @@ public class Main_Script : MonoBehaviour
     public CanvasData lifeBarCanvasData, gameLevelCanvasData;
     public FriendlyShipData friendlyShips;
     public CurrentBulletData currentBulletData;
-    public Object[] dropItemObjects;
     public int FPSTarget;
     public Camera mainCamera;
     public float defaultCameraOrthogonalSize;

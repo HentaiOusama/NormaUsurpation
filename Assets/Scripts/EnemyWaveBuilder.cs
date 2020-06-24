@@ -67,6 +67,7 @@ public class EnemyWaveBuilder : MonoBehaviour
         int totalEnemyCount = 0;
         startDirection = startDirection.ToLower();
         oscillateStartDirection = oscillateStartDirection.ToLower();
+        float tempStartUpperHeight = startUpperHeight;
 
 
         float screenWidth, enemyShipWidth, enemyShipHeight, horizontalGapSize, startPosHorizontal, startPosVertical = startUpperHeight;
@@ -86,9 +87,9 @@ public class EnemyWaveBuilder : MonoBehaviour
         horizontalGapSize = (screenWidth/enemiesPerLayer) - enemyShipWidth;
 
 
-        // Calculating Starting Positions
+        // Calculating Centre and Start Positions Positions
         if(startDirection == "top") {
-            startPosVertical += viewableScreenConstrains.top + numberOfLayersToBuild*(enemyShipHeight + verticalGapSize);
+            startPosVertical = viewableScreenConstrains.top + numberOfLayersToBuild*(enemyShipHeight + verticalGapSize);
             centerPosition = new Vector3(0, 0, (viewableScreenConstrains.top + startPosVertical)/2);
         } else if(startDirection == "right") {
             startPosVertical -= numberOfLayersToSkip*(enemyShipHeight + verticalGapSize);
@@ -142,6 +143,7 @@ public class EnemyWaveBuilder : MonoBehaviour
                                             Quaternion.Euler(0, 0, 0)) as GameObject;
                 tempGameObject.transform.localScale = tempGameObject.GetComponent<SizeData>().defaultScaleForUse;
                 tempGameObject.transform.SetParent(multipleEnemyHolder.transform);
+                tempGameObject.GetComponent<EnemyShipDataHub>().TakeHolder(multipleEnemyHolder);
 
                 if(startDirection == "top") {
                     startPosHorizontal += horizontalGapSize/2;
@@ -166,12 +168,13 @@ public class EnemyWaveBuilder : MonoBehaviour
         float rotation_Y = 0;
         float tempVerticalPos = viewableScreenConstrains.top;
         if(startDirection == "top") {
-            tempVerticalPos = viewableScreenConstrains.top - (numberOfLayersToSkip * (enemyShipHeight + verticalGapSize)) - 
+            tempVerticalPos = tempStartUpperHeight - (numberOfLayersToSkip * (enemyShipHeight + verticalGapSize)) - 
                                     ((numberOfLayersToBuild * (enemyShipHeight + verticalGapSize)) / 2);
             if(oscillateStartDirection == "right") {
                 rotation_Y = 180;
                 tempGameObject = Instantiate(waveBuildingData.movementPathObjects[1], new Vector3(0, 0, tempVerticalPos), 
                                         Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
+                tempSizeData = tempGameObject.GetComponent<SizeData>();
                 tempGameObject.transform.localScale = tempSizeData.referenceScale * (horizontalGapSize/tempSizeData.occupiedDistance.x);
             } else if(oscillateStartDirection == "left") {
                 rotation_Y = 0;
@@ -202,7 +205,8 @@ public class EnemyWaveBuilder : MonoBehaviour
         if(startDirection == "top") {
             rotation_Y = 90;
             float verticalIntroPathSize = centerPosition.z - tempVerticalPos;
-            introPath = Instantiate(waveBuildingData.movementPathObjects[0], new Vector3(centerPosition.x/2, 0, verticalIntroPathSize/2), 
+            tempVerticalPos = tempVerticalPos + verticalIntroPathSize/2;
+            introPath = Instantiate(waveBuildingData.movementPathObjects[0], new Vector3(centerPosition.x/2, 0, tempVerticalPos), 
                                     Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
             tempSizeData = introPath.GetComponent<SizeData>();
             introPath.transform.localScale = tempSizeData.referenceScale * (Mathf.Abs(verticalIntroPathSize) / tempSizeData.occupiedDistance.x);

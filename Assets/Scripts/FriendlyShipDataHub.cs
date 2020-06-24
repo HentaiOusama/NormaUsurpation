@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class FriendlyShipDataHub : MonoBehaviour
@@ -18,6 +16,10 @@ public class FriendlyShipDataHub : MonoBehaviour
     Text lifeLevelText;
     CurrentBulletData currentBulletData;
     FriendlyShieldData friendlyShieldData;
+    GameObject shieldGameObject;
+    bool isShieldActive = false;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,7 @@ public class FriendlyShipDataHub : MonoBehaviour
         
     }
 
+    // OnTriggerEnter is called when collision starts
     void OnTriggerEnter(Collider other) {
         string colliderTag = other.gameObject.tag;
 
@@ -40,12 +43,17 @@ public class FriendlyShipDataHub : MonoBehaviour
         } 
         else if(colliderTag == "DropItemArmour") 
         {
-            GameObject tempShield = Instantiate(friendlyShieldData.friendlyShieldObject , new Vector3(0, 50, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-            tempShield.GetComponent<FriendlyShieldHandler>().takeData(friendlyShieldData);
+            if(!isShieldActive) {
+                shieldGameObject = Instantiate(friendlyShieldData.friendlyShieldObject , new Vector3(0, 50, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+                shieldGameObject.GetComponent<FriendlyShieldHandler>().TakeData(this, friendlyShieldData);
+                isShieldActive = true;
+            } else {
+                shieldGameObject.GetComponent<FriendlyShieldHandler>().ResetDuration();
+            }
         }
         else if(colliderTag == "EnemyBullet") 
         {
-            float damage = other.gameObject.GetComponent<EnemyBulletData>().getDamageValue();
+            float damage = other.gameObject.GetComponent<BulletHandler>().bulletData.getDamageValue();
             for(int i = 0; i < (int) damage/healthPerSubLifeLevel; i++) {
                 decreaseLifeOfFriendlyShip();
             }
@@ -120,14 +128,18 @@ public class FriendlyShipDataHub : MonoBehaviour
         lifeLevelSlider.value = lifeLevelSliderValue;
     }
 
-    // Ends the Game  <-- Not Yet Complete
-    public void gameOver() {
-        FriendlyBulletBuilder.stopBuildingBullets();
-        Destroy(gameObject);
+    public void ShieldInactive() {
+        isShieldActive = false;
     }
 
     // Calls the class that builds friendly bullets
     public void buildProperBullets() {
         gameObject.GetComponent<FriendlyBulletBuilder>().buildFriendlyBullets(lifeLevel, currentBulletData.getSpwanPoints());
+    }
+
+    // Ends the Game  <-- Not Yet Complete
+    public void gameOver() {
+        FriendlyBulletBuilder.stopBuildingBullets();
+        Destroy(gameObject);
     }
 }

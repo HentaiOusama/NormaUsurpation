@@ -5364,8 +5364,8 @@ MonoBehaviour:
       friendlyShipHeight: 0
       gap: 0.7
   currentBulletData:
-    currentBulletObject: {fileID: 0}
-  dropItemObjects: []
+    currentBulletObject: {fileID: 6970105522484412680, guid: 7e7d288d5d55dac4ebe13fb09af53161,
+      type: 3}
   FPSTarget: 60
   mainCamera: {fileID: 963194227}
   defaultCameraOrthogonalSize: 35.55556
@@ -5375,7 +5375,8 @@ MonoBehaviour:
   gameLevelVerticalOffset: 2
   lifeLvlLimit: 5
   friendlyShipIntroSpeed: 0.1
-  enemyHolderObject: {fileID: 0}
+  enemyHolderObject: {fileID: 258396911993631381, guid: 6264a983de7c15a49b62feed9a6d605c,
+    type: 3}
 --- !u!23 &1698560782
 MeshRenderer:
   m_ObjectHideFlags: 0

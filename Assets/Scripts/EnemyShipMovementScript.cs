@@ -42,7 +42,8 @@ public class EnemyShipMovementScript : MonoBehaviour
     }
 
     // Fetches data for moving enemies
-    public void startMovingEnemies(int movementType, GameObject introductoryPath, GameObject[] movementPaths, float introSpeed, float movementSpeed) {
+    public void startMovingEnemies(int movementType, GameObject introductoryPath, GameObject[] movementPaths, 
+                                float introSpeed, float movementSpeed) {
 
         this.introductoryPath = introductoryPath.GetComponent<PathCreator>();
         this.movementPaths = new PathCreator[movementPaths.Length];
@@ -65,6 +66,7 @@ public class EnemyShipMovementScript : MonoBehaviour
             if(distanceTravelled >= introductoryPath.path.length) {
                 distanceTravelled = introductoryPath.path.length;
                 gameObject.transform.position = introductoryPath.path.GetPointAtDistance(distanceTravelled);
+                gameObject.GetComponent<EnemyHolderDataHub>().introComplete();
                 shouldIntroduce = false;
                 distanceTravelled = 0;
             }

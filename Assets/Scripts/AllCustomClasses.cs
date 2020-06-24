@@ -3,6 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class LBRTValues
+{
+    public float left, bottom, right, top;
+    public LBRTValues(float left, float bottom, float right, float top) {
+        this.left = left;
+        this.bottom = bottom;
+        this.right = right;
+        this.top = top;
+    }
+}
+
+
+[System.Serializable]
 public class BackgroundElement {
     public Material material;
     public float width;
@@ -85,6 +98,24 @@ public class CurrentBulletData {
 
     public Transform[] getSpwanPoints() {
         return spwanPoints;
+    }
+}
+
+
+
+[System.Serializable]
+public class BulletData
+{
+    // Serialized Variables
+    public float damageValue;
+    public float speedValue;
+
+    public float getDamageValue() {
+        return damageValue;
+    }
+
+    public float getSpeedValue() {
+        return speedValue;
     }
 }
 

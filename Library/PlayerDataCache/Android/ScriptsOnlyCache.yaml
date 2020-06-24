@@ -1,14 +1,14 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - BulletHandler
     - Bullet_Animating_Script
     - EnemyBulletBuilder
     - EnemyHolderDataHub
+    - EnemyShipDataHub
     - EnemyShipMovementScript
     - EnemyWaveBuilder
     - FriendlyBulletBuilder
-    - FriendlyBulletData
-    - FriendlyBulletMover
     - FriendlyShieldHandler
     - FriendlyShipDataHub
     - FriendlyShipMovementScript
@@ -16,7 +16,6 @@ ScriptsOnlyBuild:
     - ItemDropper
     - Main_Script
     - SizeData
-    - fBulletEnemyCollisionHandler
     PathCreator.dll:
     - PathCreation.PathCreator
     Unity.Rider.Editor.dll:
@@ -77,9 +76,7 @@ ScriptsOnlyBuild:
     - Class: 111
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11186}
-    - Class: 114
-      Script: {instanceID: 11190}
+      Script: {instanceID: 11188}
     - Class: 114
       Script: {instanceID: 11260}
     - Class: 114
@@ -99,35 +96,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12138}
     - Class: 114
-      Script: {instanceID: 12336}
+      Script: {instanceID: 12166}
     - Class: 114
-      Script: {instanceID: 12410}
+      Script: {instanceID: 12338}
     - Class: 114
-      Script: {instanceID: 12424}
+      Script: {instanceID: 12412}
     - Class: 114
-      Script: {instanceID: 12458}
+      Script: {instanceID: 12426}
     - Class: 114
-      Script: {instanceID: 12492}
+      Script: {instanceID: 12460}
     - Class: 114
-      Script: {instanceID: 12524}
+      Script: {instanceID: 12494}
+    - Class: 114
+      Script: {instanceID: 12526}
     - Class: 114
       Script: {instanceID: 12680}
     - Class: 114
-      Script: {instanceID: 12782}
+      Script: {instanceID: 12832}
     - Class: 114
-      Script: {instanceID: 12834}
+      Script: {instanceID: 12848}
     - Class: 114
-      Script: {instanceID: 12870}
+      Script: {instanceID: 12912}
     - Class: 114
-      Script: {instanceID: 12914}
+      Script: {instanceID: 12970}
     - Class: 114
-      Script: {instanceID: 12972}
+      Script: {instanceID: 12994}
     - Class: 114
-      Script: {instanceID: 12998}
+      Script: {instanceID: 13076}
     - Class: 114
-      Script: {instanceID: 13080}
-    - Class: 114
-      Script: {instanceID: 13120}
+      Script: {instanceID: 13116}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -161,12 +158,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: CanvasScaler
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: FriendlyBulletMover
   - hash:
       serializedVersion: 2
       Hash: c42672c997f8be6b1aa86a927ebea785
@@ -439,6 +430,12 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
+      Hash: babf713b4aa07efb18c50ea6aa2f50cd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyShipDataHub
+  - hash:
+      serializedVersion: 2
       Hash: 5f1752ed2092162f016c19510c28a8b9
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -463,7 +460,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 77d391c94eda79f4a422fada21fa3785
+      Hash: 92119fd76eba30722a4f6bdfc443c293
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Main_Script
@@ -553,12 +550,6 @@ ScriptsOnlyBuild:
     className: particleColorChanger
   - hash:
       serializedVersion: 2
-      Hash: d0e6536fa056d4649132d7cd43d0ad5a
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: EnemyBulletData
-  - hash:
-      serializedVersion: 2
       Hash: 8001a5f7502aab37e42206da015e6914
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -589,12 +580,6 @@ ScriptsOnlyBuild:
     className: CameraShake
   - hash:
       serializedVersion: 2
-      Hash: babf713b4aa07efb18c50ea6aa2f50cd
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: fBulletEnemyCollisionHandler
-  - hash:
-      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -613,10 +598,10 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: d0e6536fa056d4649132d7cd43d0ad5a
+      Hash: dd649c91334ecc1a3dfb5d30a230d422
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: FriendlyBulletData
+    className: BulletHandler
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f

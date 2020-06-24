@@ -7,6 +7,7 @@ public class FriendlyShieldHandler : MonoBehaviour
     public Slider durationSliderRight, durationSliderLeft;
 
     // Non-Serialized Variables
+    FriendlyShipDataHub friendlyShipDataHub;
     FriendlyShieldData friendlyShieldData;
     float elapsedTime = 0f;
     float sliderValue;
@@ -23,6 +24,7 @@ public class FriendlyShieldHandler : MonoBehaviour
         durationSliderLeft.value = sliderValue;
 
         if(elapsedTime >= friendlyShieldData.shieldDuration) {
+            friendlyShipDataHub.ShieldInactive();
             Destroy(gameObject);
         }
     }
@@ -33,7 +35,12 @@ public class FriendlyShieldHandler : MonoBehaviour
         }
     }
 
-    public void takeData(FriendlyShieldData friendlyShieldData) {
+    public void TakeData(FriendlyShipDataHub friendlyShipDataHub, FriendlyShieldData friendlyShieldData) {
+        this.friendlyShipDataHub = friendlyShipDataHub;
         this.friendlyShieldData = friendlyShieldData;
+    }
+
+    public void ResetDuration() {
+            elapsedTime = 0f;
     }
 }
