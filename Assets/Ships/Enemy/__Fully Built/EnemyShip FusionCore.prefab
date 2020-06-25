@@ -406,8 +406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed743888392729b4cbdbeb241780a658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawnPoints: []
-  maxLife: 750
+  bulletSpawnPoints:
+  - {fileID: 2633735212852831155}
+  destroyVFXEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
+    type: 3}
+  maxLife: 1000
   myEnemyHolder: {fileID: 0}
 --- !u!114 &5615516329770563692
 MonoBehaviour:

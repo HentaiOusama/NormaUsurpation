@@ -5,6 +5,7 @@ public class FriendlyShipDataHub : MonoBehaviour
 {
     // Serialized variables
     public float healthPerSubLifeLevel;
+    public Object destroyVFXEffect;
 
     // Non-Serialized variables
     Slider lifeLevelSlider;
@@ -141,9 +142,11 @@ public class FriendlyShipDataHub : MonoBehaviour
         gameObject.GetComponent<FriendlyBulletBuilder>().buildFriendlyBullets(lifeLevel);
     }
 
-    // Ends the Game  <-- Not Yet Complete
+    // Ends the Game  <--  Not Yet Complete
     public void gameOver() {
         gameObject.GetComponent<FriendlyBulletBuilder>().stopBuildingBullets();
+        GameObject tempGameObject = Instantiate(destroyVFXEffect, new Vector3(0, -100, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+        tempGameObject.transform.SetPositionAndRotation(gameObject.transform.position, tempGameObject.GetComponent<DefaultRotation>().Rotation());
         Destroy(gameObject);
     }
 }

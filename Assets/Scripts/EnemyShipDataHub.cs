@@ -5,6 +5,7 @@ public class EnemyShipDataHub : MonoBehaviour
 {
     // Serialized Variables
     public GameObject[] bulletSpawnPoints;
+    public Object destroyVFXEffect;
     public float maxLife;
 
 
@@ -57,6 +58,7 @@ public class EnemyShipDataHub : MonoBehaviour
        if(currentEnemyHealth <= 0) {
            ItemDropper.DropItem(gameObject.transform.position, 0.15f);
            gameObject.transform.parent.GetComponent<EnemyHolderDataHub>().decreaseChildrenShipsBy(1);
+           Instantiate(destroyVFXEffect, gameObject.transform.position, Quaternion.Euler(0, 0, 0));
            Destroy(gameObject);
        }
    }

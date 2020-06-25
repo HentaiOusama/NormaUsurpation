@@ -1173,7 +1173,9 @@ MonoBehaviour:
   - {fileID: 5481280452715132264}
   - {fileID: 4987830855710761111}
   enemyBulletObject: []
-  secondsBeforeNextBullet: 0.1
+  bulletGapInSec:
+    min: 0
+    max: 0
   probabilityOfPrimaryBulletBuild: 0
 --- !u!114 &-6433735719078358456
 MonoBehaviour:
@@ -1187,8 +1189,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed743888392729b4cbdbeb241780a658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawnPoints: []
-  maxLife: 750
+  bulletSpawnPoints:
+  - {fileID: 1281719455844830180}
+  - {fileID: 5481280452715132264}
+  - {fileID: 4987830855710761111}
+  destroyVFXEffect: {fileID: 159918, guid: a0040bf7072bc2f4e82d887d50a9c5e2, type: 3}
+  maxLife: 7500
   myEnemyHolder: {fileID: 0}
 --- !u!114 &320900396115396897
 MonoBehaviour:

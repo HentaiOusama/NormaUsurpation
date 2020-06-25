@@ -5363,11 +5363,7 @@ MonoBehaviour:
       friendlyShipTransform: {fileID: 0}
       friendlyShipHeight: 0
       gap: 0.7
-  currentBulletData:
-    currentBulletObject: {fileID: 6970105522484412680, guid: 7e7d288d5d55dac4ebe13fb09af53161,
-      type: 3}
   FPSTarget: 60
-  mainCamera: {fileID: 963194227}
   defaultCameraOrthogonalSize: 35.55556
   refrenceWidth: 1080
   refrenceHeight: 1920

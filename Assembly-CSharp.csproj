@@ -40,11 +40,11 @@
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\WebDemo\scripts\ExplodingProjectile.cs" />
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\WebDemo\scripts\Projectile.cs" />
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\WebDemo\scripts\projectileActor.cs" />
-     <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\destroyMe.cs" />
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\instantiateEffectCaller.cs" />
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\particleColorChanger.cs" />
      <Compile Include="Assets\Scripts\AllCustomClasses.cs" />
      <Compile Include="Assets\Scripts\Bullet_Animating_Script.cs" />
+     <Compile Include="Assets\Scripts\DefaultRotation.cs" />
      <Compile Include="Assets\Scripts\EnemyBulletBuilder.cs" />
      <Compile Include="Assets\Scripts\EnemyBulletHandler.cs" />
      <Compile Include="Assets\Scripts\EnemyHolderDataHub.cs" />
@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\Main_Script.cs" />
      <Compile Include="Assets\Scripts\SizeData.cs" />
      <Compile Include="Assets\Scripts\Test_Script.cs" />
+     <Compile Include="Assets\Scripts\destroyMe.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Bullets\Enemy\Projectile Pack 1\OtherReq Stuff\shader\Mobile-Particle-AlphaBlended-ZTestAlways.shader" />

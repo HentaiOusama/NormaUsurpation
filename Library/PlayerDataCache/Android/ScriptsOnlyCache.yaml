@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - Bullet_Animating_Script
+    - DefaultRotation
     - EnemyBulletBuilder
     - EnemyBulletHandler
     - EnemyHolderDataHub
@@ -134,6 +135,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13078}
     - Class: 114
       Script: {instanceID: 13118}
+    - Class: 114
+      Script: {instanceID: 21200}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -427,7 +430,7 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
-      Hash: 6f02a3bfec7ef673b4601455edfc1bba
+      Hash: b76efb3029eb7eafe242c1d035690b06
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FriendlyShipDataHub
@@ -439,7 +442,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 2284d5ee0623bdbb3513e0d73d9578c7
+      Hash: ac362e3dcb25665c6eb82c47e5dda7ff
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyShipDataHub
@@ -743,6 +746,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyHolderDataHub
+  - hash:
+      serializedVersion: 2
+      Hash: 2a1bb61f1ed5bebb78a1600bb13ae12e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DefaultRotation
   platform: 13
   scenePathNames:
   - Assets/Scenes/Play Scene.unity
