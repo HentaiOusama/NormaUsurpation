@@ -2,35 +2,39 @@
 
 public class FriendlyBulletBuilder : MonoBehaviour
 {
-    public Object bulletObject;
-    public float fireRate;
-    static int lifeLevel = 0;
-    static Transform[] spawnPoints = null;
-    static bool shouldBuildBullets = false;
-    static float nextFireTime;
+    // Serialized Variables
+    public GameObject[] bulletSpawnPoints;
+    public Object friendlyBulletObject;
+    public float secondsBeforeNextBullet;
+
+    // Non-Serialized Variables
+    int lifeLevel = 0;
+    bool shouldBuildBullets = false;
+    float elapsedTimeAfterlastBullet = 0;
 
 
     // Update is called once per frame
     void Update()
     {
-        if(shouldBuildBullets && (lifeLevel > 0) && (Time.time > nextFireTime)) {
-            nextFireTime = Time.time + fireRate;
+        elapsedTimeAfterlastBullet += Time.deltaTime;
+        if(shouldBuildBullets && (lifeLevel > 0) && (elapsedTimeAfterlastBullet >= secondsBeforeNextBullet)) {
+            elapsedTimeAfterlastBullet = 0;
 
             try {
                 switch(lifeLevel) {
                     case 1:
-                        Instantiate(bulletObject, spawnPoints[0].position, spawnPoints[0].rotation);
+                        Instantiate(friendlyBulletObject, bulletSpawnPoints[0].transform.position, bulletSpawnPoints[0].transform.rotation);
                         break;
 
                     case 2:
-                        Instantiate(bulletObject, spawnPoints[1].position, spawnPoints[1].rotation);
-                        Instantiate(bulletObject, spawnPoints[2].position, spawnPoints[2].rotation);
+                        Instantiate(friendlyBulletObject, bulletSpawnPoints[1].transform.position, bulletSpawnPoints[1].transform.rotation);
+                        Instantiate(friendlyBulletObject, bulletSpawnPoints[2].transform.position, bulletSpawnPoints[2].transform.rotation);
                         break;
 
                     case 3:
-                        Instantiate(bulletObject, spawnPoints[0].position, spawnPoints[0].rotation);
-                        Instantiate(bulletObject, spawnPoints[1].position, spawnPoints[1].rotation);
-                        Instantiate(bulletObject, spawnPoints[2].position, spawnPoints[2].rotation);
+                        Instantiate(friendlyBulletObject, bulletSpawnPoints[0].transform.position, bulletSpawnPoints[0].transform.rotation);
+                        Instantiate(friendlyBulletObject, bulletSpawnPoints[1].transform.position, bulletSpawnPoints[1].transform.rotation);
+                        Instantiate(friendlyBulletObject, bulletSpawnPoints[2].transform.position, bulletSpawnPoints[2].transform.rotation);
                         break;
 
                     case 4:
@@ -38,16 +42,16 @@ public class FriendlyBulletBuilder : MonoBehaviour
                         break;
 
                     case 5:
-                        Instantiate(bulletObject, spawnPoints[0].position, spawnPoints[0].rotation);
-                        Instantiate(bulletObject, spawnPoints[1].position, spawnPoints[1].rotation);
-                        Instantiate(bulletObject, spawnPoints[2].position, spawnPoints[2].rotation);
-                        Instantiate(bulletObject, spawnPoints[3].position, spawnPoints[3].rotation);
-                        Instantiate(bulletObject, spawnPoints[4].position, spawnPoints[4].rotation);
+                        Instantiate(friendlyBulletObject, bulletSpawnPoints[0].transform.position, bulletSpawnPoints[0].transform.rotation);
+                        Instantiate(friendlyBulletObject, bulletSpawnPoints[1].transform.position, bulletSpawnPoints[1].transform.rotation);
+                        Instantiate(friendlyBulletObject, bulletSpawnPoints[2].transform.position, bulletSpawnPoints[2].transform.rotation);
+                        Instantiate(friendlyBulletObject, bulletSpawnPoints[3].transform.position, bulletSpawnPoints[3].transform.rotation);
+                        Instantiate(friendlyBulletObject, bulletSpawnPoints[4].transform.position, bulletSpawnPoints[4].transform.rotation);
                         break;
                 }
             } catch (System.Exception e) {
                 shouldBuildBullets = false;
-                spawnPoints = null;
+                bulletSpawnPoints = null;
                 lifeLevel = 0;
                 Debug.LogError("Stopped Building Bullets due to error : " + e.Message);
             }
@@ -56,22 +60,15 @@ public class FriendlyBulletBuilder : MonoBehaviour
 
 
 
-// Method that other class calls to give data regarding what type of bullet to build
-    public void buildFriendlyBullets(int lifeLevel_, Transform[] spawnPoints_) {
-        lifeLevel = lifeLevel_;
-        spawnPoints = new Transform[spawnPoints_.Length];
-
-        for(int i = 0; i < spawnPoints.Length; i++) {
-            spawnPoints[i] = spawnPoints_[i];
-        }
-    }
-
-
-    public static void stopBuildingBullets() {
-        shouldBuildBullets = false;
-    }
-    public static void startBuildingBullets() {
+    // Method that other class calls to give data regarding what type of bullet to build
+    public void buildFriendlyBullets(int lifeLevel) {
+        this.lifeLevel = lifeLevel;
+        elapsedTimeAfterlastBullet = secondsBeforeNextBullet;
         shouldBuildBullets = true;
-        nextFireTime = Time.time;
+    }
+
+
+    public void stopBuildingBullets() {
+        shouldBuildBullets = false;
     }
 }

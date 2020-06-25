@@ -8,13 +8,11 @@ public class FriendlyShipDataHub : MonoBehaviour
 
     // Non-Serialized variables
     Slider lifeLevelSlider;
-    Canvas lifeBarCanvas;
     float lifeLevelSliderValue;
     int lifeLevel;
     int lifeLvlLimit;
     float currentHealthForCurrentSubLifeLevel;
     Text lifeLevelText;
-    CurrentBulletData currentBulletData;
     FriendlyShieldData friendlyShieldData;
     GameObject shieldGameObject;
     bool isShieldActive = false;
@@ -51,28 +49,16 @@ public class FriendlyShipDataHub : MonoBehaviour
                 shieldGameObject.GetComponent<FriendlyShieldHandler>().ResetDuration();
             }
         }
-        else if(colliderTag == "EnemyBullet") 
-        {
-            float damage = other.gameObject.GetComponent<BulletHandler>().bulletData.getDamageValue();
-            for(int i = 0; i < (int) damage/healthPerSubLifeLevel; i++) {
-                decreaseLifeOfFriendlyShip();
-            }
-            damage = damage%healthPerSubLifeLevel;
-            currentHealthForCurrentSubLifeLevel -= damage;
-            if(currentHealthForCurrentSubLifeLevel <= 0) {
-                currentHealthForCurrentSubLifeLevel += healthPerSubLifeLevel;
-                decreaseLifeOfFriendlyShip();
-            }
-        }
 
-        Destroy(other.gameObject);
+        if(colliderTag != "FriendlyBullet") {
+            Destroy(other.gameObject);
+        }
     }
 
 
 
     // Fetches data from Main Script
-    public void TakeData(Canvas lifeBarCanvas, float lifeLevelSliderValue, int lifeLevel, int lifeLvlLimit, CurrentBulletData currentBulletData, 
-                        FriendlyShieldData friendlyShieldData) {
+    public void TakeData(Canvas lifeBarCanvas, float lifeLevelSliderValue, int lifeLevel, int lifeLvlLimit, FriendlyShieldData friendlyShieldData) {
         lifeLevelSlider = lifeBarCanvas.GetComponentInChildren<Slider>();
         lifeLevelText = lifeBarCanvas.GetComponentInChildren<Text>();
         lifeLevelSlider.value = lifeLevelSliderValue;
@@ -80,7 +66,6 @@ public class FriendlyShipDataHub : MonoBehaviour
         this.lifeLevelSliderValue = lifeLevelSliderValue;
         this.lifeLevel = lifeLevel;
         this.lifeLvlLimit = lifeLvlLimit;
-        this.currentBulletData = currentBulletData;
         this.friendlyShieldData = friendlyShieldData;
     }
 
@@ -107,19 +92,16 @@ public class FriendlyShipDataHub : MonoBehaviour
     // Slider Value Decreaser
     public void decreaseLifeOfFriendlyShip() {
         lifeLevelSliderValue -= 0.1f;
-        if(lifeLevelSliderValue < 0.1) {
+        if(lifeLevelSliderValue < 0.08f) {
             if(lifeLevel == 1) {
+                lifeLevelSlider.value = 0;
                 gameOver();
                 return;
             }
             if(lifeLevel > 1) {
                 lifeLevel--;
                 lifeLevelSliderValue = 1;
-                if(lifeLevel < 10) {
-                    lifeLevelText.text = "0" + lifeLevel.ToString();
-                } else {
-                    lifeLevelText.text = lifeLevel.ToString();
-                }
+                lifeLevelTextSetValue();
                 buildProperBullets();
             } else {
                 lifeLevelSliderValue = 1;
@@ -128,18 +110,40 @@ public class FriendlyShipDataHub : MonoBehaviour
         lifeLevelSlider.value = lifeLevelSliderValue;
     }
 
+    public void performAttack(float damageValue) {
+        float damage = damageValue;
+        int iterations = (int) (damage/healthPerSubLifeLevel);
+        for(int i = 0; i < iterations; i++) {
+                decreaseLifeOfFriendlyShip();
+            }
+        damage = damage%healthPerSubLifeLevel;
+        currentHealthForCurrentSubLifeLevel -= damage;
+       if(currentHealthForCurrentSubLifeLevel <= 0) {
+                currentHealthForCurrentSubLifeLevel += healthPerSubLifeLevel;
+                decreaseLifeOfFriendlyShip();
+            }
+    }
+
+    public void lifeLevelTextSetValue() {
+        if(lifeLevel < 10) {
+            lifeLevelText.text = "0" + lifeLevel.ToString();
+        } else {
+            lifeLevelText.text = lifeLevel.ToString();
+        }
+    }
+
     public void ShieldInactive() {
         isShieldActive = false;
     }
 
     // Calls the class that builds friendly bullets
     public void buildProperBullets() {
-        gameObject.GetComponent<FriendlyBulletBuilder>().buildFriendlyBullets(lifeLevel, currentBulletData.getSpwanPoints());
+        gameObject.GetComponent<FriendlyBulletBuilder>().buildFriendlyBullets(lifeLevel);
     }
 
     // Ends the Game  <-- Not Yet Complete
     public void gameOver() {
-        FriendlyBulletBuilder.stopBuildingBullets();
+        gameObject.GetComponent<FriendlyBulletBuilder>().stopBuildingBullets();
         Destroy(gameObject);
     }
 }

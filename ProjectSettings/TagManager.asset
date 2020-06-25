@@ -16,6 +16,7 @@ TagManager:
   - DropItemArmour
   - FriendlyShield
   - FX
+  - HealthBar
   layers:
   - Default
   - TransparentFX

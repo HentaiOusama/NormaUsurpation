@@ -44,14 +44,15 @@
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\instantiateEffectCaller.cs" />
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\particleColorChanger.cs" />
      <Compile Include="Assets\Scripts\AllCustomClasses.cs" />
-     <Compile Include="Assets\Scripts\BulletHandler.cs" />
      <Compile Include="Assets\Scripts\Bullet_Animating_Script.cs" />
      <Compile Include="Assets\Scripts\EnemyBulletBuilder.cs" />
+     <Compile Include="Assets\Scripts\EnemyBulletHandler.cs" />
      <Compile Include="Assets\Scripts\EnemyHolderDataHub.cs" />
      <Compile Include="Assets\Scripts\EnemyShipDataHub.cs" />
      <Compile Include="Assets\Scripts\EnemyShipMovementScript.cs" />
      <Compile Include="Assets\Scripts\EnemyWaveBuilder.cs" />
      <Compile Include="Assets\Scripts\FriendlyBulletBuilder.cs" />
+     <Compile Include="Assets\Scripts\FriendlyBulletHandler.cs" />
      <Compile Include="Assets\Scripts\FriendlyShieldHandler.cs" />
      <Compile Include="Assets\Scripts\FriendlyShipDataHub.cs" />
      <Compile Include="Assets\Scripts\FriendlyShipMovementScript.cs" />

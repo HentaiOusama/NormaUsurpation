@@ -2,83 +2,92 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class minMaxVariable {
+    public float min;
+    public float max;
+}
+
 public class EnemyBulletBuilder : MonoBehaviour
 {
-    public Object bulletObject;
-    public float fireRate;
-    static int lifeLevel = 0;
-    Transform[] spawnPoints = null;
-    bool shouldBuildBullets = false;
-    float nextFireTime;
-
-
+    // Serialized Variables
+    public string enemyType;
+    public GameObject[] bulletSpawnPoints;
+    public Object[] enemyBulletObject;
+    public minMaxVariable bulletGapInSec;
+    public float probabilityOfPrimaryBulletBuild;
 
     // Non-Serialized Variables
-    Quaternion tempQuat;
+    bool shouldBuildBullets = false;
+    float currentSecondsBeforeNextPrimaryBullet = 0;
+    float elapsedTimeAfterlastBullet = 0;
 
+
+    void Start() {
+        currentSecondsBeforeNextPrimaryBullet = Random.Range(bulletGapInSec.min, bulletGapInSec.max);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(shouldBuildBullets && (Time.time > nextFireTime)) {
-            nextFireTime = Time.time + fireRate;
+        elapsedTimeAfterlastBullet += Time.deltaTime;
+        if(shouldBuildBullets && (elapsedTimeAfterlastBullet >= currentSecondsBeforeNextPrimaryBullet)) {
+            elapsedTimeAfterlastBullet = 0;
+            if(gameObject.GetComponent<EnemyShipDataHub>().myEnemyHolder != null) {
+                if(gameObject.GetComponent<EnemyShipDataHub>().myEnemyHolder.GetComponent<EnemyHolderDataHub>().IsIntroComplete()) {
+                    try {
+                        switch(enemyType) {
+                            case "FusionCore":
+                                buildFusionCoreBullets();
+                                break;
 
-            try {
-                switch(lifeLevel) {
-                    case 1:
-                        Instantiate(bulletObject, spawnPoints[0].position, spawnPoints[0].rotation);
-                        break;
-
-                    case 2:
-                        Instantiate(bulletObject, spawnPoints[1].position, spawnPoints[1].rotation);
-                        Instantiate(bulletObject, spawnPoints[2].position, spawnPoints[2].rotation);
-                        break;
-
-                    case 3:
-                        Instantiate(bulletObject, spawnPoints[0].position, spawnPoints[0].rotation);
-                        Instantiate(bulletObject, spawnPoints[1].position, spawnPoints[1].rotation);
-                        Instantiate(bulletObject, spawnPoints[2].position, spawnPoints[2].rotation);
-                        break;
-
-                    case 4:
-                        lifeLevel = 3;
-                        break;
-
-                    case 5:
-                        Instantiate(bulletObject, spawnPoints[0].position, spawnPoints[0].rotation);
-                        Instantiate(bulletObject, spawnPoints[1].position, spawnPoints[1].rotation);
-                        Instantiate(bulletObject, spawnPoints[2].position, spawnPoints[2].rotation);
-                        Instantiate(bulletObject, spawnPoints[3].position, spawnPoints[3].rotation);
-                        Instantiate(bulletObject, spawnPoints[4].position, spawnPoints[4].rotation);
-                        break;
+                            case "NorthStar":
+                                buildNorthStarBullets();
+                                break;
+                            
+                        }
+                    } catch (System.Exception e) {
+                        shouldBuildBullets = false;
+                        bulletSpawnPoints = null;
+                        Debug.LogError("Stopped Building Bullets due to error : " + e.Message);
+                    }
                 }
-            } catch (System.Exception e) {
-                shouldBuildBullets = false;
-                spawnPoints = null;
-                lifeLevel = 0;
-                Debug.LogError("Stopped Building Bullets due to error : " + e.Message);
-            } 
+            }
+        }
+    }
+
+
+    bool PrimaryInstantiateCheck() {
+        currentSecondsBeforeNextPrimaryBullet = Random.Range(bulletGapInSec.min, bulletGapInSec.max);
+        if(Random.Range((float)0, (float)1) <= probabilityOfPrimaryBulletBuild) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    void buildFusionCoreBullets() {
+        if(PrimaryInstantiateCheck()) {
+            Instantiate(enemyBulletObject[0], bulletSpawnPoints[0].transform.position, bulletSpawnPoints[0].transform.rotation);
+
+        }
+    }
+
+    void buildNorthStarBullets() {
+        if(PrimaryInstantiateCheck()) {
+
         }
     }
 
 
 
-// Method that other class calls to give data regarding what type of bullet to build
-    public void buildBullet(int lifeLevel_, Transform[] spawnPoints_) {
-        lifeLevel = lifeLevel_;
-        spawnPoints = new Transform[spawnPoints_.Length];
-
-        for(int i = 0; i < spawnPoints.Length; i++) {
-            spawnPoints[i] = spawnPoints_[i];
-        }
+    // Method that other class calls to give data regarding what type of bullet to build or to stop building bullets
+    public void buildEnemyBullets() {
+        elapsedTimeAfterlastBullet = currentSecondsBeforeNextPrimaryBullet;
+        shouldBuildBullets = true;
     }
-
 
     public void stopBuildingBullets() {
         shouldBuildBullets = false;
-    }
-    public void startBuildingBullets() {
-        shouldBuildBullets = true;
-        nextFireTime = Time.time;
     }
 }

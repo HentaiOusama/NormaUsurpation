@@ -63,7 +63,7 @@ public class projectileActor : MonoBehaviour {
         }
         if (swarmMissileLauncher)
         {
-            projectileSimFire = 5;
+            //projectileSimFire = 5;
         }
 	}
 	

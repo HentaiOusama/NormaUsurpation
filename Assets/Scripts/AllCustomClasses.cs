@@ -64,7 +64,9 @@ public class FriendlyShipElement {
 public class FriendlyShieldData {
     public Object friendlyShieldObject;
     public float shieldDuration;
+    [HideInInspector]
     public Transform friendlyShipTransform;
+    [HideInInspector]
     public float friendlyShipHeight;
     public float gap;
 }

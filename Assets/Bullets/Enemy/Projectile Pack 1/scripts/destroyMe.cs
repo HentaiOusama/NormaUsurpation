@@ -3,8 +3,8 @@ using System.Collections;
 
 public class destroyMe : MonoBehaviour{
 
-    float timer;
-    public float deathtimer = 10;
+    float timer = 0;
+    public float deathtimer = 3;
 
 
 	// Use this for initialization

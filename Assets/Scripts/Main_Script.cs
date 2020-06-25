@@ -9,9 +9,7 @@ public class Main_Script : MonoBehaviour
     public BackgroundData backgrounds;
     public CanvasData lifeBarCanvasData, gameLevelCanvasData;
     public FriendlyShipData friendlyShips;
-    public CurrentBulletData currentBulletData;
     public int FPSTarget;
-    public Camera mainCamera;
     public float defaultCameraOrthogonalSize;
     public float refrenceWidth;
     public float refrenceHeight;
@@ -83,8 +81,8 @@ public class Main_Script : MonoBehaviour
         gameLevelCanvasObject.transform.localScale = gameLevelCanvasData.Scale;
         Canvas lifeBarCanvas = lifeBarCanvasObject.GetComponent<Canvas>();
         Canvas gameLevelCanvas = gameLevelCanvasObject.GetComponent<Canvas>();
-        lifeBarCanvas.worldCamera = mainCamera;
-        gameLevelCanvas.worldCamera = mainCamera;
+        lifeBarCanvas.worldCamera = Camera.main;
+        gameLevelCanvas.worldCamera = Camera.main;
         gameLevelText = gameLevelCanvas.GetComponentInChildren<Text>();
         gameLevelText.text = "01";
 
@@ -102,14 +100,7 @@ public class Main_Script : MonoBehaviour
                                         (tempSizeData.occupiedDistance.z*tempSizeData.defaultScaleForUse.z/tempSizeData.referenceScale.z)/2);
         currIntroPosition = fromIntroCoOrdinates;
         currentFriendlySpaceShip.transform.SetPositionAndRotation(fromIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
-        currentBulletData = new CurrentBulletData(new Transform[]{currentFriendlySpaceShip.transform.GetChild(1).GetChild(0), 
-                                                            currentFriendlySpaceShip.transform.GetChild(1).GetChild(1), 
-                                                            currentFriendlySpaceShip.transform.GetChild(1).GetChild(2), 
-                                                            currentFriendlySpaceShip.transform.GetChild(1).GetChild(3), 
-                                                            currentFriendlySpaceShip.transform.GetChild(1).GetChild(4)});
-        
-        currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().TakeData(lifeBarCanvas, 0.1f, 1, lifeLvlLimit, currentBulletData, 
-                                                                            friendlyShips.friendlyShieldData);
+        currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().TakeData(lifeBarCanvas, 0.1f, 1, lifeLvlLimit, friendlyShips.friendlyShieldData);
         
         friendlyShips.friendlyShieldData.friendlyShipTransform = currentFriendlySpaceShip.transform;
         friendlyShips.friendlyShieldData.friendlyShipHeight = (tempSizeData.occupiedDistance.z / tempSizeData.referenceScale.z) * 
@@ -147,7 +138,6 @@ public class Main_Script : MonoBehaviour
                 currentFriendlySpaceShip.transform.SetPositionAndRotation(toIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
                 shouldIntroduce = false;
                 currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().buildProperBullets();
-                FriendlyBulletBuilder.startBuildingBullets();
                 currentFriendlySpaceShip.GetComponent<FriendlyShipMovementScript>().TakeData(currentFriendlySpaceShip.transform, viewableScaleConstrains, 
                                         currentFriendlySpaceShip.transform.localScale, tempSizeData, friendlyShips.extraHorizontalPosition, 
                                         friendlyShips.extraVerticalPositionBottom, friendlyShips.extraVerticalPositionTop, 

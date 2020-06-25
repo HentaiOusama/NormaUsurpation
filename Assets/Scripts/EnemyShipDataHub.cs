@@ -4,14 +4,17 @@ using UnityEngine;
 public class EnemyShipDataHub : MonoBehaviour
 {
     // Serialized Variables
+    public GameObject[] bulletSpawnPoints;
     public float maxLife;
 
 
     // Non-Serialized Variables
-    GameObject myEnemyHolder = null;
+    [HideInInspector]
+    public GameObject myEnemyHolder = null;
     Slider enemyHealthSlider;
     float currentEnemyHealth;
     float damageRecieved;
+    bool bulletsBeingBuilt = false;
 
 
     // Start is called before the first frame update
@@ -22,18 +25,27 @@ public class EnemyShipDataHub : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update(){
+        if(bulletsBeingBuilt == false) {
+            if(myEnemyHolder.GetComponent<EnemyHolderDataHub>().IsIntroComplete()) {
+                gameObject.GetComponent<EnemyBulletBuilder>().buildEnemyBullets();
+                bulletsBeingBuilt = true;
+            }
+        }
     }
 
     // OnTriggerEnter is called when collision starts
     private void OnTriggerEnter(Collider other) {
-       if(myEnemyHolder != null) {
-           damageRecieved = other.GetComponent<BulletHandler>().bulletData.getDamageValue();
-            Destroy(other.gameObject);
-           if(myEnemyHolder.GetComponent<EnemyHolderDataHub>().IsIntroComplete() && other.tag == "FriendlyBullet") {
-                decreaseEnemyLife(damageRecieved);
+
+        if(other.gameObject.tag == "FriendlyBullet") {
+            if(myEnemyHolder != null) {
+                damageRecieved = other.GetComponent<FriendlyBulletHandler>().bulletData.getDamageValue();
+                other.GetComponent<FriendlyBulletHandler>().DestroyBullet();
+                if(myEnemyHolder.GetComponent<EnemyHolderDataHub>().IsIntroComplete()) {
+                    decreaseEnemyLife(damageRecieved);
+                }
+            } else {
+                Destroy(other.gameObject);
             }
         }
    }
