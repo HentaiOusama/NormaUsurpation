@@ -42,26 +42,28 @@
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\WebDemo\scripts\projectileActor.cs" />
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\instantiateEffectCaller.cs" />
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\particleColorChanger.cs" />
-     <Compile Include="Assets\Scripts\AllCustomClasses.cs" />
-     <Compile Include="Assets\Scripts\Bullet_Animating_Script.cs" />
-     <Compile Include="Assets\Scripts\DefaultRotation.cs" />
-     <Compile Include="Assets\Scripts\EnemyBulletBuilder.cs" />
-     <Compile Include="Assets\Scripts\EnemyBulletHandler.cs" />
-     <Compile Include="Assets\Scripts\EnemyHolderDataHub.cs" />
-     <Compile Include="Assets\Scripts\EnemyShipDataHub.cs" />
-     <Compile Include="Assets\Scripts\EnemyShipMovementScript.cs" />
-     <Compile Include="Assets\Scripts\EnemyWaveBuilder.cs" />
-     <Compile Include="Assets\Scripts\FriendlyBulletBuilder.cs" />
-     <Compile Include="Assets\Scripts\FriendlyBulletHandler.cs" />
-     <Compile Include="Assets\Scripts\FriendlyShieldHandler.cs" />
-     <Compile Include="Assets\Scripts\FriendlyShipDataHub.cs" />
-     <Compile Include="Assets\Scripts\FriendlyShipMovementScript.cs" />
-     <Compile Include="Assets\Scripts\ItemDestroyer.cs" />
-     <Compile Include="Assets\Scripts\ItemDropper.cs" />
-     <Compile Include="Assets\Scripts\Main_Script.cs" />
-     <Compile Include="Assets\Scripts\SizeData.cs" />
-     <Compile Include="Assets\Scripts\Test_Script.cs" />
-     <Compile Include="Assets\Scripts\destroyMe.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\AllCustomClasses.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\Bullet_Animating_Script.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\DefaultRotation.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyBulletBuilder.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyBulletHandler.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyHolderDataHub.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyShipDataHub.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyShipMovementScript.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyWaveBuilder.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\FriendlyBulletBuilder.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\FriendlyBulletHandler.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\FriendlyShieldHandler.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\FriendlyShipDataHub.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\FriendlyShipMovementScript.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\GamePlayMainScript.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\ItemDestroyer.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\ItemDropper.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\SizeData.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\Test_Script.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\destroyMe.cs" />
+     <Compile Include="Assets\Scripts\MainMenu Scene Scripts\ButtonClick.cs" />
+     <Compile Include="Assets\Scripts\MainMenu Scene Scripts\MainMenuScript.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Bullets\Enemy\Projectile Pack 1\OtherReq Stuff\shader\Mobile-Particle-AlphaBlended-ZTestAlways.shader" />
@@ -631,6 +633,9 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>C:/Users/KIIT/Desktop/Coding Projects/UnityProjects/Norma Usurpation/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+        <HintPath>C:/Users/KIIT/Desktop/Coding Projects/UnityProjects/Norma Usurpation/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
