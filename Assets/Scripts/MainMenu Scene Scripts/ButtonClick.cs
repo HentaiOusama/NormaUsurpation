@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class ButtonClick : MonoBehaviour
 {
@@ -44,5 +43,11 @@ public class ButtonClick : MonoBehaviour
 
     public void PlayGame() {
         SceneManager.LoadScene(1);
+    }
+
+
+    // Not yet complete
+    public void OpenOptions() {
+
     }
 }

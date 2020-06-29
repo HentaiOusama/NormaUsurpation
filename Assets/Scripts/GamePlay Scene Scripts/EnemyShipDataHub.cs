@@ -4,7 +4,6 @@ using UnityEngine;
 public class EnemyShipDataHub : MonoBehaviour
 {
     // Serialized Variables
-    public GameObject[] bulletSpawnPoints;
     public Object destroyVFXEffect;
     public float maxLife;
 
