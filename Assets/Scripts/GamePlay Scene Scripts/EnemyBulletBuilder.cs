@@ -1,6 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
+[System.Serializable]
+public class BeforeShootDetails {
+    public bool hasShootAnimation;
+    public bool hasShootParticleSystem;
+    public Animation[] animationList;
+    public float[] respectiveAnimDuration;
+    public ParticleSystem[] particleSystemList;
+    public float[] respectivePSDuration;
+}
 
 [System.Serializable]
 public class minMaxVariable {
@@ -16,6 +24,7 @@ public class EnemyBulletBuilder : MonoBehaviour
     public Object[] enemyBulletObject;
     public minMaxVariable bulletGapInSec;
     public float probabilityOfPrimaryBulletBuild;
+    public BeforeShootDetails beforeShootDetails;
 
     // Non-Serialized Variables
     bool shouldBuildBullets = false;

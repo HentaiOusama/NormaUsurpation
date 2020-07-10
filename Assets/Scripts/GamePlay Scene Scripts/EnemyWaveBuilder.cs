@@ -37,19 +37,19 @@ public class EnemyWaveBuilder : MonoBehaviour
             shouldBuildEnemyWave = false;
             switch(waveBuildingData.waveLevel) {
                 case 1:
-                    buildWave1("right", "left", 0, 0, 5, 7, viewableScreenConstrains.top - 4f, 1, 2, 4);
+                    buildWave1("right", "left", 0, 0, 5, 7, viewableScreenConstrains.top - 4f, 0, 0, 1, 2, 4);
                     break;
 
                 case 2:
-                    buildWave2("left", "right", 0, 0, 5, 7, viewableScreenConstrains.top - 4f, 1, 2, 4);
+                    buildWave2("left", "right", 0, 0, 5, 7, viewableScreenConstrains.top - 4f, 0, 0, 1, 2, 4);
                     break;
                 
                 case 3:
-                    buildWave3("top", "right", 0, 0, 5, 7, viewableScreenConstrains.top - 4f, 1, 2, 4);
+                    buildWave3("top", "right", 0, 0, 5, 7, viewableScreenConstrains.top - 4f, 0, 0, 1, 2, 4);
                     break;
 
                 case 4: 
-                    buildWave4(0, 0, 6, 7, viewableScreenConstrains.top - 4f, 1, 2, 4);
+                    buildWave4(0, 0, 6, 7, viewableScreenConstrains.top - 4f, 0, 0, 1, 2, 4);
                     break;
             }
         }
@@ -58,20 +58,24 @@ public class EnemyWaveBuilder : MonoBehaviour
 
 
     // Not fully complete
-    void buildWave1(string startDirection, string oscillateStartDirection, int enemyShipIndex,int numberOfLayersToSkip, int numberOfLayersToBuild, 
-                    int enemiesPerLayer, float startUpperHeight, float verticalGapSize, float introSpeed, float movementSpeed){
+    void buildWave1(string buildDirection, string oscillateStartDirection, int enemyShipIndex, int numberOfLayersToSkip, int numberOfLayersToBuild, 
+                    int enemiesPerLayer, float startUpperHeight, float startLeftGap, float endRightGap, float verticalGapSize, float introSpeed, 
+                    float movementSpeed){
         
         // index => which enemyShip to build.
-        // startDirection can only be left, right or top. (It means where to build the enemyShips before introduction).
+        // buildDirection can only be left, right or top. (It means where to build the enemyShips before introduction).
         // oscillateStartDirection can only be left or right.
         int totalEnemyCount = 0;
-        startDirection = startDirection.ToLower();
+        buildDirection = buildDirection.ToLower();
         oscillateStartDirection = oscillateStartDirection.ToLower();
         float tempStartUpperHeight = startUpperHeight;
 
 
-        float screenWidth, enemyShipWidth, enemyShipHeight, horizontalGapSize, startPosHorizontal, startPosVertical = startUpperHeight;
-        screenWidth = 2*viewableScreenConstrains.right;
+        float buildWindowWidth, enemyShipWidth, enemyShipHeight, horizontalGapSize, startPosVertical = startUpperHeight;
+        float horizontalBuildPos, startPosHorizontal, endPosHorizontal;
+        startPosHorizontal = viewableScreenConstrains.left + startLeftGap;
+        endPosHorizontal = viewableScreenConstrains.right - endRightGap;
+        buildWindowWidth = endPosHorizontal - startPosHorizontal;
         Vector3 centerPosition;
         GameObject tempGameObject, multipleEnemyHolder;
         SizeData tempSizeData;
@@ -84,21 +88,23 @@ public class EnemyWaveBuilder : MonoBehaviour
         enemyShipWidth = (tempSizeData.occupiedDistance.x/tempSizeData.referenceScale.x)*tempGameObject.transform.localScale.x;
         enemyShipHeight = (tempSizeData.occupiedDistance.z/tempSizeData.referenceScale.z)*tempGameObject.transform.localScale.z;
         Destroy(tempGameObject);
-        horizontalGapSize = (screenWidth/enemiesPerLayer) - enemyShipWidth;
+        horizontalGapSize = (buildWindowWidth/enemiesPerLayer) - enemyShipWidth;
 
 
         // Calculating Centre and Start Positions Positions
-        if(startDirection == "top") {
+        if(buildDirection == "top") {
             startPosVertical = viewableScreenConstrains.top + numberOfLayersToBuild*(enemyShipHeight + verticalGapSize);
-            centerPosition = new Vector3(0, 0, (viewableScreenConstrains.top + startPosVertical)/2);
-        } else if(startDirection == "right") {
+            centerPosition = new Vector3(startPosHorizontal + (buildWindowWidth/2), 0, (viewableScreenConstrains.top + startPosVertical)/2);
+        } else if(buildDirection == "right") {
             startPosVertical -= numberOfLayersToSkip*(enemyShipHeight + verticalGapSize);
-            centerPosition = new Vector3(2*viewableScreenConstrains.right, 0, startPosVertical - (((enemyShipHeight + verticalGapSize)/2) * numberOfLayersToBuild));
-        } else if(startDirection == "left") {
+            centerPosition = new Vector3(viewableScreenConstrains.right + (buildWindowWidth/2), 0, 
+                                        startPosVertical - (((enemyShipHeight + verticalGapSize)/2) * numberOfLayersToBuild));
+        } else if(buildDirection == "left") {
             startPosVertical -= numberOfLayersToSkip*(enemyShipHeight + verticalGapSize);
-            centerPosition = new Vector3(2*viewableScreenConstrains.left, 0, startPosVertical - (((enemyShipHeight + verticalGapSize)/2) * numberOfLayersToBuild));
+            centerPosition = new Vector3(viewableScreenConstrains.left - (buildWindowWidth/2), 0, 
+                                        startPosVertical - (((enemyShipHeight + verticalGapSize)/2) * numberOfLayersToBuild));
         } else {
-            Debug.LogError("Error Building Wave 1. Input startDirection is not acceptable.");
+            Debug.LogError("Error Building Wave 1. Input buildDirection is not acceptable.");
             return;
         }
         
@@ -115,45 +121,45 @@ public class EnemyWaveBuilder : MonoBehaviour
             // Setting start Positon for current Layer to build
             startPosVertical -= verticalGapSize/2;
             startPosVertical -= enemyShipHeight/2;
-            if(startDirection == "top"){
-                startPosHorizontal = viewableScreenConstrains.left;
-            }else if(startDirection == "right") {
-                startPosHorizontal = viewableScreenConstrains.right;
-            } else if(startDirection == "left") {
-                startPosHorizontal = viewableScreenConstrains.left;
+            if(buildDirection == "top"){
+                horizontalBuildPos = startPosHorizontal;
+            }else if(buildDirection == "right") {
+                horizontalBuildPos = viewableScreenConstrains.right;
+            } else if(buildDirection == "left") {
+                horizontalBuildPos = viewableScreenConstrains.left;
             } else {
-                Debug.LogError("Error Building Wave 1. Input startDirection is not acceptable.");
+                Debug.LogError("Error Building Wave 1. Input buildDirection is not acceptable.");
                 return;
             }
 
             // Building enemies of current Layer
             for(int j = 0; j < enemiesPerLayer; j++) {
-                if(startDirection == "top") {
-                    startPosHorizontal += horizontalGapSize/2;
-                    startPosHorizontal += enemyShipWidth/2;
-                } else if(startDirection == "right") {
-                    startPosHorizontal += horizontalGapSize/2;
-                    startPosHorizontal += enemyShipWidth/2;
-                } else if(startDirection == "left") {
-                    startPosHorizontal -= horizontalGapSize/2;
-                    startPosHorizontal -= enemyShipWidth/2;
+                if(buildDirection == "top") {
+                    horizontalBuildPos += horizontalGapSize/2;
+                    horizontalBuildPos += enemyShipWidth/2;
+                } else if(buildDirection == "right") {
+                    horizontalBuildPos += horizontalGapSize/2;
+                    horizontalBuildPos += enemyShipWidth/2;
+                } else if(buildDirection == "left") {
+                    horizontalBuildPos -= horizontalGapSize/2;
+                    horizontalBuildPos -= enemyShipWidth/2;
                 }
 
-                tempGameObject = Instantiate(waveBuildingData.enemyObjects[enemyShipIndex], new Vector3(startPosHorizontal, 0, startPosVertical),
+                tempGameObject = Instantiate(waveBuildingData.enemyObjects[enemyShipIndex], new Vector3(horizontalBuildPos, 0, startPosVertical),
                                             Quaternion.Euler(0, 0, 0)) as GameObject;
                 tempGameObject.transform.localScale = tempGameObject.GetComponent<SizeData>().defaultScaleForUse;
                 tempGameObject.transform.SetParent(multipleEnemyHolder.transform);
                 tempGameObject.GetComponent<EnemyShipDataHub>().TakeHolder(multipleEnemyHolder);
 
-                if(startDirection == "top") {
-                    startPosHorizontal += horizontalGapSize/2;
-                    startPosHorizontal += enemyShipWidth/2;
-                } else if(startDirection == "right") {
-                    startPosHorizontal += horizontalGapSize/2;
-                    startPosHorizontal += enemyShipWidth/2;
-                } else if(startDirection == "left") {
-                    startPosHorizontal -= horizontalGapSize/2;
-                    startPosHorizontal -= enemyShipWidth/2;
+                if(buildDirection == "top") {
+                    horizontalBuildPos += horizontalGapSize/2;
+                    horizontalBuildPos += enemyShipWidth/2;
+                } else if(buildDirection == "right") {
+                    horizontalBuildPos += horizontalGapSize/2;
+                    horizontalBuildPos += enemyShipWidth/2;
+                } else if(buildDirection == "left") {
+                    horizontalBuildPos -= horizontalGapSize/2;
+                    horizontalBuildPos -= enemyShipWidth/2;
                 }
                 totalEnemyCount++;
             }
@@ -166,65 +172,50 @@ public class EnemyWaveBuilder : MonoBehaviour
 
         // Building Oscillating Path
         float rotation_Y = 0;
-        float tempVerticalPos = viewableScreenConstrains.top;
-        if(startDirection == "top") {
-            tempVerticalPos = tempStartUpperHeight - (numberOfLayersToSkip * (enemyShipHeight + verticalGapSize)) - 
-                                    ((numberOfLayersToBuild * (enemyShipHeight + verticalGapSize)) / 2);
-            if(oscillateStartDirection == "right") {
-                rotation_Y = 180;
-                tempGameObject = Instantiate(waveBuildingData.movementPathObjects[1], new Vector3(0, 0, tempVerticalPos), 
-                                        Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
-                tempSizeData = tempGameObject.GetComponent<SizeData>();
-                tempGameObject.transform.localScale = tempSizeData.referenceScale * (horizontalGapSize/tempSizeData.occupiedDistance.x);
-            } else if(oscillateStartDirection == "left") {
-                rotation_Y = 0;
-                tempGameObject = Instantiate(waveBuildingData.movementPathObjects[1], new Vector3(0, 0, tempVerticalPos), 
-                                        Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
-                tempGameObject.transform.localScale = tempSizeData.referenceScale * (horizontalGapSize/tempSizeData.occupiedDistance.x);
-            }
+        float tempVerticalPos = centerPosition.z; // Initialized for buildDirection != "top"
+        float tempHorizontalPos = startPosHorizontal + (buildWindowWidth/2);
+        if(oscillateStartDirection == "right") {
+            rotation_Y = 180;
+        } else if(oscillateStartDirection == "left") {
+            rotation_Y = 0;
+        } else {
+            Debug.LogError("Invalid StartOscillationDirection : " + oscillateStartDirection);
         }
-        else {
-            if(oscillateStartDirection == "right") {
-                rotation_Y = 180;
-                tempGameObject = Instantiate(waveBuildingData.movementPathObjects[1], new Vector3(0, 0, centerPosition.z), 
-                                        Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
-                tempSizeData = tempGameObject.GetComponent<SizeData>();
-                tempGameObject.transform.localScale = tempSizeData.referenceScale * (horizontalGapSize/tempSizeData.occupiedDistance.x);
-            } else if(oscillateStartDirection == "left") {
-                rotation_Y = 0;
-                tempGameObject = Instantiate(waveBuildingData.movementPathObjects[1], new Vector3(0, 0, centerPosition.z), 
-                                        Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
-                tempSizeData = tempGameObject.GetComponent<SizeData>();
-                tempGameObject.transform.localScale = tempSizeData.referenceScale * (horizontalGapSize/tempSizeData.occupiedDistance.x);
-            }
+        if(buildDirection == "top") {
+            tempVerticalPos = tempStartUpperHeight - ((numberOfLayersToSkip * (enemyShipHeight + verticalGapSize)) + 
+                                    ((numberOfLayersToBuild * (enemyShipHeight + verticalGapSize)) / 2));
         }
+        tempGameObject = Instantiate(waveBuildingData.movementPathObjects[1], new Vector3(tempHorizontalPos, 0, tempVerticalPos), 
+                                    Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
+        tempSizeData = tempGameObject.GetComponent<SizeData>();
+        tempGameObject.transform.localScale = tempSizeData.referenceScale * (horizontalGapSize/tempSizeData.occupiedDistance.x);
 
 
         // Building Intro Path
         GameObject introPath = null;
-        if(startDirection == "top") {
+        float verticalIntroPathSize = 0;
+        if(buildDirection == "top") {
             rotation_Y = 90;
-            float verticalIntroPathSize = centerPosition.z - tempVerticalPos;
-            tempVerticalPos = tempVerticalPos + verticalIntroPathSize/2;
-            introPath = Instantiate(waveBuildingData.movementPathObjects[0], new Vector3(centerPosition.x/2, 0, tempVerticalPos), 
-                                    Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
-            tempSizeData = introPath.GetComponent<SizeData>();
-            introPath.transform.localScale = tempSizeData.referenceScale * (Mathf.Abs(verticalIntroPathSize) / tempSizeData.occupiedDistance.x);
-        } else if(startDirection == "right") {
+            verticalIntroPathSize = Mathf.Abs(centerPosition.z - tempVerticalPos); // here tempVerticalPos was z pos of build of oscillating path
+            tempVerticalPos = tempVerticalPos + verticalIntroPathSize/2; // here tempVerticalPos becomes z pos of build of intro path
+            tempHorizontalPos = centerPosition.x;
+        } else if(buildDirection == "right") {
             rotation_Y = 180;
-            introPath = Instantiate(waveBuildingData.movementPathObjects[0], new Vector3(centerPosition.x/2, 0, centerPosition.z), 
-                                    Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
-            tempSizeData = introPath.GetComponent<SizeData>();
-            introPath.transform.localScale = tempSizeData.referenceScale * (Mathf.Abs(multipleEnemyHolder.transform.position.x - 
-                                            tempGameObject.transform.position.x) / tempSizeData.occupiedDistance.x);
-        } else if(startDirection == "left") {
+            verticalIntroPathSize = Mathf.Abs(tempGameObject.transform.position.x - multipleEnemyHolder.transform.position.x);
+            tempVerticalPos = centerPosition.z;
+            tempHorizontalPos = tempGameObject.transform.position.x + (verticalIntroPathSize/2);
+        } else if(buildDirection == "left") {
             rotation_Y = 0;
-            introPath = Instantiate(waveBuildingData.movementPathObjects[0], new Vector3(centerPosition.x/2, 0, centerPosition.z), 
-                                    Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
-            tempSizeData = introPath.GetComponent<SizeData>();
-            introPath.transform.localScale = tempSizeData.referenceScale * (Mathf.Abs(multipleEnemyHolder.transform.position.x - 
-                                            tempGameObject.transform.position.x) / tempSizeData.occupiedDistance.x);
+            verticalIntroPathSize = Mathf.Abs(tempGameObject.transform.position.x - multipleEnemyHolder.transform.position.x);
+            tempVerticalPos = centerPosition.z;
+            tempHorizontalPos = tempGameObject.transform.position.x - (verticalIntroPathSize/2);
+        } else {
+            Debug.Log("Invalid buildDirection : " + buildDirection);
         }
+        introPath = Instantiate(waveBuildingData.movementPathObjects[0], new Vector3(tempHorizontalPos, 0, tempVerticalPos), 
+                                Quaternion.Euler(0, rotation_Y, 0)) as GameObject;
+        tempSizeData = introPath.GetComponent<SizeData>();
+        introPath.transform.localScale = tempSizeData.referenceScale * (verticalIntroPathSize / tempSizeData.occupiedDistance.x);
 
 
         // Giving necessary data to multiple enemy holder.
@@ -236,26 +227,28 @@ public class EnemyWaveBuilder : MonoBehaviour
     }
 
 
-    void buildWave2(string startDirection, string oscillateStartDirection, int enemyShipIndex,int numberOfLayersToSkip, int numberOfLayersToBuild, 
-                    int enemiesPerLayer, float startUpperHeight, float verticalGapSize, float introSpeed, float movementSpeed){
-        buildWave1(startDirection, oscillateStartDirection, enemyShipIndex, numberOfLayersToSkip, numberOfLayersToBuild, enemiesPerLayer, 
-                startUpperHeight, verticalGapSize, introSpeed, movementSpeed);
+    void buildWave2(string buildDirection, string oscillateStartDirection, int enemyShipIndex,int numberOfLayersToSkip, int numberOfLayersToBuild, 
+                    int enemiesPerLayer, float startUpperHeight, float startLeftGap, float endRightGap, float verticalGapSize, float introSpeed, 
+                    float movementSpeed){
+        buildWave1(buildDirection, oscillateStartDirection, enemyShipIndex, numberOfLayersToSkip, numberOfLayersToBuild, enemiesPerLayer, 
+                startUpperHeight, startLeftGap, endRightGap, verticalGapSize, introSpeed, movementSpeed);
     }
 
 
-    void buildWave3(string startDirection, string oscillateStartDirection, int enemyShipIndex,int numberOfLayersToSkip, int numberOfLayersToBuild, 
-                    int enemiesPerLayer, float startUpperHeight, float verticalGapSize, float introSpeed, float movementSpeed){
-        buildWave1(startDirection, oscillateStartDirection, enemyShipIndex, numberOfLayersToSkip, numberOfLayersToBuild, enemiesPerLayer, 
-                startUpperHeight, verticalGapSize, introSpeed, movementSpeed);
+    void buildWave3(string buildDirection, string oscillateStartDirection, int enemyShipIndex,int numberOfLayersToSkip, int numberOfLayersToBuild, 
+                    int enemiesPerLayer, float startUpperHeight, float startLeftGap, float endRightGap, float verticalGapSize, float introSpeed, 
+                    float movementSpeed){
+        buildWave1(buildDirection, oscillateStartDirection, enemyShipIndex, numberOfLayersToSkip, numberOfLayersToBuild, enemiesPerLayer, 
+                startUpperHeight, startLeftGap, endRightGap, verticalGapSize, introSpeed, movementSpeed);
     }
 
 
     void buildWave4(int enemyShipIndex,int numberOfLayersToSkip, int numberOfLayersToBuild, int enemiesPerLayer, float startUpperHeight, 
-                    float verticalGapSize, float introSpeed, float movementSpeed){
+                    float startLeftGap, float endRightGap, float verticalGapSize, float introSpeed, float movementSpeed){
         // index => which enemyShip to build
         for(int i = 0; i < numberOfLayersToBuild; i++) {
-            buildWave1((i%2==0)?"left":"right", (i%2==0)?"right":"left", enemyShipIndex, i, 1, enemiesPerLayer, startUpperHeight, verticalGapSize, 
-                        introSpeed, movementSpeed);
+            buildWave1((i%2==0)?"left":"right", (i%2==0)?"right":"left", enemyShipIndex, i, 1, enemiesPerLayer, startUpperHeight, startLeftGap, 
+                        endRightGap, verticalGapSize, introSpeed, movementSpeed);
         }
     }
 

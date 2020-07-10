@@ -32,13 +32,6 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
-    UnityEditor.Graphs.dll:
-    - UnityEditor.Graphs.AnimationBlendTree.Graph
-    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
-    - UnityEditor.Graphs.AnimationStateMachine.Graph
-    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -450,7 +443,7 @@ ScriptsOnlyBuild:
     className: DefaultRotation
   - hash:
       serializedVersion: 2
-      Hash: f1326977ec8c0b55b2b062ed5b3da3ac
+      Hash: 6afa06069d77b77af74f45059e37b0a6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyBulletBuilder
@@ -552,7 +545,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: ac362e3dcb25665c6eb82c47e5dda7ff
+      Hash: 004d72c045609ab20675e69a5ee16a64
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyShipDataHub
