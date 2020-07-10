@@ -5242,10 +5242,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 21534519}
     m_Modifications:
+    - target: {fileID: 5718266044237635796, guid: 30edb6c2d842b2c4580b40d46dc7e629,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718266044842954544, guid: 30edb6c2d842b2c4580b40d46dc7e629,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718266044842954544, guid: 30edb6c2d842b2c4580b40d46dc7e629,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718266044842954544, guid: 30edb6c2d842b2c4580b40d46dc7e629,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5718266045239114569, guid: 30edb6c2d842b2c4580b40d46dc7e629,
         type: 3}
       propertyPath: m_Name
       value: EnemyShip StarViper Lighting (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718266045239114569, guid: 30edb6c2d842b2c4580b40d46dc7e629,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5718266045239114574, guid: 30edb6c2d842b2c4580b40d46dc7e629,
         type: 3}
@@ -5707,10 +5732,20 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5792885879812068995, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7430386282048949923, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430386282048949923, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b43a709d9693ea34abbf003bcc9ca482, type: 3}
@@ -5753,6 +5788,16 @@ PrefabInstance:
       propertyPath: m_BoundingSphereOverride.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 367745489708090392, guid: c51e58b987af1d74b82106be1b252d92,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 367745489708090392, guid: c51e58b987af1d74b82106be1b252d92,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 367745490179243730, guid: c51e58b987af1d74b82106be1b252d92,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
@@ -5772,6 +5817,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
       value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 367745490179243730, guid: c51e58b987af1d74b82106be1b252d92,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 367745490291147442, guid: c51e58b987af1d74b82106be1b252d92,
         type: 3}
@@ -5793,6 +5843,11 @@ PrefabInstance:
       propertyPath: m_BoundingSphereOverride.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 367745490291147442, guid: c51e58b987af1d74b82106be1b252d92,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 367745490817744200, guid: c51e58b987af1d74b82106be1b252d92,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
@@ -5812,6 +5867,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 367745490817744200, guid: c51e58b987af1d74b82106be1b252d92,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 367745491447869070, guid: c51e58b987af1d74b82106be1b252d92,
         type: 3}
