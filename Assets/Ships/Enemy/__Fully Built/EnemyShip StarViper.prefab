@@ -557,9 +557,9 @@ GameObject:
   - component: {fileID: -2367012623464678880}
   - component: {fileID: 6597778699745221021}
   - component: {fileID: 6994648809560739209}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EnemyShip StarViper
-  m_TagString: Untagged
+  m_TagString: EnemyShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -694,7 +694,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyVFXEffect: {fileID: 159918, guid: a0040bf7072bc2f4e82d887d50a9c5e2, type: 3}
-  maxLife: 25000
+  maxLife: 15000
+  shouldEnableRebouncer: 1
   myEnemyHolder: {fileID: 0}
 --- !u!114 &6994648809560739209
 MonoBehaviour:

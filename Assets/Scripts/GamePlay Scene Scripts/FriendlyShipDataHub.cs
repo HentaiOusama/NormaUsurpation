@@ -51,7 +51,7 @@ public class FriendlyShipDataHub : MonoBehaviour
             }
         }
 
-        if(colliderTag != "FriendlyBullet") {
+        if(colliderTag != "FriendlyBullet" && colliderTag != "EnemyShip") {
             Destroy(other.gameObject);
         }
     }

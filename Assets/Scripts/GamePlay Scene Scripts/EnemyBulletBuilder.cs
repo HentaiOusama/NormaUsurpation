@@ -10,12 +10,6 @@ public class BeforeShootDetails {
     public float[] respectivePSDuration;
 }
 
-[System.Serializable]
-public class minMaxVariable {
-    public float min;
-    public float max;
-}
-
 public class EnemyBulletBuilder : MonoBehaviour
 {
     // Serialized Variables

@@ -16,6 +16,9 @@ public class ItemDestroyer : MonoBehaviour
 
         if(shouldDestroy) {
             Destroy(other.gameObject);
+            if(other.tag != "FriendlyBullet") {
+                Debug.Log("Destroyed Item With Tag : " + other.tag);
+            }
         }
     }
 }

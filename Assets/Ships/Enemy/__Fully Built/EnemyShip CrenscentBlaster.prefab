@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 1108312045756364033}
   m_Layer: 0
   m_Name: EnemyShip CrenscentBlaster
-  m_TagString: Untagged
+  m_TagString: EnemyShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -628,6 +628,7 @@ MonoBehaviour:
   destroyVFXEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
     type: 3}
   maxLife: 2500
+  shouldEnableRebouncer: 0
   myEnemyHolder: {fileID: 0}
 --- !u!114 &1108312045756364033
 MonoBehaviour:

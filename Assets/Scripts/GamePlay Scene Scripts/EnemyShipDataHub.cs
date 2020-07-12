@@ -6,6 +6,7 @@ public class EnemyShipDataHub : MonoBehaviour
     // Serialized Variables
     public Object destroyVFXEffect;
     public float maxLife;
+    public bool shouldEnableRebouncer;
 
 
     // Non-Serialized Variables
@@ -55,7 +56,7 @@ public class EnemyShipDataHub : MonoBehaviour
        currentEnemyHealth -= damage;
        enemyHealthSlider.value = (Mathf.Clamp(currentEnemyHealth, 0, maxLife))/(maxLife);
        if(currentEnemyHealth <= 0) {
-           ItemDropper.DropItem(gameObject.transform.position, 0.15f);
+           ItemDropper.DropItem(gameObject.transform.position, 0.3f);
            gameObject.transform.parent.GetComponent<EnemyHolderDataHub>().decreaseChildrenShipsBy(1);
            Instantiate(destroyVFXEffect, gameObject.transform.position, Quaternion.Euler(0, 0, 0));
            Destroy(gameObject);

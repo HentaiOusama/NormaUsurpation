@@ -13,6 +13,7 @@ public class GamePlayMainScript : MonoBehaviour
     public float defaultCameraOrthogonalSize;
     public float refrenceWidth;
     public float refrenceHeight;
+    public ParticleSystem bgFogParticleSystem;
     public float lifeBarVerticalOffset, gameLevelVerticalOffset;
     public int lifeLvlLimit;
     public float friendlyShipIntroSpeed;
@@ -24,6 +25,7 @@ public class GamePlayMainScript : MonoBehaviour
     LBRTValues viewableScaleConstrains;
     Text gameLevelText;
     float resizeRatio; // Only for canvases. No need to resize other stuff
+    ParticleSystem.MainModule bgFogPSMainModule;
     Vector3 fromIntroCoOrdinates, currIntroPosition, toIntroCoOrdinates;
     SizeData tempSizeData;
     bool shouldIntroduce = true;
@@ -35,6 +37,7 @@ public class GamePlayMainScript : MonoBehaviour
     void Start()
     {
         // Setting Background and Adjusting Camera size
+        bgFogPSMainModule = bgFogParticleSystem.main;
         setBackground(backgrounds.startBgIndex);
         float screenHeight = Screen.currentResolution.height;
         float screenWidth = Screen.currentResolution.width;
@@ -143,7 +146,7 @@ public class GamePlayMainScript : MonoBehaviour
                                         currentFriendlySpaceShip.transform.localScale, tempSizeData, friendlyShips.extraHorizontalPosition, 
                                         friendlyShips.extraVerticalPositionBottom, friendlyShips.extraVerticalPositionTop, 
                                         friendlyShips.heightOffset, friendlyShips.percentHeightAllowedForMovement);
-                enemyWaveBuilder.startBuildingWaves(1, viewableScaleConstrains, enemyHolderObject);
+                enemyWaveBuilder.startBuildingWaves(viewableScaleConstrains, enemyHolderObject);
             }
         }
 
@@ -151,12 +154,13 @@ public class GamePlayMainScript : MonoBehaviour
 
 
     // This function fixes the size of backgroud quad and sets it 
-    public void setBackground(int index) {
+    void setBackground(int index) {
         if( backgrounds.BGMaterialList[index].width != backgrounds.baseBackgroundWidth) {
             backgrounds.BGMaterialList[index].height = backgrounds.baseBackgroundWidth*backgrounds.BGMaterialList[index].height/backgrounds.BGMaterialList[index].width;
             backgrounds.BGMaterialList[index].width = backgrounds.baseBackgroundWidth;
         }
         gameObject.transform.localScale = new Vector3(backgrounds.BGMaterialList[index].width, backgrounds.BGMaterialList[index].height, 5);
+        Vector4 col = backgrounds.BGMaterialList[index].BGFogColorARGB;
+        bgFogPSMainModule.startColor = new ParticleSystem.MinMaxGradient(new Color32((byte) col.x, (byte) col.y, (byte) col.z, (byte) col.w));
     }
-
 }

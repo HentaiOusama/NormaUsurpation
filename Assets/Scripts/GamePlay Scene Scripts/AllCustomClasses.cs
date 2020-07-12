@@ -3,6 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class minMaxVariable {
+    public minMaxVariable() {
+
+    }
+    public minMaxVariable(float min, float max) {
+        this.min = min;
+        this.max = max;
+    }
+    
+    public float min;
+    public float max;
+}
+
+
+[System.Serializable]
 public class LBRTValues
 {
     public float left, bottom, right, top;
@@ -18,6 +33,7 @@ public class LBRTValues
 [System.Serializable]
 public class BackgroundElement {
     public Material material;
+    public Vector4 BGFogColorARGB;
     public float width;
     public float height;
 }

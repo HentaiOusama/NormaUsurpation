@@ -5,7 +5,8 @@ public class EnemyShipMovementScript : MonoBehaviour
 {
     /*Details :-
     * 
-    * Type = 1 => A to B Introduction and Oscillate at given MovementPath
+    * Type = 1 => A to B Introduction and Oscillate at given MovementPath.
+    * Type = 2 => No Intro or MovementPaths. Initial Velocity is given and they keep colliding inside visible area.
     */
 
 
@@ -13,13 +14,18 @@ public class EnemyShipMovementScript : MonoBehaviour
 
     // Non-Serialized Variables
     bool shouldMoveEnemies = false;
+    bool introStarted = false;
     bool shouldIntroduce = false;
     int movementType;
     PathCreator introductoryPath;
     PathCreator[] movementPaths;
+    float waitBeforeIntroStart;
     float introSpeed;
+    float remainingIntroDuration;
     float movementSpeed;
-    float distanceTravelled = 0f;
+    minMaxVariable minMaxMovementSpeed;
+    Vector3 velocityDirection;
+    float distanceTravelled = 0.0f;
 
 
     // Start is called before the first frame update
@@ -36,19 +42,28 @@ public class EnemyShipMovementScript : MonoBehaviour
                 case 1:
                     moveType1();
                     break;
+                
+                case 2:
+                    moveType2();
+                    break;
 
             }
         }
     }
 
-    // Fetches data for moving enemies
+    ////////////////////////////////////////////////////////////////////////// Fetches data for moving enemies
+    // For MovementType = 1
     public void startMovingEnemies(int movementType, GameObject introductoryPath, GameObject[] movementPaths, 
                                 float introSpeed, float movementSpeed) {
 
-        this.introductoryPath = introductoryPath.GetComponent<PathCreator>();
-        this.movementPaths = new PathCreator[movementPaths.Length];
-        for(int i = 0; i < movementPaths.Length; i++) {
-            this.movementPaths[i] = movementPaths[i].GetComponent<PathCreator>();
+        if(introductoryPath != null) {
+            this.introductoryPath = introductoryPath.GetComponent<PathCreator>();
+        }
+        if(movementPaths != null) {
+            this.movementPaths = new PathCreator[movementPaths.Length];
+            for(int i = 0; i < movementPaths.Length; i++) {
+                this.movementPaths[i] = movementPaths[i].GetComponent<PathCreator>();
+            }
         }
         this.introSpeed = introSpeed;
         this.movementSpeed = movementSpeed;
@@ -56,6 +71,23 @@ public class EnemyShipMovementScript : MonoBehaviour
         shouldIntroduce = true;
         shouldMoveEnemies = true;
     }
+    
+    // For MovementType = 2
+    public void startMovingEnemies(int movementType, Vector3 velocityDirection, float waitBeforeIntroStart, float introSpeed, 
+                                float remainingIntroDuration, minMaxVariable minMaxMovementSpeed) {
+        
+        this.velocityDirection = velocityDirection;
+        this.waitBeforeIntroStart = waitBeforeIntroStart;
+        this.introSpeed = introSpeed;
+        this.remainingIntroDuration = remainingIntroDuration;
+        this.minMaxMovementSpeed = minMaxMovementSpeed;
+        this.movementType = movementType;
+        introStarted = false;
+        shouldIntroduce = true;
+        shouldMoveEnemies = true;
+    }
+    ////////////////////////////////////////////////////////////////////////
+
 
 
     // Different Movement Types
@@ -77,4 +109,27 @@ public class EnemyShipMovementScript : MonoBehaviour
         gameObject.transform.position = movementPaths[0].path.GetPointAtDistance(distanceTravelled);
         
     }
+
+    void moveType2() {
+        if(shouldIntroduce) {
+            if(waitBeforeIntroStart > 0) {
+                waitBeforeIntroStart -= Time.deltaTime;
+            } else if(!introStarted) {
+                gameObject.GetComponent<Rigidbody>().velocity = velocityDirection * introSpeed;
+                introStarted = true;
+            } else {
+                if(remainingIntroDuration > 0) {
+                    remainingIntroDuration -= Time.deltaTime;
+                } else {
+                    remainingIntroDuration = 0;
+                    shouldIntroduce = false;
+                    gameObject.GetComponent<EnemyHolderDataHub>().introComplete();
+                }
+            }
+            return;
+        }
+    }
+
+
+    // Rebounce Handler with In_Game_EnemyRebouncer
 }

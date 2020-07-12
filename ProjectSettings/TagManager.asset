@@ -17,6 +17,8 @@ TagManager:
   - FriendlyShield
   - FX
   - HealthBar
+  - EnemyRebouncer
+  - MultipleEnemyHolder
   layers:
   - Default
   - TransparentFX
@@ -31,7 +33,7 @@ TagManager:
   - Federation Corvette F3
   - Star Viper
   - Crenscent Blaster
-  - 
+  - MultipleEnemyHolder
   - 
   - 
   - 

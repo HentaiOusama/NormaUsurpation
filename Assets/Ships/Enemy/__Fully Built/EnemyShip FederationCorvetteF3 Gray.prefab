@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 2484305649246345425}
   m_Layer: 0
   m_Name: EnemyShip FederationCorvetteF3 Gray
-  m_TagString: Untagged
+  m_TagString: EnemyShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,6 +443,13 @@ MonoBehaviour:
     min: 0
     max: 5
   probabilityOfPrimaryBulletBuild: 0.1
+  beforeShootDetails:
+    hasShootAnimation: 0
+    hasShootParticleSystem: 0
+    animationList: []
+    respectiveAnimDuration: []
+    particleSystemList: []
+    respectivePSDuration: []
 --- !u!114 &-2079806308045094161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,6 +465,7 @@ MonoBehaviour:
   destroyVFXEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
     type: 3}
   maxLife: 50000
+  shouldEnableRebouncer: 0
   myEnemyHolder: {fileID: 0}
 --- !u!114 &2484305649246345425
 MonoBehaviour:

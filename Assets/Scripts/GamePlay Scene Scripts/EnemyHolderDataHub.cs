@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyHolderDataHub : MonoBehaviour
 {
+    // Serialized Variables
+    public BoxCollider holderRebouncer;
+
     // Non-Serialized Variables
     GameObject introPath;
     GameObject[] movementPaths;
@@ -11,15 +14,24 @@ public class EnemyHolderDataHub : MonoBehaviour
     EnemyWaveBuilder enemyWaveBuilder;
     int waveLevel = -1;
     bool isIntroComplete = false;
+    bool isRebounding = false;
+
+    void Start() {
+        holderRebouncer.isTrigger = true;
+    }
 
     // Update is called once per frame
     void Update()
     {
         if(numberOfChildrenShips == 0) {
             numberOfChildrenShips = -1;
-            Destroy(introPath);
-            for(int i = 0; i < movementPaths.Length; i++) {
-                Destroy(movementPaths[i]);
+            if(introPath != null) {
+                Destroy(introPath);
+            }
+            if(movementPaths != null) {
+                for(int i = 0; i < movementPaths.Length; i++) {
+                    Destroy(movementPaths[i]);
+                }
             }
             Debug.Log("Holder Destroyed... WaveLevel = " + waveLevel);
             enemyWaveBuilder.allChilderEnemiesDefeated();
@@ -50,10 +62,19 @@ public class EnemyHolderDataHub : MonoBehaviour
     }
 
     public void introComplete() {
+        if(isRebounding) {
+            holderRebouncer.isTrigger = false;
+        }
         isIntroComplete = true;
     }
 
     public bool IsIntroComplete() {
         return isIntroComplete;
+    }
+
+    public void enableRebouncingCollider(Vector3 colliderSize) {
+        holderRebouncer.isTrigger = true;
+        holderRebouncer.size = colliderSize;
+        isRebounding = true;
     }
 }

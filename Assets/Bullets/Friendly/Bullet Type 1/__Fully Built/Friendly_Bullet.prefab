@@ -182,5 +182,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletData:
-    damageValue: 200
+    damageValue: 350
     speedValue: 25
