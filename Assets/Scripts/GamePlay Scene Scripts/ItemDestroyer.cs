@@ -16,7 +16,7 @@ public class ItemDestroyer : MonoBehaviour
 
         if(shouldDestroy) {
             Destroy(other.gameObject);
-            if(other.tag != "FriendlyBullet") {
+            if(other.tag != "FriendlyBullet" && other.tag != "EnemyBullet") {
                 Debug.Log("Destroyed Item With Tag : " + other.tag);
             }
         }

@@ -5043,7 +5043,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -9556,7 +9556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   referenceScale: {x: 1, y: 1, z: 1}
   occupiedDistance: {x: 0.12, y: 0.12, z: 0.12}
-  defaultScaleForUse: {x: 8, y: 8, z: 8}
+  defaultScaleForUse: {x: 6, y: 6, z: 6}
 --- !u!1 &1939419837291940
 GameObject:
   m_ObjectHideFlags: 0

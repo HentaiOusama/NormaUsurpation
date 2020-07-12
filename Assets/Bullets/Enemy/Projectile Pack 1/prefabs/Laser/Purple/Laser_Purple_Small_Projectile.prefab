@@ -4752,8 +4752,10 @@ GameObject:
   - component: {fileID: 198447062717955468}
   - component: {fileID: 199841310213611012}
   - component: {fileID: 54929995699331496}
-  - component: {fileID: 114756686390696780}
+  - component: {fileID: 1606203356031591797}
   - component: {fileID: 114880781407873270}
+  - component: {fileID: -2659907024087866594}
+  - component: {fileID: -7674644611733160006}
   m_Layer: 0
   m_Name: Laser_Purple_Small_Projectile
   m_TagString: EnemyBullet
@@ -9516,32 +9518,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114756686390696780
-MonoBehaviour:
+--- !u!136 &1606203356031591797
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523153560657062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 538d28f745155f34fba977c5c1026e39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactPrefab: {fileID: 1879272669879180, guid: a05adddee0ded3f439cf297977aaeaa7,
-    type: 3}
-  explosionPrefab: {fileID: 0}
-  thrust: 0
-  thisRigidbody: {fileID: 54929995699331496}
-  particleKillGroup: {fileID: 0}
-  LookRotation: 1
-  Missile: 0
-  missileTarget: {fileID: 0}
-  projectileSpeed: 0
-  projectileSpeedMultiplier: 0
-  ignorePrevRotation: 0
-  explodeOnTimer: 0
-  explosionTimer: 0
+  m_Radius: 0.06
+  m_Height: 1
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114880781407873270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9621,6 +9611,42 @@ MonoBehaviour:
       m_NumAlphaKeys: 5
   applyChanges: 0
   Keep_applyChanges: 0
+--- !u!114 &-2659907024087866594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523153560657062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cb03eb4e15ede439ae53e4a1f6c0d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletData:
+    damageValue: 1500
+    speedValue: 30
+  muzzelFlare: {fileID: 1000012903210382, guid: 94784aaeafdcced4c9acece16afc1e79,
+    type: 3}
+  muzzelFlareScaleMultiplier: 2
+  impactObject: {fileID: 1879272669879180, guid: a05adddee0ded3f439cf297977aaeaa7,
+    type: 3}
+  impactObjectScaleMultiplier: 1.5
+--- !u!114 &-7674644611733160006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523153560657062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d10f27863e7af4897d0ea7d4719e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referenceScale: {x: 5, y: 5, z: 5}
+  occupiedDistance: {x: 0.8, y: 0.8, z: 5}
+  defaultScaleForUse: {x: 3, y: 3, z: 3}
 --- !u!1 &1598420234293714
 GameObject:
   m_ObjectHideFlags: 0

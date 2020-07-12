@@ -171,6 +171,10 @@ MonoBehaviour:
   healthPerSubLifeLevel: 3500
   destroyVFXEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
     type: 3}
+  tagsOfItemsNotToDestroy:
+  - FriendlyBullet
+  - EnemyShip
+  - MultipleEnemyHolder
 --- !u!114 &1596515668900207609
 MonoBehaviour:
   m_ObjectHideFlags: 0

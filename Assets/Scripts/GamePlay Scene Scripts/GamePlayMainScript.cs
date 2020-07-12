@@ -17,6 +17,7 @@ public class GamePlayMainScript : MonoBehaviour
     public float lifeBarVerticalOffset, gameLevelVerticalOffset;
     public int lifeLvlLimit;
     public float friendlyShipIntroSpeed;
+    public GameObject EnemyRebouncer;
     public Object enemyHolderObject;
 
 
@@ -36,7 +37,7 @@ public class GamePlayMainScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Setting Background and Adjusting Camera size
+        // Setting Background and Adjusting Camera size and EnemyRebouncer Size
         bgFogPSMainModule = bgFogParticleSystem.main;
         setBackground(backgrounds.startBgIndex);
         float screenHeight = Screen.currentResolution.height;
@@ -58,6 +59,10 @@ public class GamePlayMainScript : MonoBehaviour
         // Sets the scale wise constrains of workspace on the background
         viewableScaleConstrains = new LBRTValues(-backgrounds.baseBackgroundWidth/2, -Camera.main.orthographicSize, 
                                                 backgrounds.baseBackgroundWidth/2, Camera.main.orthographicSize);
+        SizeData sizeData = EnemyRebouncer.GetComponent<SizeData>();
+        EnemyRebouncer.transform.localScale = new Vector3(2*viewableScaleConstrains.right*sizeData.referenceScale.x/sizeData.occupiedDistance.x, 
+                                                        EnemyRebouncer.transform.localScale.y, 
+                                                        2*viewableScaleConstrains.top*sizeData.referenceScale.z/sizeData.occupiedDistance.z);
 
 
 

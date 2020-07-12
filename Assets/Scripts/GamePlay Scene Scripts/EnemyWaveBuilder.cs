@@ -52,7 +52,7 @@ public class EnemyWaveBuilder : MonoBehaviour
                     break;
 
                 case 5:
-                    buildWave5("top", 1, 7, 7f, 2, new minMaxVariable(3.5f, 7.5f));
+                    buildWave5("top", 1, 7, 10f, 2, new minMaxVariable(3.5f, 7.5f));
                     break;
             }
         }

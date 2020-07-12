@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4836675779974994}
-  - component: {fileID: 54453457801900860}
   - component: {fileID: 198228151580939694}
+  - component: {fileID: 54453457801900860}
+  - component: {fileID: 3524299035418052471}
   - component: {fileID: 114950535843143764}
   - component: {fileID: 199187720539646952}
   - component: {fileID: 4722125922871697242}
-  - component: {fileID: 3524299035418052471}
+  - component: {fileID: 8588087472526433317}
   m_Layer: 0
   m_Name: Bullet_BlazingRed_Small_Projectile
   m_TagString: EnemyBullet
@@ -39,22 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &54453457801900860
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1238843893459588}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!198 &198228151580939694
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4713,6 +4698,36 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!54 &54453457801900860
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238843893459588}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &3524299035418052471
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238843893459588}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.05
+  m_Height: 1
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114950535843143764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4903,22 +4918,27 @@ MonoBehaviour:
   bulletData:
     damageValue: 1000
     speedValue: 20
+  muzzelFlare: {fileID: 1000012903210382, guid: 2cc07ac0b88fafc40b730713b6dac672,
+    type: 3}
+  muzzelFlareScaleMultiplier: 2.3
   impactObject: {fileID: 1879272669879180, guid: e3f361eacdeb09440850ac7397930cba,
     type: 3}
---- !u!136 &3524299035418052471
-CapsuleCollider:
+  impactObjectScaleMultiplier: 3.5
+--- !u!114 &8588087472526433317
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238843893459588}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.05
-  m_Height: 1
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d10f27863e7af4897d0ea7d4719e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referenceScale: {x: 5, y: 5, z: 5}
+  occupiedDistance: {x: 0.8, y: 0.8, z: 8.5}
+  defaultScaleForUse: {x: 1.5, y: 1.5, z: 1.5}
 --- !u!1 &1540588367011230
 GameObject:
   m_ObjectHideFlags: 0

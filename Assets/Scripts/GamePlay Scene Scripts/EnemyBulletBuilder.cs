@@ -44,8 +44,8 @@ public class EnemyBulletBuilder : MonoBehaviour
                                 buildFusionCoreBullets();
                                 break;
 
-                            case "NorthStar":
-                                buildNorthStarBullets();
+                            case "StarViper":
+                                buildStarViperBullets();
                                 break;
                             
                         }
@@ -62,26 +62,29 @@ public class EnemyBulletBuilder : MonoBehaviour
 
     bool PrimaryInstantiateCheck() {
         currentSecondsBeforeNextPrimaryBullet = Random.Range(bulletGapInSec.min, bulletGapInSec.max);
-        if(Random.Range((float)0, (float)1) <= probabilityOfPrimaryBulletBuild) {
-            return true;
-        } else {
-            return false;
-        }
+        return (Random.Range((float)0, (float)1) <= probabilityOfPrimaryBulletBuild);
     }
 
     void buildFusionCoreBullets() {
         if(PrimaryInstantiateCheck()) {
-            Instantiate(enemyBulletObject[0], bulletSpawnPoints[0].transform.position, bulletSpawnPoints[0].transform.rotation);
-
+            spwanBullet(0, 0);
         }
     }
 
-    void buildNorthStarBullets() {
+    void buildStarViperBullets() {
         if(PrimaryInstantiateCheck()) {
-
+            spwanBullet(0, 1);
+            spwanBullet(0, 2);
         }
     }
 
+
+    // Method that all builders call when instantiating the bullet
+    void spwanBullet(int bulletObjIdx, int bulletSpPointIdx) {
+        GameObject tempGameObject = Instantiate(enemyBulletObject[bulletObjIdx], bulletSpawnPoints[bulletSpPointIdx].transform.position, 
+                                                bulletSpawnPoints[bulletSpPointIdx].transform.rotation) as GameObject;
+        tempGameObject.transform.localScale = tempGameObject.GetComponent<SizeData>().defaultScaleForUse;
+    }
 
 
     // Method that other class calls to give data regarding what type of bullet to build or to stop building bullets

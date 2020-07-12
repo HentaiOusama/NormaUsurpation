@@ -6,6 +6,7 @@ public class FriendlyShipDataHub : MonoBehaviour
     // Serialized variables
     public float healthPerSubLifeLevel;
     public Object destroyVFXEffect;
+    public string[] tagsOfItemsNotToDestroy;
 
     // Non-Serialized variables
     Slider lifeLevelSlider;
@@ -50,8 +51,15 @@ public class FriendlyShipDataHub : MonoBehaviour
                 shieldGameObject.GetComponent<FriendlyShieldHandler>().ResetDuration();
             }
         }
+        
+        bool shouldDestroy = true;
+        for(int i = 0; i < tagsOfItemsNotToDestroy.Length; i++) {
+            if(colliderTag == tagsOfItemsNotToDestroy[i]) {
+                shouldDestroy = false;
+            }
+        }
 
-        if(colliderTag != "FriendlyBullet" && colliderTag != "EnemyShip") {
+        if(shouldDestroy) {
             Destroy(other.gameObject);
         }
     }

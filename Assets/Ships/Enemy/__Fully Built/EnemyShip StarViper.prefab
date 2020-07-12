@@ -662,16 +662,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8e09b48b7de9b40b2d428e01256a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: Star Viper
+  enemyType: StarViper
   bulletSpawnPoints:
   - {fileID: 8133048797849995063}
   - {fileID: 5221321546896291169}
   - {fileID: 1542810153927897642}
-  enemyBulletObject: []
+  enemyBulletObject:
+  - {fileID: 1523153560657062, guid: cd3a4ee3b9b481342afe44304c00fd97, type: 3}
   bulletGapInSec:
     min: 0
-    max: 5
-  probabilityOfPrimaryBulletBuild: 0.1
+    max: 4
+  probabilityOfPrimaryBulletBuild: 0.3
   beforeShootDetails:
     hasShootAnimation: 1
     hasShootParticleSystem: 0
