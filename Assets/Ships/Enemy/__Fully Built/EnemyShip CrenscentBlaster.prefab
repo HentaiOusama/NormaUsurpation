@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 2190254709553034793}
   - component: {fileID: 9189423951551351813}
   - component: {fileID: 1108312045756364033}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EnemyShip CrenscentBlaster
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}

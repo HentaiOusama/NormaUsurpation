@@ -4756,7 +4756,7 @@ GameObject:
   - component: {fileID: 114880781407873270}
   - component: {fileID: -2659907024087866594}
   - component: {fileID: -7674644611733160006}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Laser_Purple_Small_Projectile
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}

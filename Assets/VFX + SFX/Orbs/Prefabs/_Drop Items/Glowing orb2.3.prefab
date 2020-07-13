@@ -9522,7 +9522,7 @@ GameObject:
   - component: {fileID: 8803873573487490986}
   - component: {fileID: 177381060973833262}
   - component: {fileID: 140993019702231947}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Glowing orb2.3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

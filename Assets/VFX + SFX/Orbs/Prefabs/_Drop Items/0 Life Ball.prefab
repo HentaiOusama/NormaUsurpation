@@ -9522,7 +9522,7 @@ GameObject:
   - component: {fileID: 2062004594592262328}
   - component: {fileID: 8186591740527445279}
   - component: {fileID: 717912049476327566}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: 0 Life Ball
   m_TagString: DropItemLife
   m_Icon: {fileID: 0}

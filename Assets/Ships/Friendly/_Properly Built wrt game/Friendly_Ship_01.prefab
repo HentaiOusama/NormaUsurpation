@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 7846831521925905590}
   - component: {fileID: 1596515668900207609}
   - component: {fileID: 204600217990397066}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Friendly_Ship_01
   m_TagString: FriendlyShip
   m_Icon: {fileID: 0}

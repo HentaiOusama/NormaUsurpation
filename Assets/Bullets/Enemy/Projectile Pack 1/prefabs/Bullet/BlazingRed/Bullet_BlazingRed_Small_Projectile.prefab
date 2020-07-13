@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 199187720539646952}
   - component: {fileID: 4722125922871697242}
   - component: {fileID: 8588087472526433317}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Bullet_BlazingRed_Small_Projectile
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}

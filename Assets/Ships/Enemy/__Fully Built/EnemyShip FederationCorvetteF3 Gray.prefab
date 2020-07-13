@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: -5554993391078982419}
   - component: {fileID: -2079806308045094161}
   - component: {fileID: 2484305649246345425}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyShip FederationCorvetteF3 Gray
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}

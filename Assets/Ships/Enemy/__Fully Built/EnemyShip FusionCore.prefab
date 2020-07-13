@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: -5815087075484140517}
   - component: {fileID: -7664591419080814317}
   - component: {fileID: 5615516329770563692}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyShip FusionCore
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}
@@ -320,6 +320,13 @@ MonoBehaviour:
     min: 0
     max: 5
   probabilityOfPrimaryBulletBuild: 0.1
+  beforeShootDetails:
+    hasShootAnimation: 0
+    hasShootParticleSystem: 0
+    animationList: []
+    respectiveAnimDuration: []
+    particleSystemList: []
+    respectivePSDuration: []
 --- !u!114 &-7664591419080814317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,11 +339,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed743888392729b4cbdbeb241780a658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawnPoints:
-  - {fileID: 2633735212852831155}
   destroyVFXEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
     type: 3}
   maxLife: 1000
+  shouldEnableRebouncer: 0
   myEnemyHolder: {fileID: 0}
 --- !u!114 &5615516329770563692
 MonoBehaviour:

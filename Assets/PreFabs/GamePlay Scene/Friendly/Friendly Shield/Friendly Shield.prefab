@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 273253252145358155}
   - component: {fileID: 1957213171264507276}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: DurationSliderL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 2577343152426573450}
   - component: {fileID: 2577343152426573547}
   - component: {fileID: 2577343152426573494}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 2577343152426573451}
   - component: {fileID: 2577343152426573540}
   - component: {fileID: 2577343152426573495}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2577343152426573448}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2577343152426573449}
   - component: {fileID: 2577343152426573493}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: DurationSliderR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 2577343152426573538}
   - component: {fileID: 2577343152426573497}
   - component: {fileID: 2577343152426573464}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: Canvas For Life Bar
   m_TagString: DisplayCanvas
   m_Icon: {fileID: 0}
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 413445500734903159}
   - component: {fileID: 2577343152426573519}
   - component: {fileID: 2577343152426573499}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Friendly Shield
   m_TagString: FriendlyShield
   m_Icon: {fileID: 0}
@@ -5262,7 +5262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7280407484533269746}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5300,7 +5300,7 @@ GameObject:
   - component: {fileID: 4152896040601724391}
   - component: {fileID: 1020865637649865550}
   - component: {fileID: 6226663888450454759}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5374,7 +5374,7 @@ GameObject:
   - component: {fileID: 2708758250932082163}
   - component: {fileID: 5738174453159072075}
   - component: {fileID: 5568647326852367339}
-  m_Layer: 5
+  m_Layer: 20
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

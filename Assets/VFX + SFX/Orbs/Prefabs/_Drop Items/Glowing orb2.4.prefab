@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1112614489606603383}
   - component: {fileID: -945494631037836168}
   - component: {fileID: 3633252941851021233}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Glowing orb2.4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
