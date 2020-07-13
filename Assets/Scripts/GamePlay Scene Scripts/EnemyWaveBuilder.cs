@@ -34,36 +34,42 @@ public class EnemyWaveBuilder : MonoBehaviour
 
         if(shouldBuildEnemyWave && (waveBuildingData.waveLevel <= waveBuildingData.maxWaves)) {
             shouldBuildEnemyWave = false;
+            Debug.Log("Building Wave Level : " + waveBuildingData.waveLevel);
             switch(waveBuildingData.waveLevel) {
                 case 1:
-                    buildWave1("right", "left", 0, 0, 5, 7, viewableScreenConstrains.top - 4f, 0, 0, 1, 2, 4);
-                    break;
-
-                case 2:
-                    buildWave2("left", "right", 0, 0, 5, 7, viewableScreenConstrains.top - 4f, 0, 0, 1, 2, 4);
+                    buildWave1("top", "right", 0, 1f, 0, 5, 7, viewableScreenConstrains.top - 4f, 0, 0, 1, 2, 4);
                     break;
                 
-                case 3:
-                    buildWave3("top", "right", 0, 0, 5, 7, viewableScreenConstrains.top - 4f, 0, 0, 1, 2, 4);
+                case 2: 
+                    buildWave2(0, 1f, 0, 6, 7, viewableScreenConstrains.top - 4f, 0, 0, 1, 2, 4);
                     break;
 
-                case 4: 
-                    buildWave4(0, 0, 6, 7, viewableScreenConstrains.top - 4f, 0, 0, 1, 2, 4);
+                case 3:
+                    buildWave3("top", 0, 1f, 4, 10f, 2, new minMaxVariable(3.5f, 7.5f));
+                    buildWave3("right", 0, 1f, 4, 10f, 2, new minMaxVariable(3.5f, 7.5f));
+                    buildWave3("left", 0, 1f, 4, 10f, 2, new minMaxVariable(3.5f, 7.5f));
+                    break;
+
+                case 4:
+                    buildWave3("top", 1, 0.8f, 4, 10f, 2, new minMaxVariable(3.5f, 7.5f));
                     break;
 
                 case 5:
-                    buildWave5("top", 1, 7, 10f, 2, new minMaxVariable(3.5f, 7.5f));
+                    buildWave3("right", 0, 1f, 2, 10f, 2, new minMaxVariable(3.5f, 7.5f));
+                    buildWave3("left", 0, 1f, 2, 10f, 2, new minMaxVariable(3.5f, 7.5f));
+                    buildWave3("top", 1, 0.8f, 3, 10f, 2, new minMaxVariable(3.5f, 7.5f));
                     break;
             }
+            Debug.Log("Total Number of EnemyHolders Built =  " + totalNumberOfActiveEnemyHolders);
         }
     }
 
 
 
     // Not fully complete
-    void buildWave1(string buildDirection, string oscillateStartDirection, int enemyShipIndex, int numberOfLayersToSkip, int numberOfLayersToBuild, 
-                    int enemiesPerLayer, float startUpperHeight, float startLeftGap, float endRightGap, float verticalGapSize, float introSpeed, 
-                    float movementSpeed){
+    void buildWave1(string buildDirection, string oscillateStartDirection, int enemyShipIndex, float percentageOfDefaultScaleToUse,
+                    int numberOfLayersToSkip, int numberOfLayersToBuild, int enemiesPerLayer, float startUpperHeight, float startLeftGap, 
+                    float endRightGap, float verticalGapSize, float introSpeed, float movementSpeed){
         
         // index => which enemyShip to build.
         // buildDirection can only be left, right or top. (It means where to build the enemyShips before introduction).
@@ -87,7 +93,7 @@ public class EnemyWaveBuilder : MonoBehaviour
         // Get data regarding the ship we are going to build by instantiating a temporary enemyShip to get SizeData and then delete it.
         tempGameObject = Instantiate(waveBuildingData.enemyObjects[enemyShipIndex], new Vector3(0, 25, 0), Quaternion.Euler(0, 0, 0)) as GameObject; // Temporary Instantiation
         tempSizeData = tempGameObject.GetComponent<SizeData>();
-        tempGameObject.transform.localScale = tempSizeData.defaultScaleForUse;
+        tempGameObject.transform.localScale = tempSizeData.defaultScaleForUse * percentageOfDefaultScaleToUse;
         enemyShipWidth = (tempSizeData.occupiedDistance.x/tempSizeData.referenceScale.x)*tempGameObject.transform.localScale.x;
         enemyShipHeight = (tempSizeData.occupiedDistance.z/tempSizeData.referenceScale.z)*tempGameObject.transform.localScale.z;
         Destroy(tempGameObject);
@@ -150,7 +156,7 @@ public class EnemyWaveBuilder : MonoBehaviour
 
                 tempGameObject = Instantiate(waveBuildingData.enemyObjects[enemyShipIndex], new Vector3(horizontalBuildPos, 0, startPosVertical),
                                             Quaternion.Euler(0, 0, 0)) as GameObject;
-                tempGameObject.transform.localScale = tempGameObject.GetComponent<SizeData>().defaultScaleForUse;
+                tempGameObject.transform.localScale = tempGameObject.GetComponent<SizeData>().defaultScaleForUse*percentageOfDefaultScaleToUse;
                 tempGameObject.transform.SetParent(multipleEnemyHolder.transform);
                 tempGameObject.GetComponent<EnemyShipDataHub>().TakeHolder(multipleEnemyHolder);
 
@@ -230,34 +236,19 @@ public class EnemyWaveBuilder : MonoBehaviour
     }
 
 
-    void buildWave2(string buildDirection, string oscillateStartDirection, int enemyShipIndex, int numberOfLayersToSkip, int numberOfLayersToBuild, 
-                    int enemiesPerLayer, float startUpperHeight, float startLeftGap, float endRightGap, float verticalGapSize, float introSpeed, 
-                    float movementSpeed){
-        buildWave1(buildDirection, oscillateStartDirection, enemyShipIndex, numberOfLayersToSkip, numberOfLayersToBuild, enemiesPerLayer, 
-                startUpperHeight, startLeftGap, endRightGap, verticalGapSize, introSpeed, movementSpeed);
-    }
-
-
-    void buildWave3(string buildDirection, string oscillateStartDirection, int enemyShipIndex, int numberOfLayersToSkip, int numberOfLayersToBuild, 
-                    int enemiesPerLayer, float startUpperHeight, float startLeftGap, float endRightGap, float verticalGapSize, float introSpeed, 
-                    float movementSpeed){
-        buildWave1(buildDirection, oscillateStartDirection, enemyShipIndex, numberOfLayersToSkip, numberOfLayersToBuild, enemiesPerLayer, 
-                startUpperHeight, startLeftGap, endRightGap, verticalGapSize, introSpeed, movementSpeed);
-    }
-
-
-    void buildWave4(int enemyShipIndex, int numberOfLayersToSkip, int numberOfLayersToBuild, int enemiesPerLayer, float startUpperHeight, 
-                    float startLeftGap, float endRightGap, float verticalGapSize, float introSpeed, float movementSpeed){
+    void buildWave2(int enemyShipIndex, float percentageOfDefaultScaleToUse, int numberOfLayersToSkip, int numberOfLayersToBuild, 
+                    int enemiesPerLayer, float startUpperHeight, float startLeftGap, float endRightGap, float verticalGapSize, 
+                    float introSpeed, float movementSpeed){
         // index => which enemyShip to build
         for(int i = 0; i < numberOfLayersToBuild; i++) {
-            buildWave1((i%2==0)?"left":"right", (i%2==0)?"right":"left", enemyShipIndex, i, 1, enemiesPerLayer, startUpperHeight, startLeftGap, 
-                        endRightGap, verticalGapSize, introSpeed, movementSpeed);
+            buildWave1((i%2==0)?"left":"right", (i%2==0)?"right":"left", enemyShipIndex, percentageOfDefaultScaleToUse, i, 1, enemiesPerLayer, 
+                        startUpperHeight, startLeftGap, endRightGap, verticalGapSize, introSpeed, movementSpeed);
         }
     }
 
 
-    void buildWave5(string buildDirection, int enemyShipIndex, int numberOfShipsToBuild, float introSpeed, float introDuration, 
-                    minMaxVariable minMaxMovementSpeed) {
+    void buildWave3(string buildDirection, int enemyShipIndex, float percentageOfDefaultScaleToUse, int numberOfShipsToBuild, float introSpeed, 
+                    float introDuration, minMaxVariable minMaxMovementSpeed) {
         
         Vector3 velocityDirection = new Vector3();
         buildDirection = buildDirection.ToLower();
@@ -270,7 +261,7 @@ public class EnemyWaveBuilder : MonoBehaviour
         float enemyShipWidth, enemyShipHeight;
         tempGameObject = Instantiate(waveBuildingData.enemyObjects[enemyShipIndex], new Vector3(0, 25, 0), Quaternion.Euler(0, 0, 0)) as GameObject; // Temporary Instantiation
         tempSizeData = tempGameObject.GetComponent<SizeData>();
-        tempGameObject.transform.localScale = tempSizeData.defaultScaleForUse;
+        tempGameObject.transform.localScale = tempSizeData.defaultScaleForUse*percentageOfDefaultScaleToUse;
         enemyShipWidth = (tempSizeData.occupiedDistance.x/tempSizeData.referenceScale.x)*tempGameObject.transform.localScale.x;
         enemyShipHeight = (tempSizeData.occupiedDistance.z/tempSizeData.referenceScale.z)*tempGameObject.transform.localScale.z;
         Destroy(tempGameObject);
@@ -286,7 +277,7 @@ public class EnemyWaveBuilder : MonoBehaviour
             centerPosition = new Vector3(viewableScreenConstrains.right + enemyShipWidth/2, 0, viewableScreenConstrains.top/2);
         }
 
-
+        // Building all enemies
         for(int i = 0; i < numberOfShipsToBuild; i++) {
             GameObject multipleEnemyHolder = Instantiate(enemyHolderObject, centerPosition, Quaternion.Euler(0, 0, 0)) as GameObject;
             if(buildDirection == "top") {
@@ -301,7 +292,7 @@ public class EnemyWaveBuilder : MonoBehaviour
             velocityDirection = velocityDirection.normalized;
 
             tempGameObject = Instantiate(waveBuildingData.enemyObjects[enemyShipIndex], centerPosition, Quaternion.Euler(0, 0, 0)) as GameObject;
-            tempGameObject.transform.localScale = tempGameObject.GetComponent<SizeData>().defaultScaleForUse;
+            tempGameObject.transform.localScale = tempGameObject.GetComponent<SizeData>().defaultScaleForUse*percentageOfDefaultScaleToUse;
             tempGameObject.transform.SetParent(multipleEnemyHolder.transform);
             tempGameObject.GetComponent<EnemyShipDataHub>().TakeHolder(multipleEnemyHolder);
 
@@ -309,15 +300,15 @@ public class EnemyWaveBuilder : MonoBehaviour
             EnemyHolderDataHub enemyHolderDataHub =  multipleEnemyHolder.GetComponent<EnemyHolderDataHub>();
             enemyHolderDataHub.TakePathsForDeletion(this, currentWaveLevel, null, null);
             enemyHolderDataHub.increaseChildrenShipsBy(1);
-            if(tempGameObject.GetComponent<EnemyShipDataHub>().shouldEnableRebouncer) {
-                enemyHolderDataHub.enableRebouncingCollider(buildColliderSize(tempGameObject));
-            }
+            enemyHolderDataHub.enableRebouncingCollider(buildColliderSize(tempGameObject));
             multipleEnemyHolder.AddComponent<EnemyShipMovementScript>().startMovingEnemies(2, velocityDirection, waitBeforeNextEnemy, introSpeed, 
                                                                                         introDuration, minMaxMovementSpeed);
             waitBeforeNextEnemy += 0.4f*introDuration;
+            totalNumberOfActiveEnemyHolders++;
         }
     }
     
+
 
 
 
@@ -326,7 +317,6 @@ public class EnemyWaveBuilder : MonoBehaviour
         this.enemyHolderObject = enemyHolderObject;
         shouldBuildEnemyWave = true;
     }
-
 
     public void buildNextWave() {
         currentWaveLevel++;
