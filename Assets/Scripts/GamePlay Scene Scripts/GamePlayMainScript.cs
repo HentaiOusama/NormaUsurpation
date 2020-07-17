@@ -9,16 +9,12 @@ public class GamePlayMainScript : MonoBehaviour
     public BackgroundData backgrounds;
     public CanvasData lifeBarCanvasData, gameLevelCanvasData;
     public FriendlyShipData friendlyShips;
+    public ParticleSystem bgFogParticleSystem;
+    public GameObject EnemyRebouncer;
     public int FPSTarget;
     public float defaultCameraOrthogonalSize;
     public float refrenceWidth;
     public float refrenceHeight;
-    public ParticleSystem bgFogParticleSystem;
-    public float lifeBarVerticalOffset, gameLevelVerticalOffset;
-    public int lifeLvlLimit;
-    public float friendlyShipIntroSpeed;
-    public GameObject EnemyRebouncer;
-    public Object enemyHolderObject;
 
 
     // Non-Serialized Variables
@@ -81,12 +77,12 @@ public class GamePlayMainScript : MonoBehaviour
         lifeBarCanvasObject.transform.localScale = new Vector3(lifeBarCanvasData.Scale.x*resizeRatio, lifeBarCanvasData.Scale.y*resizeRatio, lifeBarCanvasData.Scale.z);
         lifeBarCanvasObject.transform.SetPositionAndRotation(new Vector3(tempPosition.x, tempPosition.y, viewableScaleConstrains.bottom + 
                                                             (lifeBarCanvasObject.GetComponent<SizeData>().occupiedDistance.z*resizeRatio/2) + 
-                                                            lifeBarVerticalOffset), lifeBarCanvasObject.transform.rotation);
+                                                            lifeBarCanvasData.verticalOffset), lifeBarCanvasObject.transform.rotation);
         tempPosition = gameLevelCanvasObject.transform.position;
         gameLevelCanvasObject.transform.localScale = new Vector3(gameLevelCanvasData.Scale.x*resizeRatio, gameLevelCanvasData.Scale.y*resizeRatio, gameLevelCanvasData.Scale.z);
         gameLevelCanvasObject.transform.SetPositionAndRotation(new Vector3(tempPosition.x, tempPosition.y, viewableScaleConstrains.top - 
                                                             (gameLevelCanvasObject.GetComponent<SizeData>().occupiedDistance.z*resizeRatio/2) - 
-                                                            gameLevelVerticalOffset), gameLevelCanvasObject.transform.rotation);
+                                                            gameLevelCanvasData.verticalOffset), gameLevelCanvasObject.transform.rotation);
         gameLevelCanvasObject.transform.localScale = gameLevelCanvasData.Scale;
         Canvas lifeBarCanvas = lifeBarCanvasObject.GetComponent<Canvas>();
         Canvas gameLevelCanvas = gameLevelCanvasObject.GetComponent<Canvas>();
@@ -109,7 +105,8 @@ public class GamePlayMainScript : MonoBehaviour
                                         (tempSizeData.occupiedDistance.z*tempSizeData.defaultScaleForUse.z/tempSizeData.referenceScale.z)/2);
         currIntroPosition = fromIntroCoOrdinates;
         currentFriendlySpaceShip.transform.SetPositionAndRotation(fromIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
-        currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().TakeData(lifeBarCanvas, 0.1f, 1, lifeLvlLimit, friendlyShips.friendlyShieldData);
+        currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().TakeData(lifeBarCanvas, 0.1f, 1, friendlyShips.lifeLvlLimit, 
+                                                                            friendlyShips.friendlyShieldData);
         
         friendlyShips.friendlyShieldData.friendlyShipTransform = currentFriendlySpaceShip.transform;
         friendlyShips.friendlyShieldData.friendlyShipHeight = (tempSizeData.occupiedDistance.z / tempSizeData.referenceScale.z) * 
@@ -139,7 +136,7 @@ public class GamePlayMainScript : MonoBehaviour
 
         // For Introducing Friendly SpcaeShip And Starting It's Functionalities
         if(shouldIntroduce) {
-            currIntroPosition.z += friendlyShipIntroSpeed;
+            currIntroPosition.z += friendlyShips.FSIntroSpeed;
             currentFriendlySpaceShip.transform.SetPositionAndRotation(currIntroPosition, currentFriendlySpaceShip.transform.rotation);
 
             // On Intro Completion
@@ -147,11 +144,10 @@ public class GamePlayMainScript : MonoBehaviour
                 currentFriendlySpaceShip.transform.SetPositionAndRotation(toIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
                 shouldIntroduce = false;
                 currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().buildProperBullets();
-                currentFriendlySpaceShip.GetComponent<FriendlyShipMovementScript>().TakeData(currentFriendlySpaceShip.transform, viewableScaleConstrains, 
-                                        currentFriendlySpaceShip.transform.localScale, tempSizeData, friendlyShips.extraHorizontalPosition, 
-                                        friendlyShips.extraVerticalPositionBottom, friendlyShips.extraVerticalPositionTop, 
-                                        friendlyShips.heightOffset, friendlyShips.percentHeightAllowedForMovement);
-                enemyWaveBuilder.startBuildingWaves(viewableScaleConstrains, enemyHolderObject);
+                currentFriendlySpaceShip.GetComponent<FriendlyShipMovementScript>().TakeData(viewableScaleConstrains, 
+                                        currentFriendlySpaceShip.transform.localScale, tempSizeData, friendlyShips.percentHeightAllowedForMovement, 
+                                        friendlyShips.movementDrag);
+                enemyWaveBuilder.startBuildingWaves(viewableScaleConstrains);
             }
         }
 
@@ -164,6 +160,7 @@ public class GamePlayMainScript : MonoBehaviour
             backgrounds.BGMaterialList[index].height = backgrounds.baseBackgroundWidth*backgrounds.BGMaterialList[index].height/backgrounds.BGMaterialList[index].width;
             backgrounds.BGMaterialList[index].width = backgrounds.baseBackgroundWidth;
         }
+        gameObject.GetComponent<MeshRenderer>().material = backgrounds.BGMaterialList[index].material;
         gameObject.transform.localScale = new Vector3(backgrounds.BGMaterialList[index].width, backgrounds.BGMaterialList[index].height, 5);
         Vector4 col = backgrounds.BGMaterialList[index].BGFogColorARGB;
         bgFogPSMainModule.startColor = new ParticleSystem.MinMaxGradient(new Color32((byte) col.x, (byte) col.y, (byte) col.z, (byte) col.w));

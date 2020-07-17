@@ -6,11 +6,11 @@ public class EnemyWaveBuilder : MonoBehaviour
 {
     // Serialized variables
     public WaveBuildingData waveBuildingData;
+    public Object enemyHolderObject;
     public int currentWaveLevel;
 
     // Non-Serialized Variables
     LBRTValues viewableScreenConstrains;
-    Object enemyHolderObject;
     bool shouldBuildEnemyWave = false;
     int totalNumberOfActiveEnemyHolders = 0;
 
@@ -283,9 +283,9 @@ public class EnemyWaveBuilder : MonoBehaviour
             if(buildDirection == "top") {
                 velocityDirection = new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, -6f));
             } else if(buildDirection == "left") {
-                velocityDirection = new Vector3(Random.Range(6f, 10f), 0, Random.Range(-10f, -10f));
+                velocityDirection = new Vector3(Random.Range(6f, 10f), 0, Random.Range(-10f, 10f));
             } else if(buildDirection == "right") {
-                velocityDirection = new Vector3(Random.Range(-10f, -6f), 0, Random.Range(-10f, -10f));
+                velocityDirection = new Vector3(Random.Range(-10f, -6f), 0, Random.Range(-10f, 10f));
             } else {
                 Debug.LogError("Invalid buildDirection : " + buildDirection);
             }
@@ -312,9 +312,8 @@ public class EnemyWaveBuilder : MonoBehaviour
 
 
 
-    public void startBuildingWaves(LBRTValues viewableScreenConstrains, Object enemyHolderObject) {
+    public void startBuildingWaves(LBRTValues viewableScreenConstrains) {
         this.viewableScreenConstrains = viewableScreenConstrains;
-        this.enemyHolderObject = enemyHolderObject;
         shouldBuildEnemyWave = true;
     }
 

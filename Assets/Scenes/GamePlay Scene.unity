@@ -10002,6 +10002,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5718266044237635797, guid: 30edb6c2d842b2c4580b40d46dc7e629,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718266044237635797, guid: 30edb6c2d842b2c4580b40d46dc7e629,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718266044237635797, guid: 30edb6c2d842b2c4580b40d46dc7e629,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718266044237635797, guid: 30edb6c2d842b2c4580b40d46dc7e629,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 2.1199e-41
+      objectReference: {fileID: 0}
     - target: {fileID: 5718266044842954544, guid: 30edb6c2d842b2c4580b40d46dc7e629,
         type: 3}
       propertyPath: m_Enabled
@@ -10138,25 +10158,19 @@ MonoBehaviour:
     Position: {x: -18, y: -4, z: -25}
     Scale: {x: 20, y: 20, z: 1}
     Rotation: {x: 90, y: 0, z: 0}
+    verticalOffset: 2
   gameLevelCanvasData:
     CanvasObject: {fileID: 8893431071718349739, guid: 72eb87f0058767e44b17c8bd99008a02,
       type: 3}
     Position: {x: 17.5, y: -4, z: 33.5}
     Scale: {x: 2, y: 2, z: 1}
     Rotation: {x: 90, y: 0, z: 0}
+    verticalOffset: 2
   friendlyShips:
     FSList:
     - FriendlyShipObject: {fileID: 4171679261465287792, guid: e424fc01e751e334ba16d62ff09acced,
         type: 3}
       Rotation: {x: 0, y: 0, z: 0}
-    startShipIndex: 0
-    currentShipIndex: 0
-    FSIntroSpeed: 0.2
-    extraHorizontalPosition: 2.5
-    extraVerticalPositionBottom: 5
-    extraVerticalPositionTop: 0
-    heightOffset: 5
-    percentHeightAllowedForMovement: 30
     friendlyShieldData:
       friendlyShieldObject: {fileID: 2577343152426573743, guid: 295265dec98075646b06b3f19babfb62,
         type: 3}
@@ -10164,18 +10178,19 @@ MonoBehaviour:
       friendlyShipTransform: {fileID: 0}
       friendlyShipHeight: 0
       gap: 0.7
+    startShipIndex: 0
+    currentShipIndex: 0
+    FSIntroSpeed: 0.15
+    percentHeightAllowedForMovement: 30
+    movementDrag: 30
+    horizontalTilt: 2
+    lifeLvlLimit: 5
+  bgFogParticleSystem: {fileID: 994533945}
+  EnemyRebouncer: {fileID: 2026177122}
   FPSTarget: 60
   defaultCameraOrthogonalSize: 35.55556
   refrenceWidth: 1080
   refrenceHeight: 1920
-  bgFogParticleSystem: {fileID: 994533945}
-  lifeBarVerticalOffset: 2
-  gameLevelVerticalOffset: 2
-  lifeLvlLimit: 5
-  friendlyShipIntroSpeed: 0.1
-  EnemyRebouncer: {fileID: 2026177122}
-  enemyHolderObject: {fileID: 258396911993631381, guid: 6264a983de7c15a49b62feed9a6d605c,
-    type: 3}
 --- !u!23 &1698560782
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10264,6 +10279,7 @@ MonoBehaviour:
       type: 3}
     waveLevel: 1
     maxWaves: 5
+  enemyHolderObject: {fileID: 0}
   currentWaveLevel: 1
 --- !u!114 &1698560786
 MonoBehaviour:
@@ -10564,6 +10580,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3140296201204955676, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140296201204955676, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 2.0801e-41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140296201204955676, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140296201204955676, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5049190116997945449, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10629,6 +10665,26 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5792885879812068995, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792885879812068995, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 2.1266e-41
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792885879812068995, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792885879812068995, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7430386282048949923, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}
       propertyPath: m_Enabled
@@ -10638,6 +10694,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Intensity
       value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430386282048949923, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 2.1277e-41
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430386282048949923, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7430386282048949923, guid: b43a709d9693ea34abbf003bcc9ca482,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b43a709d9693ea34abbf003bcc9ca482, type: 3}

@@ -4,9 +4,6 @@ using UnityEngine;
 
 [System.Serializable]
 public class minMaxVariable {
-    public minMaxVariable() {
-
-    }
     public minMaxVariable(float min, float max) {
         this.min = min;
         this.max = max;
@@ -55,6 +52,7 @@ public class CanvasData {
     public Vector3 Position;
     public Vector3 Scale;
     public Vector3 Rotation;
+    public float verticalOffset;
 }
 
 
@@ -92,14 +90,13 @@ public class FriendlyShieldData {
 [System.Serializable]
 public class FriendlyShipData {
     public FriendlyShipElement[] FSList;
+    public FriendlyShieldData friendlyShieldData;
     public int startShipIndex;
     public int currentShipIndex = 0;
     public float FSIntroSpeed;
-    public float extraHorizontalPosition;
-    public float extraVerticalPositionBottom, extraVerticalPositionTop;
-    public float heightOffset;
     public float percentHeightAllowedForMovement;
-    public FriendlyShieldData friendlyShieldData;
+    public float movementDrag;
+    public int lifeLvlLimit;
 
 }
 

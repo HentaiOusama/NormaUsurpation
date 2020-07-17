@@ -421,7 +421,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 4ef0ffff68f0ffff36f1ffffb0f1ffff84f2ffff9ef2ffff6cf3ffffe6f3ffff6af5ffff84f5ffff52f6ffffccf6ffff8cf8ffffa6f8ffff74f9ffffeef9ffff70fbffff
+      m_ExpandedIDs: 86d1ffffa0d1ffff6ed2ffffe8d2ffffa0d3ffffbad3ffff88d4ffff02d5ffffb6d5ffffd0d5ffff9ed6ffff18d7ffff54d8ffff6ed8ffff3cd9ffffb6d9ffff66daffff80daffff8adafffff2daffffc0dbffffdadbffffa8dcffff22ddffff98ecffffb2ecffff80edfffffaedffff60f1ffff7af1ffff48f2ffffc2f2ffffdaf3fffff4f3ffffc2f4ffff3cf5ffffecf5ffff06f6ffffd4f6ffff4ef7ffff06f8ffff20f8fffff2f8ffff70f9ffff70fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -481,9 +481,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -11.350978, y: -17.53683, z: 2.2236392}
+    m_Target: {x: 0.054753408, y: -18.228794, z: 2.603911}
     speed: 2
-    m_Value: {x: -11.350978, y: -17.53683, z: 2.2236392}
+    m_Value: {x: 0.054753408, y: -18.228794, z: 2.603911}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -533,9 +533,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_Size:
-    m_Target: 69.09982
+    m_Target: 41.640316
     speed: 2
-    m_Value: 69.09982
+    m_Value: 41.640316
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -609,10 +609,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
+    scrollPos: {x: 0, y: 31}
     m_SelectedIDs: 9c3c0000
     m_LastClickedID: 15516
-    m_ExpandedIDs: 000000009c3c00009e3c0000a03c0000a23c0000
+    m_ExpandedIDs: 000000009c3c00009e3c0000a03c0000a23c0000103d0000123d00004e3d0000543d0000563d0000803d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -667,7 +667,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

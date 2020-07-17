@@ -42,13 +42,13 @@
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\WebDemo\scripts\projectileActor.cs" />
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\instantiateEffectCaller.cs" />
      <Compile Include="Assets\Bullets\Enemy\Projectile Pack 1\scripts\particleColorChanger.cs" />
-     <Compile Include="Assets\Scripts\EnemyHolderRebounceHandler.cs" />
      <Compile Include="Assets\Scripts\GamePlay Scene Scripts\AllCustomClasses.cs" />
      <Compile Include="Assets\Scripts\GamePlay Scene Scripts\Bullet_Animating_Script.cs" />
      <Compile Include="Assets\Scripts\GamePlay Scene Scripts\DefaultRotation.cs" />
      <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyBulletBuilder.cs" />
      <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyBulletHandler.cs" />
      <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyHolderDataHub.cs" />
+     <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyHolderRebounceHandler.cs" />
      <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyShipDataHub.cs" />
      <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyShipMovementScript.cs" />
      <Compile Include="Assets\Scripts\GamePlay Scene Scripts\EnemyWaveBuilder.cs" />
