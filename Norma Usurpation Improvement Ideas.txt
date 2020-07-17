@@ -1,0 +1,20 @@
+Star Viper :- Rotates and shoots a Long lazer beam.
+
+Crenscent Blaster :- normal shots and then rotates to gather energy and then shoots a big ball of blast
+
+Federation Corvette :- Huge Life. Shoots a single blast that splits into multiple blasts.
+
+Enemy Ship Idea :- An Only Healing enemy ship that heals enemies in it's range.....
+some enemies can get a shield in certain health range like 10%-30%. The exact value will be decided in Start() of the enemyShipDataHub.....
+
+
+
+**** Smoothen out the movement of objects on path creator ****
+Solution to above Statement :-
+Use FixedUpdate()and not Update();
+
+
+
+What to add in settings :- 
+1) Volume Tweakers
+2) Ship Movement Sensitivity (Changes the drag of the friendly ship)

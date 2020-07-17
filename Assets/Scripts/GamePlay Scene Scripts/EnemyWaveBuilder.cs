@@ -119,7 +119,7 @@ public class EnemyWaveBuilder : MonoBehaviour
         
 
         // Building Enemy Holder
-        multipleEnemyHolder = Instantiate(waveBuildingData.multipleEnemyHolder, new Vector3(centerPosition.x, 0, centerPosition.z), 
+        multipleEnemyHolder = Instantiate(enemyHolderObject, new Vector3(centerPosition.x, 0, centerPosition.z), 
                                         Quaternion.Euler(0, 0, 0)) as GameObject;
         totalNumberOfActiveEnemyHolders++;
 

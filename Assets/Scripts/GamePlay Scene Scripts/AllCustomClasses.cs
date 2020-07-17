@@ -140,7 +140,6 @@ public class BulletData
 public class WaveBuildingData {
     public Object[] enemyObjects;
     public Object[] movementPathObjects;
-    public Object multipleEnemyHolder;
     public int waveLevel;
     public int maxWaves;
 }

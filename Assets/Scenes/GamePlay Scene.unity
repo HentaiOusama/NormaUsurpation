@@ -10020,7 +10020,7 @@ PrefabInstance:
     - target: {fileID: 5718266044237635797, guid: 30edb6c2d842b2c4580b40d46dc7e629,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 2.1199e-41
+      value: 8.856e-42
       objectReference: {fileID: 0}
     - target: {fileID: 5718266044842954544, guid: 30edb6c2d842b2c4580b40d46dc7e629,
         type: 3}
@@ -10183,7 +10183,6 @@ MonoBehaviour:
     FSIntroSpeed: 0.15
     percentHeightAllowedForMovement: 30
     movementDrag: 30
-    horizontalTilt: 2
     lifeLvlLimit: 5
   bgFogParticleSystem: {fileID: 994533945}
   EnemyRebouncer: {fileID: 2026177122}
@@ -10275,11 +10274,10 @@ MonoBehaviour:
     - {fileID: 1262563787011978770, guid: 0f4ec55993a320647a2a791f965510c5, type: 3}
     - {fileID: 106655788647334153, guid: 94eca8dc1bf7273418ebb2e69fd7652b, type: 3}
     - {fileID: 892733241776322366, guid: 6802f9e78e79b2c45966f1f6c11fc70c, type: 3}
-    multipleEnemyHolder: {fileID: 258396911993631381, guid: 6264a983de7c15a49b62feed9a6d605c,
-      type: 3}
     waveLevel: 1
     maxWaves: 5
-  enemyHolderObject: {fileID: 0}
+  enemyHolderObject: {fileID: 258396911993631381, guid: 6264a983de7c15a49b62feed9a6d605c,
+    type: 3}
   currentWaveLevel: 1
 --- !u!114 &1698560786
 MonoBehaviour:
@@ -10588,12 +10586,12 @@ PrefabInstance:
     - target: {fileID: 3140296201204955676, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 2.0801e-41
+      value: 8.8e-42
       objectReference: {fileID: 0}
     - target: {fileID: 3140296201204955676, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0
+      value: -6.148184e-10
       objectReference: {fileID: 0}
     - target: {fileID: 3140296201204955676, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}
@@ -10673,7 +10671,7 @@ PrefabInstance:
     - target: {fileID: 5792885879812068995, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 2.1266e-41
+      value: 8.862e-42
       objectReference: {fileID: 0}
     - target: {fileID: 5792885879812068995, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}
@@ -10683,7 +10681,7 @@ PrefabInstance:
     - target: {fileID: 5792885879812068995, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -1
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 7430386282048949923, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}
@@ -10698,7 +10696,7 @@ PrefabInstance:
     - target: {fileID: 7430386282048949923, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 2.1277e-41
+      value: 1.637e-42
       objectReference: {fileID: 0}
     - target: {fileID: 7430386282048949923, guid: b43a709d9693ea34abbf003bcc9ca482,
         type: 3}

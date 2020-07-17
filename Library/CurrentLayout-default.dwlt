@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 879, y: 492}
   m_MaxSize: {x: 16004, y: 14042}
   vertical: 0
-  controlID: 102
+  controlID: 103
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 604, y: 492}
   m_MaxSize: {x: 12004, y: 14042}
   vertical: 1
-  controlID: 107
+  controlID: 108
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 604, y: 221}
   m_MaxSize: {x: 12004, y: 4021}
   vertical: 0
-  controlID: 108
+  controlID: 109
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -210,7 +210,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 295
     y: 0
-    width: 615
+    width: 622
     height: 480
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
@@ -234,9 +234,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 910
+    x: 917
     y: 0
-    width: 254
+    width: 247
     height: 480
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
@@ -319,9 +319,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 910.2857
+    x: 917.1429
     y: 72.85715
-    width: 252
+    width: 245
     height: 459
   m_ViewDataDictionary: {fileID: 0}
   m_SerializedViewNames: []
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 287, y: 510.99997}
+  m_TargetSize: {x: 285.8333, y: 508}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -347,10 +347,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -123
-    m_HBaseRangeMax: 123
-    m_VBaseRangeMin: -218.99998
-    m_VBaseRangeMax: 218.99998
+    m_HBaseRangeMin: -122.49999
+    m_HBaseRangeMax: 122.49999
+    m_VBaseRangeMin: -217.7143
+    m_VBaseRangeMax: 217.7143
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -368,23 +368,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 252
+      width: 245
       height: 438
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 126, y: 219}
+    m_Translation: {x: 122.5, y: 219}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -126
+      x: -122.5
       y: -219
-      width: 252
+      width: 245
       height: 438
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 294, y: 535.5}
+  m_LastWindowPixelSize: {x: 285.8333, y: 535.5}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 00000000000000000000
@@ -419,9 +419,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 90350000
       m_LastClickedID: 0
-      m_ExpandedIDs: 86d1ffffa0d1ffff6ed2ffffe8d2ffffa0d3ffffbad3ffff88d4ffff02d5ffffb6d5ffffd0d5ffff9ed6ffff18d7ffff54d8ffff6ed8ffff3cd9ffffb6d9ffff66daffff80daffff8adafffff2daffffc0dbffffdadbffffa8dcffff22ddffff98ecffffb2ecffff80edfffffaedffff60f1ffff7af1ffff48f2ffffc2f2ffffdaf3fffff4f3ffffc2f4ffff3cf5ffffecf5ffff06f6ffffd4f6ffff4ef7ffff06f8ffff20f8fffff2f8ffff70f9ffff70fbffff
+      m_ExpandedIDs: 4ef1ffff68f1ffff36f2ffffb0f2ffffdef6fffff8f6ffffc6f7ffff40f8ffff02f9ffff1cf9ffffeaf9ffff64faffff70fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -468,7 +468,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 294.85715
     y: 72.85715
-    width: 613
+    width: 620
     height: 459
   m_ViewDataDictionary: {fileID: 0}
   m_ShowContextualTools: 0
@@ -599,20 +599,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Ships/Enemy/__Fully Built
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Ships/Enemy/__Fully Built
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\KIIT\Desktop\Coding Projects\UnityProjects\Norma Usurpation
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 31}
-    m_SelectedIDs: 9c3c0000
-    m_LastClickedID: 15516
-    m_ExpandedIDs: 000000009c3c00009e3c0000a03c0000a23c0000103d0000123d00004e3d0000543d0000563d0000803d0000
+    scrollPos: {x: 0, y: 144}
+    m_SelectedIDs: 7a3d0000
+    m_LastClickedID: 15738
+    m_ExpandedIDs: 000000009c3c00009e3c0000a03c0000a23c0000a43c0000a63c0000a83c0000543d0000563d00008a3d0000983d00009c3d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -640,7 +640,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009c3c00009e3c0000a03c0000a23c0000
+    m_ExpandedIDs: 000000009c3c00009e3c0000a03c0000a23c0000a43c0000a63c0000a83c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -719,7 +719,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 552.8572
-    width: 1311
+    width: 1163
     height: 292
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &18

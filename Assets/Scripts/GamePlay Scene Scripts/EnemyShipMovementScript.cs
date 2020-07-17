@@ -35,7 +35,7 @@ public class EnemyShipMovementScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(shouldMoveEnemies) {
             switch (movementType) {

@@ -468,7 +468,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: b63e0f3cfa1af1958e9ebceb20cf86a9
+      Hash: 948d42870f27535ed85fdb452f53ea17
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyWaveBuilder

@@ -695,7 +695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyVFXEffect: {fileID: 159918, guid: a0040bf7072bc2f4e82d887d50a9c5e2, type: 3}
-  maxLife: 15000
+  maxLife: 10000
   shouldEnableRebouncer: 1
   myEnemyHolder: {fileID: 0}
 --- !u!114 &6994648809560739209
