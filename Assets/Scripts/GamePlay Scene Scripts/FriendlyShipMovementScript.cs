@@ -37,7 +37,7 @@ public class FriendlyShipMovementScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if(dataGiven) {
+        if(dataGiven && !BackButtonScript.isGamePaused) {
             if(Input.touchCount > 0) {
                 firstTouch = Input.GetTouch(0);
                 currentPosition = gameObject.transform.position;

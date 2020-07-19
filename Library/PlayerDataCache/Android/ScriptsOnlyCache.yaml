@@ -1,8 +1,8 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - BackButtonScript
     - Bullet_Animating_Script
-    - ButtonClick
     - DefaultRotation
     - EnemyBulletBuilder
     - EnemyBulletHandler
@@ -20,6 +20,8 @@ ScriptsOnlyBuild:
     - ItemDestroyer
     - ItemDropper
     - MainMenuScript
+    - MenuButtonClick
+    - PauseMenuButtonClick
     - SizeData
     - destroyMe
     - particleColorChanger
@@ -33,6 +35,14 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateMachineNode
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -82,6 +92,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
@@ -107,39 +121,49 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11816}
     - Class: 114
-      Script: {instanceID: 12054}
+      Script: {instanceID: 11904}
     - Class: 114
-      Script: {instanceID: 12176}
+      Script: {instanceID: 12056}
     - Class: 114
-      Script: {instanceID: 12204}
+      Script: {instanceID: 12178}
     - Class: 114
       Script: {instanceID: 12206}
     - Class: 114
-      Script: {instanceID: 12380}
+      Script: {instanceID: 12208}
     - Class: 114
-      Script: {instanceID: 12508}
+      Script: {instanceID: 12222}
     - Class: 114
-      Script: {instanceID: 12544}
+      Script: {instanceID: 12382}
     - Class: 114
-      Script: {instanceID: 12578}
+      Script: {instanceID: 12460}
     - Class: 114
-      Script: {instanceID: 12622}
+      Script: {instanceID: 12510}
     - Class: 114
-      Script: {instanceID: 12678}
+      Script: {instanceID: 12546}
     - Class: 114
-      Script: {instanceID: 12740}
+      Script: {instanceID: 12580}
     - Class: 114
-      Script: {instanceID: 12918}
+      Script: {instanceID: 12624}
     - Class: 114
-      Script: {instanceID: 12982}
+      Script: {instanceID: 12676}
     - Class: 114
-      Script: {instanceID: 13040}
+      Script: {instanceID: 12680}
     - Class: 114
-      Script: {instanceID: 13064}
+      Script: {instanceID: 12742}
     - Class: 114
-      Script: {instanceID: 13146}
+      Script: {instanceID: 12920}
     - Class: 114
-      Script: {instanceID: 13188}
+      Script: {instanceID: 12984}
+    - Class: 114
+      Script: {instanceID: 13042}
+    - Class: 114
+      Script: {instanceID: 13066}
+    - Class: 114
+      Script: {instanceID: 13148}
+    - Class: 114
+      Script: {instanceID: 13190}
+    - Class: 114
+      Script: {instanceID: 18574}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -218,21 +242,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11838}
     - Class: 114
-      Script: {instanceID: 12028}
+      Script: {instanceID: 12030}
     - Class: 114
-      Script: {instanceID: 12220}
+      Script: {instanceID: 12222}
     - Class: 114
-      Script: {instanceID: 12458}
+      Script: {instanceID: 12460}
     - Class: 114
-      Script: {instanceID: 12472}
+      Script: {instanceID: 12474}
     - Class: 114
-      Script: {instanceID: 12674}
+      Script: {instanceID: 12676}
     - Class: 114
-      Script: {instanceID: 12740}
+      Script: {instanceID: 12742}
     - Class: 114
-      Script: {instanceID: 12902}
+      Script: {instanceID: 12904}
     - Class: 114
-      Script: {instanceID: 13114}
+      Script: {instanceID: 13116}
+    - Class: 114
+      Script: {instanceID: 13148}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -492,6 +518,12 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
+      Hash: 1fbcc8bf8c03af370e5e7738a065b835
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BackButtonScript
+  - hash:
+      serializedVersion: 2
       Hash: b3ab2106268377ffe25dd18ac23dca28
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -507,7 +539,7 @@ ScriptsOnlyBuild:
       Hash: a36aa12078e232ebe46cb1e27da80066
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: ButtonClick
+    className: MenuButtonClick
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -600,7 +632,7 @@ ScriptsOnlyBuild:
     className: projectileActor
   - hash:
       serializedVersion: 2
-      Hash: bfd10ec349a1a59ca1631589faec3d02
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Test_Script
@@ -862,6 +894,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyHolderDataHub
+  - hash:
+      serializedVersion: 2
+      Hash: a36aa12078e232ebe46cb1e27da80066
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PauseMenuButtonClick
   platform: 13
   scenePathNames:
   - Assets/Scenes/Menu Scene.unity

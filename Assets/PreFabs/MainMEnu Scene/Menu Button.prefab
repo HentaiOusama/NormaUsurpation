@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283618033
-  m_fontColor: {r: 0.9433962, g: 0.8236585, b: 0.3203987, a: 1}
+    rgba: 4280150783
+  m_fontColor: {r: 1, g: 0.9181539, b: 0.11320752, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -241,8 +241,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2338969839920856921}
   - component: {fileID: 5842627114430330638}
-  - component: {fileID: 3027212675705097057}
   - component: {fileID: 5703473413250851767}
+  - component: {fileID: 3027212675705097057}
   m_Layer: 5
   m_Name: Menu Button
   m_TagString: Untagged
@@ -291,19 +291,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3027212675705097057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4414408610815908911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d995fde68664f374db15cf2ea5947785, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonId: 0
 --- !u!114 &5703473413250851767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,6 +345,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3027212675705097057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4414408610815908911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d995fde68664f374db15cf2ea5947785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonId: 0
 --- !u!1 &8375339248783994592
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.38943148, a: 0.46666667}
+  m_Color: {r: 0, g: 1, b: 0.38943148, a: 0.5882353}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

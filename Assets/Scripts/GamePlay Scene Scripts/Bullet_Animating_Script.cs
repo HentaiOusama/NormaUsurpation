@@ -11,12 +11,14 @@ public class Bullet_Animating_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(i >= materialsSize) {
-            i = 0;
+        if(!BackButtonScript.isGamePaused) {
+            if(i >= materialsSize) {
+                i = 0;
+            }
+
+            gameObj.GetComponent<MeshRenderer>().material = materials[i];
+
+            i++;
         }
-
-        gameObj.GetComponent<MeshRenderer>().material = materials[i];
-
-        i++;
     }
 }
