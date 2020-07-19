@@ -7,7 +7,7 @@ public class BackButtonScript : MonoBehaviour
     public GameObject pauseMenuCanvas;
 
     // Non-Serialized Variables;
-    public static bool isGamePaused;
+    public static bool isGamePaused = false;
     bool canTakeInput = true;
     bool shouldReset = false;
     bool isPauseMenuOpen = false;
@@ -16,11 +16,9 @@ public class BackButtonScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isGamePaused = false;
         pauseMenuPanelAnimator = pauseMenuCanvas.GetComponent<Animator>();
         pauseMenuCanvas.SetActive(false);
-        pauseMenuPanelAnimator.ResetTrigger("shouldOpen");
-        pauseMenuPanelAnimator.ResetTrigger("shouldClose");
-        pauseMenuPanelAnimator.ResetTrigger("goToIdle");
         isPauseMenuOpen = false;
         canTakeInput = true;
     }
@@ -51,18 +49,20 @@ public class BackButtonScript : MonoBehaviour
             }
         }
 
-        if(pauseMenuPanelAnimator.GetCurrentAnimatorStateInfo(0).IsName("PauseMenuAnimationEnded")) {
-            if(isPauseMenuOpen) {
-                pauseMenuPanelAnimator.ResetTrigger("shouldOpen");
-                pauseMenuPanelAnimator.SetTrigger("goToIdle");
-                shouldReset = true;
-            } else {
-                pauseMenuPanelAnimator.ResetTrigger("shouldClose");
-                pauseMenuPanelAnimator.SetTrigger("goToIdle");
-                Time.timeScale = 1;
-                pauseMenuCanvas.SetActive(false);
-                isGamePaused = false;
-                shouldReset = true;
+        if(isGamePaused) {
+            if(pauseMenuPanelAnimator.GetCurrentAnimatorStateInfo(0).IsName("PauseMenuAnimationEnded")) {
+                if(isPauseMenuOpen) {
+                    pauseMenuPanelAnimator.ResetTrigger("shouldOpen");
+                    pauseMenuPanelAnimator.SetTrigger("goToIdle");
+                    shouldReset = true;
+                } else {
+                    pauseMenuPanelAnimator.ResetTrigger("shouldClose");
+                    pauseMenuPanelAnimator.SetTrigger("goToIdle");
+                    Time.timeScale = 1;
+                    pauseMenuCanvas.SetActive(false);
+                    isGamePaused = false;
+                    shouldReset = true;
+                }
             }
         }
     }
@@ -71,6 +71,7 @@ public class BackButtonScript : MonoBehaviour
         isPauseMenuOpen = true;
         isGamePaused = true;
         pauseMenuCanvas.SetActive(true);
+        pauseMenuPanelAnimator.ResetTrigger("goToIdle");
         pauseMenuPanelAnimator.SetTrigger("shouldOpen");
     }
 
