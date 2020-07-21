@@ -24,6 +24,8 @@ public class EnemyShipMovementScript : MonoBehaviour
     float remainingIntroDuration;
     float movementSpeed;
     minMaxVariable minMaxMovementSpeed;
+    minMaxVariable addForceDuration = new minMaxVariable(1, 3);
+    float currentDuration, timeElapsed = 0;
     Vector3 velocityDirection;
     float distanceTravelled = 0.0f;
 
@@ -123,11 +125,23 @@ public class EnemyShipMovementScript : MonoBehaviour
                 } else {
                     remainingIntroDuration = 0;
                     shouldIntroduce = false;
+                    currentDuration = Random.Range(addForceDuration.min, addForceDuration.max);
                     gameObject.GetComponent<EnemyHolderDataHub>().introComplete();
                 }
             }
             return;
         }
+        if(timeElapsed < currentDuration) {
+            timeElapsed += Time.deltaTime;
+        } else {
+            timeElapsed = 0;
+            currentDuration = Random.Range(addForceDuration.min, addForceDuration.max);
+            gameObject.GetComponent<Rigidbody>().AddForce(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f));
+            gameObject.GetComponent<Rigidbody>().velocity = gameObject.GetComponent<Rigidbody>().velocity.normalized * 
+                                                            Random.Range(minMaxMovementSpeed.min, minMaxMovementSpeed.max);
+            
+        }
+
     }
 
 

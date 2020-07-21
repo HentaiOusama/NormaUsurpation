@@ -25,6 +25,8 @@ public class FriendlyShipMovementScript : MonoBehaviour {
         float maximumRightPositionAllowed = LBRTPositionConstrains.right;
         // Now LBRTPositionConstrains holds values of extremities of transform of ship which are allowed
         LBRTPositionConstrains = new LBRTValues(minimumLeftPositionAllowed, minimumBottomPositionAllowed, maximumRightPositionAllowed, maximumTopPositionAllowed);
+        float movementSensitivity = 10 * (PlayerPrefs.GetInt("FShipMovementSensitivity") - 5) / 5;
+        movementDrag -= movementSensitivity;
         drag = 1/movementDrag;
         dataGiven = true;
     }

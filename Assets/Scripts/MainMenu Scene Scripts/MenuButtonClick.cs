@@ -3,12 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtonClick : MonoBehaviour
 {
+    // Serialized Variables
     public int buttonId;
+    public GameObject background;
 
     private Animator menuButtonAnimator;
     bool shouldReset = false;
+    MainMenuScript mainMenuScript;
 
     void Start() {
+        mainMenuScript = background.GetComponent<MainMenuScript>();
         menuButtonAnimator = gameObject.GetComponent<Animator>();
         menuButtonAnimator.ResetTrigger("didClick");
         menuButtonAnimator.ResetTrigger("goToIdle");
@@ -33,6 +37,19 @@ public class MenuButtonClick : MonoBehaviour
                 case 0:
                     PlayGame();
                     break;
+                
+                case 1:
+                    OpenOptions();
+                    break;
+
+                case 2:
+                    CloseApp();
+                    break;
+
+
+                case 5:
+                    closeOptions();
+                    break;
             }
         }
     }
@@ -45,9 +62,15 @@ public class MenuButtonClick : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-
-    // Not yet complete
     public void OpenOptions() {
+        mainMenuScript.closeMMPAndOpenOP();
+    }
 
+    public void CloseApp() {
+        Application.Quit();
+    }
+
+    public void closeOptions() {
+        mainMenuScript.closeOPAndOpenMMP();
     }
 }

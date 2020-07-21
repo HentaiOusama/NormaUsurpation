@@ -41,7 +41,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateMachineNode
     - UnityEditor.Graphs.AnimationStateMachine.StateNode
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -56,6 +55,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
+    - UnityEngine.UI.Toggle
   sceneClasses:
     Assets/Scenes/GamePlay Scene.unity:
     - Class: 1
@@ -103,67 +103,71 @@ ScriptsOnlyBuild:
     - Class: 111
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11188}
     - Class: 114
-      Script: {instanceID: 11262}
+      Script: {instanceID: 11264}
     - Class: 114
-      Script: {instanceID: 11288}
+      Script: {instanceID: 11290}
     - Class: 114
-      Script: {instanceID: 11314}
+      Script: {instanceID: 11316}
     - Class: 114
-      Script: {instanceID: 11366}
+      Script: {instanceID: 11368}
     - Class: 114
-      Script: {instanceID: 11408}
+      Script: {instanceID: 11410}
     - Class: 114
-      Script: {instanceID: 11756}
+      Script: {instanceID: 11758}
     - Class: 114
-      Script: {instanceID: 11788}
+      Script: {instanceID: 11790}
     - Class: 114
-      Script: {instanceID: 11816}
+      Script: {instanceID: 11812}
     - Class: 114
-      Script: {instanceID: 11904}
+      Script: {instanceID: 11818}
     - Class: 114
-      Script: {instanceID: 12056}
+      Script: {instanceID: 11906}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12058}
     - Class: 114
-      Script: {instanceID: 12206}
+      Script: {instanceID: 12180}
     - Class: 114
       Script: {instanceID: 12208}
     - Class: 114
-      Script: {instanceID: 12222}
+      Script: {instanceID: 12210}
     - Class: 114
-      Script: {instanceID: 12382}
+      Script: {instanceID: 12224}
     - Class: 114
-      Script: {instanceID: 12460}
+      Script: {instanceID: 12384}
     - Class: 114
-      Script: {instanceID: 12510}
+      Script: {instanceID: 12462}
     - Class: 114
-      Script: {instanceID: 12546}
+      Script: {instanceID: 12512}
     - Class: 114
-      Script: {instanceID: 12580}
+      Script: {instanceID: 12548}
     - Class: 114
-      Script: {instanceID: 12624}
+      Script: {instanceID: 12582}
     - Class: 114
-      Script: {instanceID: 12676}
+      Script: {instanceID: 12626}
+    - Class: 114
+      Script: {instanceID: 12648}
     - Class: 114
       Script: {instanceID: 12680}
     - Class: 114
-      Script: {instanceID: 12742}
+      Script: {instanceID: 12684}
     - Class: 114
-      Script: {instanceID: 12920}
+      Script: {instanceID: 12746}
     - Class: 114
-      Script: {instanceID: 12984}
+      Script: {instanceID: 12924}
     - Class: 114
-      Script: {instanceID: 13042}
+      Script: {instanceID: 12988}
     - Class: 114
-      Script: {instanceID: 13066}
+      Script: {instanceID: 13046}
     - Class: 114
-      Script: {instanceID: 13148}
+      Script: {instanceID: 13070}
     - Class: 114
-      Script: {instanceID: 13190}
+      Script: {instanceID: 13120}
     - Class: 114
-      Script: {instanceID: 18574}
+      Script: {instanceID: 13152}
+    - Class: 114
+      Script: {instanceID: 13194}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -232,33 +236,35 @@ ScriptsOnlyBuild:
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11188}
     - Class: 114
-      Script: {instanceID: 11308}
+      Script: {instanceID: 11310}
     - Class: 114
-      Script: {instanceID: 11408}
+      Script: {instanceID: 11410}
     - Class: 114
-      Script: {instanceID: 11810}
+      Script: {instanceID: 11812}
     - Class: 114
-      Script: {instanceID: 11838}
+      Script: {instanceID: 11840}
     - Class: 114
-      Script: {instanceID: 12030}
+      Script: {instanceID: 12032}
     - Class: 114
-      Script: {instanceID: 12222}
+      Script: {instanceID: 12224}
     - Class: 114
-      Script: {instanceID: 12460}
+      Script: {instanceID: 12462}
     - Class: 114
-      Script: {instanceID: 12474}
+      Script: {instanceID: 12476}
     - Class: 114
-      Script: {instanceID: 12676}
+      Script: {instanceID: 12680}
     - Class: 114
-      Script: {instanceID: 12742}
+      Script: {instanceID: 12746}
     - Class: 114
-      Script: {instanceID: 12904}
+      Script: {instanceID: 12908}
     - Class: 114
-      Script: {instanceID: 13116}
+      Script: {instanceID: 13120}
     - Class: 114
-      Script: {instanceID: 13148}
+      Script: {instanceID: 13136}
+    - Class: 114
+      Script: {instanceID: 13152}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -326,7 +332,7 @@ ScriptsOnlyBuild:
     className: PlayerQuitHandler
   - hash:
       serializedVersion: 2
-      Hash: 8cd4f97a49af73ddf8a84a53d3256d66
+      Hash: 70b9cd2490e2e43a478dd7e63ba82154
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenuScript
@@ -536,7 +542,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: a36aa12078e232ebe46cb1e27da80066
+      Hash: 390b9a124a0c936baec9c76550a921a3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuButtonClick
@@ -620,7 +626,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 6fabe63a79549bffa79313708aa552af
+      Hash: 23dd23ceacad77eac11b554220330e60
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GamePlayMainScript
@@ -708,6 +714,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: particleColorChanger
+  - hash:
+      serializedVersion: 2
+      Hash: c7b649ad0cccaffff7b164f8ce0891e0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PauseMenuButtonClick
   - hash:
       serializedVersion: 2
       Hash: 8001a5f7502aab37e42206da015e6914
@@ -894,12 +906,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyHolderDataHub
-  - hash:
-      serializedVersion: 2
-      Hash: a36aa12078e232ebe46cb1e27da80066
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PauseMenuButtonClick
   platform: 13
   scenePathNames:
   - Assets/Scenes/Menu Scene.unity

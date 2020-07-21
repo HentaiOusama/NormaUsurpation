@@ -10865,7 +10865,7 @@ MonoBehaviour:
     startShipIndex: 0
     currentShipIndex: 0
     FSIntroSpeed: 0.15
-    percentHeightAllowedForMovement: 30
+    percentHeightAllowedForMovement: 35
     movementDrag: 30
     lifeLvlLimit: 5
   bgFogParticleSystem: {fileID: 994533945}
@@ -10874,6 +10874,8 @@ MonoBehaviour:
   defaultCameraOrthogonalSize: 35.55556
   refrenceWidth: 1080
   refrenceHeight: 1920
+  percentageOfDisplayForEnemyRebounding: 0.8
+  bgAudioSource: {fileID: 1698560787}
 --- !u!23 &1698560782
 MeshRenderer:
   m_ObjectHideFlags: 0

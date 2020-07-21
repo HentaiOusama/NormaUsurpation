@@ -15,6 +15,8 @@ public class GamePlayMainScript : MonoBehaviour
     public float defaultCameraOrthogonalSize;
     public float refrenceWidth;
     public float refrenceHeight;
+    public float percentageOfDisplayForEnemyRebounding;
+    public AudioSource bgAudioSource;
 
 
     // Non-Serialized Variables
@@ -41,9 +43,6 @@ public class GamePlayMainScript : MonoBehaviour
         float refrenceAspect = refrenceWidth/refrenceHeight;
         float screenAspect = screenWidth/screenHeight;
         Debug.Log("Game Play");
-        Debug.Log("refrenceWidth = " + refrenceWidth + " refrenceHeight = " + refrenceHeight + " refrenceAspect = " + refrenceAspect);
-        Debug.Log("screenWidth = " + screenWidth + " screenHeight = " + screenHeight + " screenAspect = " + screenAspect);
-        Debug.Log("cameraAspect = " + Camera.main.aspect);
         if(screenAspect >= 1) {
             Camera.main.orthographicSize = defaultCameraOrthogonalSize*refrenceAspect*screenAspect;
             resizeRatio = (float) System.Math.Round(((refrenceAspect*screenAspect)/4) + 0.75f, 3);
@@ -51,15 +50,16 @@ public class GamePlayMainScript : MonoBehaviour
             Camera.main.orthographicSize = defaultCameraOrthogonalSize*refrenceAspect/screenAspect;
             resizeRatio = (float) System.Math.Round(((refrenceAspect/screenAspect)/4) + 0.75f, 3);
         }
-        Debug.Log("Resize Ratio = " + resizeRatio);
         // Sets the scale wise constrains of workspace on the background
         viewableScaleConstrains = new LBRTValues(-backgrounds.baseBackgroundWidth/2, -Camera.main.orthographicSize, 
                                                 backgrounds.baseBackgroundWidth/2, Camera.main.orthographicSize);
         SizeData sizeData = EnemyRebouncer.GetComponent<SizeData>();
-        EnemyRebouncer.transform.localScale = new Vector3(2*viewableScaleConstrains.right*sizeData.referenceScale.x/sizeData.occupiedDistance.x, 
-                                                        EnemyRebouncer.transform.localScale.y, 
-                                                        2*viewableScaleConstrains.top*sizeData.referenceScale.z/sizeData.occupiedDistance.z);
-
+        Vector3 rebouncerScale = new Vector3(2*viewableScaleConstrains.right*sizeData.referenceScale.x/sizeData.occupiedDistance.x, 
+                                            EnemyRebouncer.transform.localScale.y, percentageOfDisplayForEnemyRebounding *
+                                            (2*viewableScaleConstrains.top*sizeData.referenceScale.z/sizeData.occupiedDistance.z));
+        EnemyRebouncer.transform.localScale = rebouncerScale;
+        EnemyRebouncer.transform.position = new Vector3(0, 0, viewableScaleConstrains.top - ((rebouncerScale.z * sizeData.occupiedDistance.z /
+                                                        sizeData.referenceScale.z)/2));
 
 
         // Disables VSync for custom Frame Rate and sets custom FPS
@@ -105,7 +105,7 @@ public class GamePlayMainScript : MonoBehaviour
                                         (tempSizeData.occupiedDistance.z*tempSizeData.defaultScaleForUse.z/tempSizeData.referenceScale.z)/2);
         currIntroPosition = fromIntroCoOrdinates;
         currentFriendlySpaceShip.transform.SetPositionAndRotation(fromIntroCoOrdinates, currentFriendlySpaceShip.transform.rotation);
-        currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().TakeData(lifeBarCanvas, 0.1f, 1, friendlyShips.lifeLvlLimit, 
+        currentFriendlySpaceShip.GetComponent<FriendlyShipDataHub>().TakeData(lifeBarCanvas, 0.3f, 1, friendlyShips.lifeLvlLimit, 
                                                                             friendlyShips.friendlyShieldData);
         
         friendlyShips.friendlyShieldData.friendlyShipTransform = currentFriendlySpaceShip.transform;
@@ -119,7 +119,10 @@ public class GamePlayMainScript : MonoBehaviour
 
 
 
-        // Regarding
+        // Regarding BGSound
+        if(PlayerPrefs.GetInt("bgSoundEnabled") == 0) {
+            bgAudioSource.volume = 0;
+        }
     }
 
 
